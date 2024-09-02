@@ -1,0 +1,47 @@
+<div class="d-flex justify-content-end page-content__header">
+  <%= link_to new_admin_job_title_path, class: "btn btn-light" do %>
+    <i class="bi bi-plus"></i>
+    <%= t "job_titles.new_job" %>
+  <% end %>
+</div>
+
+<% if @job_titles.present? %>
+  <table class="table table-hover">
+    <thead>
+    <tr>
+      <th scope="col" class="text-center"><%= t "crud.table.id" %></th>
+      <th scope="col"><%= t "crud.table.name" %></th>
+      <th scope="col"><%= t "crud.table.employees" %></th>
+      <th scope="col" class="text-center"><%= t "crud.table.status" %></th>
+      <th scope="col" colspan="3"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @job_titles.each.with_index(1) do |job_title, index| %>
+      <tr>
+        <th scope="row" class="text-center"><%= index %></th>
+        <td><%= job_title.name %></td>
+        <td><%= list_employees job_title.employees %></td>
+        <td class="status text-center"><%= activity_status job_title.status %></td>
+        <td>
+          <%= link_to admin_job_title_path(job_title.id), class: "text-light" do %>
+            <i class="bi bi-eye"></i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to edit_admin_job_title_path(job_title.id), class: "text-light" do %>
+            <i class="bi bi-pencil-square"></i>
+          <% end %>
+        </td>
+        <td>
+          <%= link_to admin_job_title_path(job_title.id), data: { turbo_method: "delete", turbo_confirm: t("crud.table.confirm") }, class: "text-light" do %>
+            <i class="bi bi-trash3"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-success text-center" role="alert"><%= t "crud.table.not_found" %></div>
+<% end %>

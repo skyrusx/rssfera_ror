@@ -1,0 +1,57 @@
+<%= form_with model: @partner, url: url_form, html: { class: "admin-crud partners needs-validation", novalidate: true } do |form| %>
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="input-group mb-4 mb-3">
+        <div class="input-group-text checkbox status">
+          <%= form.check_box :status, class: "form-check-input mt-0", required: false %>
+          <%= form.label :status, class: "form-check-label" %>
+        </div>
+      </div>
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.name" %></span>
+        <%= form.text_field :name, class: "form-control", placeholder: t("placeholders.partners.name"), required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.name" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+      <div class="mb-4 mb-3">
+        <div class="input-group">
+          <span class="input-group-text justify-content-end"><%= t "crud.table.anchor" %></span>
+          <%= form.text_field :anchor, class: "form-control slug", placeholder: t("placeholders.partners.anchor"), required: true %>
+          <div class="invalid-feedback"><%= t "validation.invalid.anchor" %></div>
+          <div class="valid-feedback"><%= t "validation.valid" %></div>
+        </div>
+        <div class="form-text"><%= t "hint.anchor" %></div>
+      </div>
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.description" %></span>
+        <div data-controller="tinymce" class="form-control tinymce">
+          <%= form.text_area :description, data: { tinymce_target: "input" }, class: "tinymce", rows: 5 %>
+        </div>
+        <%= tinymce %>
+      </div>
+    </div>
+
+    <div class="col-lg-3">
+      <div class="d-flex justify-content-center list-images">
+        <div class="img-thumbnail">
+          <% if @partner.logo.attached? %>
+            <%= image_tag(@partner.logo, id: "selected-image", class: "selected-image") %>
+            <%= link_to delete_logo_admin_partner_path(id: @partner.id, logo_id: @partner.logo.id), data: { turbo_method: "delete", turbo_confirm: t("crud.table.confirm") }, class: "text-danger" do %>
+              <i class="bi bi-x-circle-fill"></i>
+            <% end %>
+          <% else %>
+            <%= image_tag "avatar/avatar-placeholder.png", id: "selected-image", class: "selected-image preview" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center align-items-end photo-wrapper">
+        <div class="btn btn-light mb-4 mb-3">
+          <%= form.label :logo, t("crud.table.select_logo"), class: "form-label" %>
+          <%= form.file_field :logo, class: "form-control d-none upload-image" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%= form.submit t("crud.table.save_button"), class: "btn btn-light" %>
+<% end %>

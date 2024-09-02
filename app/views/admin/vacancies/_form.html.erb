@@ -1,0 +1,94 @@
+<%= form_with model: @vacancy, url: url_form, html: { class: "admin-crud vacancies needs-validation", novalidate: true } do |form| %>
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="input-group mb-4 mb-3">
+        <div class="input-group-text checkbox status">
+          <%= form.check_box :status, class: "form-check-input mt-0", required: false %>
+          <%= form.label :status, class: "form-check-label" %>
+        </div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.name" %></span>
+        <%= form.text_field :name, class: "form-control", placeholder: t("placeholders.job_titles.name"), required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.name" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.employment_types" %></span>
+        <%= form.collection_select :employment_type_ids, @employment_types, :id, :name, { include_blank: false, selected: @vacancy.employment_type_ids }, { class: "form-select select2", multiple: true, required: true } %>
+
+        <div class="invalid-feedback"><%= t "validation.invalid.employment_type" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.name" %></span>
+        <%= form.text_field :location, class: "form-control", placeholder: t("placeholders.location"), required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.name" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.job_title" %></span>
+        <%= form.collection_select :job_title_id, @job_titles, :id, :name, { include_blank: true, selected: @vacancy.job_title_id }, { class: "form-select select2", required: true } %>
+
+        <div class="invalid-feedback"><%= t "validation.invalid.job_title" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.experience" %></span>
+        <%= form.text_field :experience, class: "form-control", placeholder: t("placeholders.vacancies.experience"), required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.name" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3 income">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.income" %></span>
+        <%= form.text_field :income_from, class: "form-control income-item", placeholder: t("placeholders.from") %>
+        <%= form.text_field :income_to, class: "form-control income-item", placeholder: t("placeholders.to") %>
+        <%= form.select :income_type, Vacancy::INCOME_TYPES.map { |item| [ item[:value], item[:type] ] }, { include_blank: false, selected: @vacancy.income_type }, { class: "form-select select2" } %>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.published_at" %></span>
+        <%= form.datetime_field :published_at, class: "form-control" %>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.skills" %></span>
+        <%= form.collection_select :skill_ids, @skills, :id, :name, { include_blank: false, selected: @vacancy.skill_ids }, { class: "form-select select2", multiple: true, required: true } %>
+
+        <div class="invalid-feedback"><%= t "validation.invalid.skill" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.contact_info" %></span>
+        <%= form.collection_select :team_member_id, @team_members, :id, :whole_name, { include_blank: true }, { class: "form-select select2" } %>
+      </div>
+    </div>
+
+    <div class="col-lg-3"></div>
+  </div>
+
+  <div class="input-group mb-4 mb-3">
+    <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.description" %></span>
+    <div data-controller="tinymce" class="form-control tinymce">
+      <%= form.text_area :description, data: { tinymce_target: "input" }, class: "tinymce", rows: 5 %>
+    </div>
+    <%= tinymce %>
+  </div>
+
+  <div class="input-group mb-4 mb-3">
+    <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.more_info" %></span>
+    <div data-controller="tinymce" class="form-control tinymce">
+      <%= form.text_area :more_info, data: { tinymce_target: "input" }, class: "tinymce", rows: 5 %>
+    </div>
+    <%= tinymce %>
+  </div>
+
+  <%= form.submit t("crud.table.save_button"), class: "btn btn-light" %>
+<% end %>

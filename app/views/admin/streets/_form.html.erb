@@ -1,0 +1,20 @@
+<%= form_with model: @street, url: url_form, html: { class: "admin-crud streets needs-validation", novalidate: true } do |form| %>
+  <%= form.hidden_field :realty_ids %>
+
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.name" %></span>
+        <%= form.text_field :name, class: "form-control", placeholder: t("placeholders.streets.name"), required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.name" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.district" %></span>
+        <%= form.collection_select :district_id, @districts, :id, :full_name, { include_blank: false, selected: @street.district_id }, { class: "form-select select2" } %>
+      </div>
+    </div>
+  </div>
+
+  <%= form.submit t("crud.table.save_button"), class: "btn btn-light" %>
+<% end %>

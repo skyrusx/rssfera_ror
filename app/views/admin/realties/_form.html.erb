@@ -1,0 +1,155 @@
+<%= form_with model: @realty, url: url_form, html: { class: "admin-crud realties needs-validation", novalidate: true } do |form| %>
+  <% @realty.photos.each do |photo| %>
+    <%= form.hidden_field :photos, multiple: true, value: photo.signed_id, id: nil %>
+  <% end %>
+
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="input-group mb-4 mb-3">
+        <div class="input-group-text checkbox status">
+          <%= form.check_box :status, class: "form-check-input mt-0", required: false %>
+          <%= form.label :status, class: "form-check-label" %>
+        </div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="input-group-text justify-content-end align-items-start"><%= t "crud.table.photos" %></div>
+        <div class="field-value info">
+          <div class="list-images">
+            <% if @realty.photos.attached? %>
+              <% @realty.photos.each.with_index do |photo, index| %>
+                <div class="<%= "img-thumbnail-#{index}" %> img-thumbnail">
+                  <%= image_tag(photo, class: "selected-image") %>
+                  <p><%= photo.id %></p>
+                  <%= link_to delete_photo_admin_realty_path(id: @realty.id, photo_id: photo.id), data: { turbo_method: "delete", turbo_confirm: t("crud.table.confirm") }, class: "text-danger" do %>
+                    <i class="bi bi-x-circle-fill"></i>
+                  <% end %>
+                </div>
+              <% end %>
+            <% else %>
+              <div class="img-thumbnail">
+                <%= image_tag "team-placeholder.png", id: "selected-image", class: "selected-image preview" %>
+              </div>
+            <% end %>
+          </div>
+          <div class="d-flex justify-content-center align-items-end photo-wrapper">
+            <div class="btn btn-light mb-4 mb-3">
+              <% if @realty.photos.attached? %>
+                <%= form.label :photos, t("crud.table.add_photo"), class: "form-label" %>
+              <% else %>
+                <%= form.label :photos, t("crud.table.select_photo"), class: "form-label" %>
+              <% end %>
+              <%= form.file_field :photos, class: "form-control d-none upload-images", multiple: true %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.name" %></span>
+        <%= form.text_field :name, class: "form-control", placeholder: t("placeholders.realties.name"), required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.name" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="mb-4 mb-3">
+        <div class="input-group">
+          <span class="input-group-text justify-content-end"><%= t "crud.table.slug_short" %></span>
+          <%= form.text_field :slug, class: "form-control", placeholder: t("placeholders.realties.slug"), required: true %>
+          <div class="invalid-feedback"><%= t "validation.invalid.slug" %></div>
+          <div class="valid-feedback"><%= t "validation.valid" %></div>
+        </div>
+        <div class="form-text"><%= t "hint.realty_slug" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.type_object" %></span>
+        <%= form.select :type_object, Realty::TYPES.values, { include_blank: true, selected: @realty.type_object }, { class: "form-select select2" } %>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.realty_category" %></span>
+        <%= form.select :realty_category_id, @categories.pluck(:name, :id), { include_blank: true, selected: @realty.realty_category_id }, { class: "form-select select2" } %>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.employee" %></span>
+        <%= form.select :team_member_id, @team_members.map { |tm| [tm.whole_name, tm.id] }, { include_blank: true, selected: @realty.team_member_id }, { class: "form-select select2" } %>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.city" %></span>
+        <%= form.collection_select :city_id, @cities, :id, :name, { include_blank: true, selected: @realty.city_id }, { class: "form-select select2", required: true } %>
+        <div class="invalid-feedback"><%= t "validation.invalid.city" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.district" %></span>
+        <%= form.collection_select :district_id, @districts, :id, :full_name, { include_blank: true, selected: @realty.district_id }, { class: "form-select select2", required: true } %>
+        <div class="invalid-feedback"><%= t "validation.invalid.district" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.street" %></span>
+        <%= form.collection_select :street_id, @streets, :id, :full_name, { include_blank: true, selected: @realty.street_id }, { class: "form-select select2", required: true } %>
+        <div class="invalid-feedback"><%= t "validation.invalid.street" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.location" %></span>
+        <%= form.text_field :location, class: "form-control", placeholder: t("placeholders.location"), required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.location" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.price" %></span>
+        <%= form.text_field :price, class: "form-control", placeholder: t("placeholders.realties.price"), required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.price" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.payments" %></span>
+        <%= form.text_field :payments, class: "form-control", placeholder: t("placeholders.realties.payments"), required: true %>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.description" %></span>
+        <div data-controller="tinymce" class="form-control tinymce">
+          <%= form.text_area :description, data: { tinymce_target: "input" }, class: "tinymce", rows: 5 %>
+        </div>
+        <%= tinymce %>
+      </div>
+
+      <div class="mb-4 mb-3 schedule">
+        <div class="input-group">
+          <span class="input-group-text w-100"><%= t "crud.table.specifications" %></span>
+        </div>
+
+        <% prev_section = "" %>
+        <% @specifications.each do |key, data| %>
+          <% unless prev_section == data["section"] %>
+            <div class="input-group">
+              <%= text_field_tag "specs[#{key}][section]", @specifications[key]["section"], class: "form-control input-group-text w-100" %>
+            </div>
+          <% end %>
+
+          <div class="input-group">
+            <%= text_field_tag "specs[#{key}][field]", @specifications[key]["field"], class: "form-control" %>
+            <%= text_field_tag "specs[#{key}][value]", @specifications[key]["value"], class: "form-control" %>
+          </div>
+
+          <% prev_section = data["section"] %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-lg-3"></div>
+  </div>
+
+  <%= form.submit t("crud.table.save_button"), class: "btn btn-light" %>
+<% end %>

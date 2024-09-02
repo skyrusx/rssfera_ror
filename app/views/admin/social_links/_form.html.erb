@@ -1,0 +1,26 @@
+<%= form_with model: @social_link, url: url_form, html: { class: "admin-crud social-links needs-validation", novalidate: true } do |form| %>
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="input-group mb-4 mb-3">
+        <div class="input-group-text checkbox status">
+          <%= form.check_box :status, class: "form-check-input mt-0", required: false %>
+          <%= form.label :status, class: "form-check-label" %>
+        </div>
+      </div>
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.name" %></span>
+        <%= form.text_field :name, class: "form-control", placeholder: t("placeholders.social_links.name"), required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.name" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.link" %></span>
+        <%= form.text_field :link, class: "form-control", placeholder: t("placeholders.social_links.link"), required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.link" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+    </div>
+  </div>
+
+  <%= form.submit t("crud.table.save_button"), class: "btn btn-light" %>
+<% end %>

@@ -1,0 +1,61 @@
+<div class="d-flex justify-content-end page-content__header">
+  <%= link_to new_admin_review_path, class: "btn btn-light" do %>
+    <i class="bi bi-plus"></i>
+    <%= t "reviews.new_review" %>
+  <% end %>
+</div>
+
+<% if @reviews.present? %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col" class="text-center"><%= t "crud.table.id" %></th>
+        <th scope="col" class="text-center"><%= t "crud.table.avatar" %></th>
+        <th scope="col"><%= t "crud.table.author" %></th>
+        <th scope="col" class="text-center"><%= t "crud.table.rating" %></th>
+        <th scope="col"><%= t "crud.table.created_at" %></th>
+        <th scope="col"><%= t "crud.table.published_at" %></th>
+        <th scope="col"><%= t "crud.table.employee" %></th>
+        <th scope="col" class="text-center"><%= t "crud.table.status" %></th>
+        <th scope="col" colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reviews.each.with_index(1) do |review, index| %>
+        <tr>
+          <th scope="row" class="text-center"><%= index %></th>
+          <td class="text-center">
+            <% if review.avatar.attached? %>
+              <%= image_tag(review.avatar, class: "mini-avatar") %>
+            <% else %>
+              <%= image_tag "avatar/avatar-placeholder.png", class: "mini-avatar" %>
+            <% end %>
+          </td>
+          <td><%= review.author %></td>
+          <td class="text-center"><%= review.rating %></td>
+          <td><%= date_format review.created_at %></td>
+          <td><%= date_format review.published_at %></td>
+          <td><%= team_member_name review %></td>
+          <td class="status text-center"><%= review_status review.status %></td>
+          <td>
+            <%= link_to admin_review_path(review.id), class: "text-light" do %>
+              <i class="bi bi-eye"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to edit_admin_review_path(review.id), class: "text-light" do %>
+              <i class="bi bi-pencil-square"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to admin_review_path(review.id), data: { turbo_method: "delete", turbo_confirm: t("crud.table.confirm") }, class: "text-light" do %>
+              <i class="bi bi-trash3"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="alert alert-success text-center" role="alert"><%= t "crud.table.not_found" %></div>
+<% end %>

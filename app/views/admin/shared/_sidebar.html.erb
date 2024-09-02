@@ -1,0 +1,112 @@
+<div id="sidebar" class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
+  <div class="main-menu d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+    <%= link_to admin_path, class: "navbar-brand" do %>
+      <%= image_tag "logo.png", alt: "РиелтСтройСфера", width: "40", height: "40", class: "d-inline-block align-text-top" %>
+      <div>Риелт<span>С</span>трой<span>С</span>фера</div>
+    <% end %>
+
+    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
+      <li class="nav-item menu-title">Меню</li>
+      <li class="nav-item">
+        <%= link_to admin_path, class: active_class(admin_path) do %>
+          <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+        <% end %>
+      </li>
+      <%#
+      <li class="nav-item">
+        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
+          <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
+        <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
+          <li class="w-100">
+            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
+          </li>
+          <li>
+            <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
+          </li>
+        </ul>
+      </li>
+      %>
+      <li class="nav-item">
+        <%= link_to admin_team_members_path, class: active_class(admin_team_members_path) do %>
+          <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Сотрудники</span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to admin_reviews_path, class: active_class(admin_reviews_path) do %>
+          <i class="bi bi-star"></i> <span class="ms-1 d-none d-sm-inline">Отзывы</span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to admin_vacancies_path, class: active_class(admin_vacancies_path) do %>
+          <i class="bi bi-clipboard2-data"></i> <span class="ms-1 d-none d-sm-inline">Вакансии</span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to admin_partners_path, class: active_class(admin_partners_path) do %>
+          <i class="bi bi-bank"></i> <span class="ms-1 d-none d-sm-inline">Партнеры</span>
+        <% end %>
+      </li>
+      <li class="nav-item menu-title">Недвижимость</li>
+      <li class="nav-item">
+        <%= link_to admin_realty_categories_path, class: active_class(admin_realty_categories_path) do %>
+          <i class="bi bi-folder"></i> <span class="ms-1 d-none d-sm-inline">Категории</span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to admin_realties_path, class: active_class(admin_realties_path) do %>
+          <i class="bi bi-house"></i> <span class="ms-1 d-none d-sm-inline">Объекты</span>
+        <% end %>
+      </li>
+      <li class="nav-item menu-title">Контакты</li>
+      <li class="nav-item">
+        <%= link_to admin_contact_path(Contact.last.id), class: active_class(admin_contact_path(Contact.last.id)) do %>
+          <i class="bi bi-journal-text"></i> <span class="ms-1 d-none d-sm-inline">Контактные данные</span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to admin_social_links_path, class: active_class(admin_social_links_path) do %>
+          <i class="bi bi-wechat"></i> <span class="ms-1 d-none d-sm-inline">Социальные сети</span>
+        <% end %>
+      </li>
+      <li class="nav-item menu-title">Местоположение</li>
+      <li class="nav-item">
+        <%= link_to admin_cities_path, class: active_class(admin_cities_path) do %>
+          <i class="bi bi-buildings"></i> <span class="ms-1 d-none d-sm-inline">Города</span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to admin_districts_path, class: active_class(admin_districts_path) do %>
+          <i class="bi bi-geo"></i> <span class="ms-1 d-none d-sm-inline">Районы</span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to admin_streets_path, class: active_class(admin_streets_path) do %>
+          <i class="bi bi-signpost-2"></i> <span class="ms-1 d-none d-sm-inline">Улицы</span>
+        <% end %>
+      </li>
+      <li class="nav-item menu-title">Дополнительно</li>
+      <li class="nav-item">
+        <%= link_to admin_job_titles_path, class: active_class(admin_job_titles_path) do %>
+          <i class="bi bi-diagram-2"></i> <span class="ms-1 d-none d-sm-inline">Должности</span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to admin_skills_path, class: active_class(admin_skills_path) do %>
+          <i class="bi bi-lightbulb"></i> <span class="ms-1 d-none d-sm-inline">Навыки</span>
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to admin_employment_types_path, class: active_class(admin_employment_types_path) do %>
+          <i class="bi bi-hourglass-split"></i> <span class="ms-1 d-none d-sm-inline">Типы занятости</span>
+        <% end %>
+      </li>
+      <%#
+      <li class="nav-item">
+        <a href="#" class="nav-link px-0 align-middle">
+          <i class="bi bi-shield-lock"></i> <span class="ms-1 d-none d-sm-inline">Администраторы</span>
+        </a>
+      </li>
+      %>
+    </ul>
+  </div>
+</div>

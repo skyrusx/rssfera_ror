@@ -1,0 +1,26 @@
+<%= form_with model: @city, url: url_form, html: { class: "admin-crud cities needs-validation", novalidate: true } do |form| %>
+  <%= form.hidden_field :realty_ids %>
+
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="input-group mb-4 mb-3">
+        <div class="input-group-text checkbox status">
+          <%= form.check_box :status, class: "form-check-input mt-0", required: false %>
+          <%= form.label :status, class: "form-check-label" %>
+        </div>
+      </div>
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.name" %></span>
+        <%= form.text_field :name, class: "form-control", placeholder: t("placeholders.cities.name"), required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.name" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.district" %></span>
+        <%= form.collection_select :district_ids, @districts, :id, :full_name, { include_blank: false, selected: @city.district_ids }, { class: "form-select select2", multiple: true } %>
+      </div>
+    </div>
+  </div>
+
+  <%= form.submit t("crud.table.save_button"), class: "btn btn-light" %>
+<% end %>

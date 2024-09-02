@@ -1,0 +1,126 @@
+<form name="form1" method="post" action="">
+  <p>
+    <label for="countries">Countries:</label>
+    <select id="countries" name="countries" onChange="select_countries(this);">
+      <option disabled selected value>No Country Selected</option>
+      <option value="can">Canada</option>
+      <option value="us">United States</option>
+    </select>
+  </p>
+
+  <p id="ca_region">
+    <label for="provinces">Provinces:</label>
+    <select id="provinces" name="provinces" onChange='select_region(this);'>
+      <option disabled selected value>No Province Selected</option>
+      <option value="on">Ontario</option>
+      <option value="qc">Quebec</option>
+    </select>
+  </p>
+
+  <p id="us_region">
+    <label for="states">States:</label>
+    <select id="states" name="states" onChange='select_region(this);'>
+      <option disabled selected value>No State Selected</option>
+      <option value="ny">New York</option>
+      <option value="ca">California</option>
+    </select>
+  </p>
+
+  <p class="cities" id="on_cities">
+    <label for="on_cities">Cities:</label>
+    <select id="on_cities" name="on_cities" onChange='select_cities("on_cities");'>
+      <option value="hamilton">Hamilton</option>
+      <option value="toronto">Toronto</option>
+    </select>
+  </p>
+
+  <p class="cities" id="qc_cities">
+    <label for="qc_cities">Cities:</label>
+    <select id="qc_cities" name="qc_cities" onChange='select_cities("qc_cities");'>
+      <option value="montreal">Montreal</option>
+      <option value="quebec">Quebec City</option>
+    </select>
+  </p>
+
+  <p class="cities" id="ny_cities">
+    <label for="ny_cities">Cities:</label>
+    <select id="ny_cities" name="ny_cities" onChange='select_cities("ny_cities");'>
+      <option value="newyork">New York City</option>
+      <option value="albany">Albany</option>
+    </select>
+  </p>
+
+  <p class="cities" id="ca_cities">
+    <label for="ca_cities">Cities:</label>
+    <select id="ca_cities" name="ca_cities" onChange='select_cities("ca_cities");'>
+      <option value="losangeles">Los Angeles</option>
+      <option value="sanfrancisco">San Francisco</option>
+    </select>
+  </p>
+
+</form>
+
+<script type="text/javascript" charset="utf-8">
+    function select_countries(selectElem) {
+        var regionCode = selectElem.options[selectElem.selectedIndex].value;
+
+        if (regionCode == 'us') {
+            document.getElementById("us_region").style.display = 'block';
+            document.getElementById("ca_region").style.display = 'none';
+        } else if (regionCode == 'can') {
+            document.getElementById("ca_region").style.display = 'block';
+            document.getElementById("us_region").style.display = 'none';
+        }
+    }
+
+    function select_region(selectElem) {
+        var cityCode = selectElem.options[selectElem.selectedIndex].value;
+
+        if (cityCode == "on") {
+            document.getElementById("on_cities").style.display = 'block';
+            document.getElementById("qc_cities").style.display = 'none';
+
+        } else if (cityCode == "qc") {
+            document.getElementById("qc_cities").style.display = 'block';
+            document.getElementById("on_cities").style.display = 'none';
+
+        } else if (cityCode == "ny") {
+            document.getElementById("ny_cities").style.display = 'block';
+            document.getElementById("ca_cities").style.display = 'none';
+        } else if (cityCode == "ca") {
+            document.getElementById("ca_cities").style.display = 'block';
+            document.getElementById("ny_cities").style.display = 'none';
+        }
+    }
+</script>
+
+<!--<nav id="navbar-top" class="navbar sticky-top navbar-expand-lg bg-success">-->
+<!--  <div class="container-fluid">-->
+    <%#= link_to admin_path, class: "navbar-brand" do %>
+      <%#= image_tag "logo.png", alt: "РиелтСтройСфера", width: "40", height: "40", class: "d-inline-block align-text-top" %>
+<!--      <div>Риелт<span>С</span>трой<span>С</span>фера</div>-->
+    <%# end %>
+<!--    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--      <span class="navbar-toggler-icon"></span>-->
+<!--    </button>-->
+<!--    <div class="d-flex">-->
+<!--      <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+<!--        <li class="nav-item dropdown">-->
+<!--          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--            Admin-->
+<!--          </a>-->
+<!--          <ul class="dropdown-menu">-->
+<!--            <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Профиль</a></li>-->
+<!--            <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Настройки</a></li>-->
+<!--            <li>-->
+              <%#= link_to destroy_admin_session_path, data: { turbo_method: :delete }, class: "dropdown-item" do %>
+<!--                <i class="bi bi-box-arrow-left"></i>-->
+<!--                Выйти-->
+              <%# end %>
+<!--            </li>-->
+<!--          </ul>-->
+<!--        </li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</nav>-->

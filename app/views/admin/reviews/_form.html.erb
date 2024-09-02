@@ -1,0 +1,75 @@
+<%= form_with model: @review, url: url_form, html: { class: "admin-crud reviews needs-validation", novalidate: true } do |form| %>
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.status" %></span>
+        <%= form.select :status, Review::STATUSES.map { |status| [status.last, status.first] }, { include_blank: false, selected: @review.status }, { class: "form-select select2" } %>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.author" %></span>
+        <%= form.text_field :author, class: "form-control", placeholder: t("placeholders.reviews.author"), required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.author" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.email" %></span>
+        <%= form.text_field :email, class: "form-control", placeholder: t("placeholders.email"), required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.email" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="mb-4 mb-3">
+        <div class="input-group">
+          <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.rating" %></span>
+          <%= form.number_field :rating, step: 0.5, min: 0, max: 5, placeholder: t("placeholders.reviews.rating"), class: "form-control", required: true %>
+          <div class="invalid-feedback"><%= t "validation.invalid.rating" %></div>
+          <div class="valid-feedback"><%= t "validation.valid" %></div>
+        </div>
+        <div class="form-text"><%= t "hint.rating" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.published_at" %></span>
+        <%= form.datetime_field :published_at, class: "form-control" %>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.employee" %></span>
+        <%= form.collection_select :team_member_id, @team_members, :id, :whole_name, { include_blank: false }, { class: "form-select select2" } %>
+      </div>
+    </div>
+
+    <div class="col-lg-3">
+      <div class="d-flex justify-content-center list-images">
+        <div class="img-thumbnail">
+          <% if @review.avatar.attached? %>
+            <%= image_tag(@review.avatar, id: "selected-image", class: "selected-image") %>
+            <%= link_to delete_avatar_admin_review_path(id: @review.id, avatar_id: @review.avatar.id), data: { turbo_method: "delete", turbo_confirm: t("crud.table.confirm") }, class: "text-danger" do %>
+              <i class="bi bi-x-circle-fill"></i>
+            <% end %>
+          <% else %>
+            <%= image_tag "avatar/avatar-placeholder.png", id: "selected-image", class: "selected-image preview" %>
+          <% end %>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center align-items-end photo-wrapper">
+        <div class="btn btn-light mb-4 mb-3">
+          <%= form.label :avatar, t("crud.table.select_avatar"), class: "form-label" %>
+          <%= form.file_field :avatar, class: "form-control d-none upload-image" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="input-group mb-4 mb-3">
+    <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.feedback" %></span>
+    <div data-controller="tinymce" class="form-control tinymce">
+      <%= form.text_area :feedback, data: { tinymce_target: "input" }, class: "tinymce", rows: 5 %>
+    </div>
+    <%= tinymce %>
+  </div>
+
+  <%= form.submit t("crud.table.save_button"), class: "btn btn-light" %>
+<% end %>

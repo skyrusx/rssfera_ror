@@ -1,0 +1,40 @@
+<div id="page-topbar" class="header sticky-top d-flex justify-content-end">
+  <div class="row">
+    <div class="col-12">
+      <div class="top-menu d-flex justify-content-end align-items-center">
+        <%= link_to "", title: "Уведомления", class: "nav-link mx-3" do %>
+          <i class="bi bi-bell"></i>
+        <% end %>
+        <div class="dropdown admin">
+          <%= link_to "", class: "d-flex align-items-center text-white text-decoration-none dropdown-toggle", "data-bs-toggle": :dropdown, "aria-expanded": false do %>
+            <%= image_tag "admin-avatar.png", width: "30", height: "30", class: "rounded-circle", alt: "Admin" %>
+            <span class="d-none d-sm-inline mx-2">Admin</span>
+          <% end %>
+          <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+            <li>
+              <%= link_to root_path, class: "dropdown-item", target: "_blank" do %>
+                <i class="bi bi-globe"></i> Сайт
+              <% end %>
+            </li>
+            <li>
+              <%= link_to "#", class: "dropdown-item" do %>
+                <i class="bi bi-gear"></i> Настройки
+              <% end %>
+            </li>
+            <li>
+              <%= link_to "#", class: "dropdown-item" do %>
+                <i class="bi bi-person"></i> Профиль
+              <% end %>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <%= link_to destroy_admin_session_path, data: { turbo_method: "delete" }, class: "dropdown-item" do %>
+                <i class="bi bi-power"></i> Выход
+              <% end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
