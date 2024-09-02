@@ -7,3 +7,7 @@ application.debug = false
 window.Stimulus   = application
 
 export { application }
+
+import jquery from 'jquery'
+window.jQuery = jquery
+window.$ = jquery
