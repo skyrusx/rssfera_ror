@@ -25,6 +25,38 @@ ru:
         unconfirmed_email: Неподтвержденный email
         unlock_token: Токен разблокировки
         updated_at: Дата обновления
+      team_member:
+        first_name: Имя
+        last_name: Фамилия
+        patronymic_name: Отчество
+        slug: Идентификатор URL
+        phone: Телефон
+        email: E-mail
+        info: О сотруднике
+        whatsapp: Наличие WhatsApp
+        status: Активен
+      job_title:
+        name: Наименование
+        status: Активен
+      employment_type:
+        name: Наименование
+        status: Активен
+      partner:
+        name: Наименование
+        status: Активен
+      skill:
+        name: Наименование
+        status: Активен
+      vacancy:
+        status: Активен
+      social_link:
+        status: Активен
+      realty_category:
+        status: Активен
+      city:
+        status: Активен
+      realty:
+        status: Активен
     models:
       user:
         few: Пользователя
@@ -151,3 +183,451 @@ ru:
         many: "%{resource}: сохранение не удалось из-за %{count} ошибок:"
         one: "%{resource}: сохранение не удалось из-за %{count} ошибки:"
         other: "%{resource}: сохранение не удалось из-за %{count} ошибки:"
+
+  weekday:
+    monday: "Понедельник"
+    tuesday: "Вторник"
+    wednesday: "Среда"
+    thursday: "Четверг"
+    friday: "Пятница"
+    saturday: "Суббота"
+    sunday: "Воскресенье"
+
+  admin: "Dashboard"
+  admin_team_members: "Сотрудники"
+  admin_job_titles: "Должности"
+  admin_reviews: "Отзывы"
+  admin_employment_types: "Типы занятости"
+  admin_partners: "Партнеры"
+  admin_skills: "Навыки"
+  admin_vacancies: "Вакансии"
+  admin_social_links: "Социальные сети"
+  admin_contacts: "Контакты"
+  admin_realty_categories: "Категории недвижимости"
+  admin_cities: "Города"
+  admin_districts: "Районы"
+  admin_streets: "Улицы"
+  admin_realties: "Объекты"
+
+  teams:
+    team_members: "Сотрудники"
+    new_team_member: "Новый сотрудник"
+    show_team_member_title: "Просмотр данных сотрудника"
+    new_team_member_title: "Добавить нового сотрудника"
+    edit_team_member_title: "Изменить данные сотрудника"
+    create:
+      success: "Сотрудник успешно добавлен"
+      error: "Ошибка добавления сотрудника"
+    update:
+      success: "Данные сотрудника успешно изменены"
+      error: "Ошибка изменения данных сотрудника"
+    destroy:
+      success: "Сотрудник успешно удален"
+    delete_photo:
+      success: "Фотография удалена"
+      error: "Ошибка удаления фотографии"
+
+  job_titles:
+    new_job: "Новая должность"
+    show_job_title: "Просмотр данных должности"
+    new_job_title: "Добавить новую должность"
+    edit_job_title: "Изменить данные должности"
+    create:
+      success: "Должность успешно добавлена"
+      error: "Ошибка добавления должности"
+    update:
+      success: "Данные должности успешно изменены"
+      error: "Ошибка изменения данных должности"
+    destroy:
+      success: "Должность успешно удалена"
+
+  reviews:
+    new_review: "Новый отзыв"
+    show_review_title: "Просмотр данных отзыва"
+    new_review_title: "Добавить новый отзыв"
+    edit_review_title: "Изменить данные отзыва"
+    create:
+      success: "Отзыв успешно добавлен"
+      error: "Ошибка добавления отзыва"
+    update:
+      success: "Данные отзыва успешно изменены"
+      error: "Ошибка изменения данных отзыва"
+    destroy:
+      success: "Отзыв успешно удалена"
+    delete_avatar:
+      success: "Аватар удалена"
+      error: "Ошибка удаления аватара"
+
+  employment_types:
+    new_type: "Новый тип занятости"
+    show_type_title: "Просмотр данных типа занятости"
+    new_type_title: "Новый тип занятости"
+    edit_type_title: "Изменить данные типа занятости"
+    create:
+      success: "Тип занятости успешно добавлен"
+      error: "Ошибка добавления тип азанятости"
+    update:
+      success: "Данные типа занятости успешно изменены"
+      error: "Ошибка изменения данных типа занятости"
+    destroy:
+      success: "Тип занятости успешно удален"
+
+  partners:
+    new_partner: "Новый партнер"
+    show_partner_title: "Просмотр данных партнера"
+    new_partner_title: "Добавить новый партнер"
+    edit_partner_title: "Изменить данные партнера"
+    create:
+      success: "Партнер успешно добавлен"
+      error: "Ошибка добавления партнера"
+    update:
+      success: "Данные партнера успешно изменены"
+      error: "Ошибка изменения данных партнера"
+    destroy:
+      success: "Партнер успешно удален"
+    delete_logo:
+      success: "Логотип удалена"
+      error: "Ошибка удаления логотип"
+
+  skills:
+    new_skill: "Новый навык"
+    show_skill_title: "Просмотр данных навыка"
+    new_skill_title: "Добавить новый навык"
+    edit_skill_title: "Изменить данные навыка"
+    create:
+      success: "Навык успешно добавлен"
+      error: "Ошибка добавления навыка"
+    update:
+      success: "Данные навыка успешно изменены"
+      error: "Ошибка изменения данных навыка"
+    destroy:
+      success: "Навык успешно удален"
+
+  vacancies:
+    new_vacancy: "Новая вакансия"
+    show_vacancy_title: "Просмотр данных вакансии"
+    new_vacancy_title: "Добавить новую вакансию"
+    edit_vacancy_title: "Изменить данные вакансии"
+    create:
+      success: "Вакансия успешно добавлена"
+      error: "Ошибка добавления вакансии"
+    update:
+      success: "Данные вакансии успешно изменены"
+      error: "Ошибка изменения данных вакансии"
+    destroy:
+      success: "Вакансия успешно удалена"
+
+  social_links:
+    new_social_link: "Новая соц сеть"
+    show_link_title: "Просмотр данных соц сети"
+    new_link_title: "Добавить новую соц сеть"
+    edit_link_title: "Изменить данные соц сети"
+    create:
+      success: "Соц сеть успешно добавлена"
+      error: "Ошибка добавления соц сети"
+    update:
+      success: "Данные соц сети успешно изменены"
+      error: "Ошибка изменения данных соц сети"
+    destroy:
+      success: "Соц сеть успешно удалена"
+
+  contacts:
+    new_contact: "Новый контакт"
+    show_contact_title: "Просмотр контактных данных"
+    new_contact_title: "Добавить новые контактные данные"
+    edit_contact_title: "Изменить контактные данные"
+    create:
+      success: "Контакт успешно добавлен"
+      error: "Ошибка добавления контакта"
+    update:
+      success: "Контактные данные успешно изменены"
+      error: "Ошибка изменения контактных данных"
+    destroy:
+      success: "Данные контакта успешно удалены"
+
+  realty_categories:
+    new_realty_category: "Новая категория недвижимости"
+    show_category_title: "Просмотр данных категории недвижимости"
+    new_category_title: "Добавить новую категорию недвижимости"
+    edit_category_title: "Изменить данные категории недвижимости"
+    create:
+      success: "Категория недвижимости успешно добавлена"
+      error: "Ошибка добавления категории недвижимости"
+    update:
+      success: "Данные категории недвижимости успешно изменены"
+      error: "Ошибка изменения данных категории недвижимости"
+    destroy:
+      success: "Данные категории недвижимости успешно удалены"
+
+  cities:
+    new_city: "Новый город"
+    show_city_title: "Просмотр данных города"
+    new_city_title: "Добавить новый город"
+    edit_city_title: "Изменить данные города"
+    create:
+      success: "Город успешно добавлен"
+      error: "Ошибка добавления города"
+    update:
+      success: "Данные города успешно изменены"
+      error: "Ошибка изменения данных города"
+    destroy:
+      success: "Данные города успешно удалены"
+
+  districts:
+    new_district: "Новый район"
+    show_district_title: "Просмотр данных района"
+    new_district_title: "Добавить новый район"
+    edit_district_title: "Изменить данные района"
+    create:
+      success: "Район успешно добавлен"
+      error: "Ошибка добавления района"
+    update:
+      success: "Данные района успешно изменены"
+      error: "Ошибка изменения данных района"
+    destroy:
+      success: "Данные района успешно удалены"
+
+  streets:
+    new_street: "Новая улица"
+    show_street_title: "Просмотр данных улицы"
+    new_street_title: "Добавить новую улицу"
+    edit_street_title: "Изменить данные улицы"
+    create:
+      success: "Улица успешно добавлена"
+      error: "Ошибка добавления улицы"
+    update:
+      success: "Данные улицы успешно изменены"
+      error: "Ошибка изменения данных улицы"
+    destroy:
+      success: "Данные улицы успешно удалены"
+
+  realties:
+    new_realty: "Новый объект"
+    show_realty_title: "Просмотр данных объекта"
+    new_realty_title: "Добавить новый объект"
+    edit_realty_title: "Изменить данные объекта"
+    create:
+      success: "Объект успешно добавлен"
+      error: "Ошибка добавления объекта"
+    update:
+      success: "Данные объекта успешно изменены"
+      error: "Ошибка изменения данных объекта"
+    destroy:
+      success: "Данные объекта успешно удалены"
+
+  admin_breadcrumbs:
+    team_members: "Сотрудники"
+    show_team_member: "Данные сотрудника"
+    new_team_member: "Новый сотрудник"
+    edit_team_member: "Изменение данных сотрудника"
+
+    job_titles: "Должности"
+    show_job_title: "Данные должности"
+    new_job_title: "Новая должность"
+    edit_job_title: "Изменение данных должности"
+
+    reviews: "Отзывы"
+    show_review: "Данные отзыва"
+    new_review: "Новый отзыв"
+    edit_review: "Изменение данных отзыва"
+
+    employment_types: "Типы занятости"
+    show_employment_type: "Данные типа занятости"
+    new_employment_type: "Новый тип занятости"
+    edit_employment_type: "Изменение данных типа занятости"
+
+    partners: "Партнеры"
+    show_partner: "Данные партнера"
+    new_partner: "Новый партнер"
+    edit_partner: "Изменение данных партнера"
+
+    skills: "Навыки"
+    show_skill: "Данные навыка"
+    new_skill: "Новый навык"
+    edit_skill: "Изменение данных навыка"
+
+    vacancies: "Вакансии"
+    show_vacancy: "Данные вакансии"
+    new_vacancy: "Новая вакансия"
+    edit_vacancy: "Изменение данных вакансии"
+
+    social_links: "Соц сети"
+    show_social_link: "Данные соц сети"
+    new_social_link: "Новая соц сеть"
+    edit_social_link: "Изменение данных соц сети"
+
+    contacts: "Контакты"
+    show_contact: "Контактные данные"
+    new_contact: "Новая контакты"
+    edit_contact: "Изменение контактных данных"
+
+    realty_categories: "Категории недвижимости"
+    show_realty_category: "Данные категории недвижимости"
+    new_realty_category: "Новая категория недвижимости"
+    edit_realty_category: "Изменение категории недвижимости"
+
+    cities: "Города"
+    show_city: "Данные города"
+    new_city: "Новый город"
+    edit_city: "Изменение города"
+
+    districts: "Районы"
+    show_district: "Данные района"
+    new_district: "Новый район"
+    edit_district: "Изменение района"
+
+    streets: "Улицы"
+    show_street: "Данные улицы"
+    new_street: "Новая улица"
+    edit_street: "Изменение улицы"
+
+    realties: "Объекты"
+    show_realty: "Данные объекта"
+    new_realty: "Новый объект"
+    edit_realty: "Изменение объекта"
+
+  crud:
+    table:
+      id: "#"
+      name: "Наименование"
+      last_name: "Фамилия"
+      first_name: "Имя"
+      patronymic_name: "Отчество"
+      full_name: "Фамилия Имя Отчество"
+      job_title: "Должность"
+      phone: "Телефон"
+      phone_number: "Номер телефона"
+      whatsapp: "Наличие WhatsApp"
+      email: "E-mail"
+      status: "Статус"
+      slug: "Уникальный идентификатор URL"
+      slug_short: "Идентификатор URL"
+      anchor: "Якорная ссылка"
+      info: "О сотруднике"
+      employee: "Сотрудник"
+      employees: "Сотрудники"
+      employment_types: "Типы занятости"
+      author: "Автор"
+      rating: "Рейтинг"
+      created_at: "Дата создания"
+      published_at: "Дата публикации"
+      feedback: "Отзыв"
+      description: "Описание"
+      experience: "Опыт"
+      income: "Уровень дохода"
+      location: "Местоположение"
+      skills: "Ключевые навыки"
+      contact_info: "Контактная информация"
+      more_info: "Дополнительная информация"
+      link: "Ссылка"
+      city_district_street: "Город, район, улица"
+      address_full: "Полный адрес"
+      address_short: "Адрес"
+      work_schedule: "Режим работы"
+      legal_info: "Юридическая информация"
+      self_emloyed: "ИП"
+      inn: "ИНН"
+      realties: "Недвижимость"
+      city: "Город"
+      district: "Район"
+      districts: "Районы"
+      street: "Улица"
+      streets: "Улицы"
+      price: "Цена"
+      type_object: "Тип недвижимости"
+      realty_category: "Категория"
+      payments: "Платежи"
+      specifications: "Характеристики"
+      photos: "Фотографии"
+      generate: "Сгенерировать"
+      select_photo: "Выберите фото"
+      add_photo: "Добавить фото"
+      avatar: "Аватар"
+      select_avatar: "Выберите аватар"
+      logo: "Логотип"
+      select_logo: "Выберите логотип"
+      save_button: "Сохранить"
+      confirm: "Вы уверены, что хотите удалить?"
+      not_found: "Упс! Данные не найдены."
+
+  validation:
+    invalid:
+      name: "Пожалуйста введите наименование"
+      anchor: "Пожалуйста введите якорную ссылку"
+      author: "Пожалуйста введите автора"
+      email: "Пожалуйста введите e-mail"
+      phone: "Пожалуйста введите номер телефона"
+      rating: "Пожалуйста введите рейтинг"
+      last_name: "Пожалуйста введите фамилию"
+      first_name: "Пожалуйста введите имя"
+      patronymic_name: "Пожалуйста введите отчество"
+      slug: "Пожалуйста введите уникальный идентификатор URL"
+      job_title: "Пожалуйста выберите должность"
+      employment_type: "Пожалуйста выберите тип занятости"
+      skill: "Пожалуйста выберите навыки"
+      link: "Пожалуйста введите ссылку"
+      address_full: "Пожалуйста введите полный адрес"
+      address_short: "Пожалуйста введите адрес"
+      self_emloyed: "Пожалуйста введите наименование ИП"
+      inn: "Пожалуйста введите ИНН"
+      city: "Пожалуйста выберите город"
+      district: "Пожалуйста выберите район"
+      street: "Пожалуйста выберите улицу"
+      location: "Пожалуйста введите местоположение"
+      price: "Пожалуйста укажите цену"
+    valid: "Заполнено!"
+
+  placeholders:
+    employment_type:
+      name: "Полная занятость, полный день"
+    job_titles:
+      name: "Агент по недвижимости"
+    partners:
+      name: "Сбербанк"
+      anchor: "sber"
+    reviews:
+      author: "Фамилия Имя Отчество"
+      rating: "4,5"
+    team_members:
+      slug: "ivanov-ivan-ivanovich"
+    skills:
+      name: "Коммерческая недвижимость"
+    vacancies:
+      experience: "Без опыта"
+    social_links:
+      name: "ВКонтакте"
+      link: "https://vk.com/rssfera"
+    realty_categories:
+      name: "Аренда"
+    cities:
+      name: "Мурманск"
+    districts:
+      name: "Центральный"
+    streets:
+      name: "Центральная"
+    realties:
+      name: "4-комн. кв. 89 м² этаж 5/5"
+      slug: "3755615"
+      payments: "Платежи"
+      price: "4 500 000"
+    email: "example@rssfera.ru"
+    phone: "+7 (999) 999-99-99"
+    location: "Мурманск, улица Полярные Зори, 44"
+    from: "от"
+    to: "до"
+    address_full: "183025, г. Мурманск, ул. Полярные Зори, 44, 2 этаж (вход со двора)"
+    address_short: "г. Мурманск, ул.Полярные Зори, д. 44"
+    self_emloyed: "ИП Кулишов Дмитрий Александрович"
+    inn: "ИНН"
+    weekday_time_start: "09:00"
+    weekday_time_end: "19:00"
+    saturday_time_start: "10:00"
+    saturday_time_end: "18:00"
+    sunday_time_start: "Выходной"
+    sunday_time_end: "Выходной"
+
+  hint:
+    slug: "Уникальный идентификатор URL для отображения на сайте. Чтобы сгенерировать, необходимо заполнить ФИО"
+    realty_slug: "Уникальный идентификатор URL для отображения на сайте. Используется как Код объекта"
+    anchor: "Якорная ссылка, нужна для скроллинга к нужному элементу на странице"
+    rating: "Рейтинг указывается от 0 до 5 с шагом 0,5"

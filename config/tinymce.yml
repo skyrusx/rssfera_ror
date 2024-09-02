@@ -1,0 +1,7 @@
+height: 350
+menubar: true
+toolbar:
+  - undo redo | blocks | bold italic | alignleft aligncenter alignright | bullist numlist outdent indent | removeformat | help
+plugins:
+  - insertdatetime lists media table code help wordcount
+license_key: 'gpl'
