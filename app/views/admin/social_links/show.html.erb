@@ -1,0 +1,30 @@
+<div class="page-subtitle-box d-flex justify-content-between">
+  <h4><%= t "social_links.show_link_title" %></h4>
+  <div class="link-group mb-4">
+    <%= link_to edit_admin_social_link_path(@social_link.id), class: "text-light" do %>
+      <i class="bi bi-pencil-square"></i>
+    <% end %>
+    <%= link_to admin_social_link_path(@social_link.id), data: { turbo_method: "delete", turbo_confirm: t("crud.table.confirm") }, class: "text-light" do %>
+      <i class="bi bi-trash3"></i>
+    <% end %>
+  </div>
+</div>
+
+<div class="admin-crud social-links">
+  <div class="row social-link__data">
+    <div class="col-lg-9">
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.status" %></div>
+        <div class="field-value"><%= activity_status @social_link.status, true %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.name" %></div>
+        <div class="field-value"><%= @social_link.name %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.link" %></div>
+        <div class="field-value"><%= @social_link.link %></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div class="page-subtitle-box d-flex justify-content-between">
+  <h4><%= t "contacts.show_contact_title" %></h4>
+  <div class="link-group mb-4">
+    <%= link_to edit_admin_contact_path(@contact.id), class: "text-light" do %>
+      <i class="bi bi-pencil-square"></i>
+    <% end %>
+  </div>
+</div>
+
+<div class="admin-crud contacts">
+  <div class="row contact__data">
+    <div class="col-lg-9">
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.address_full" %></div>
+        <div class="field-value"><%= @contact.address_full %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.address_short" %></div>
+        <div class="field-value"><%= @contact.address_short %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.phone" %></div>
+        <div class="field-value"><%= @contact.phone %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.email" %></div>
+        <div class="field-value"><%= @contact.email %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field schedule">
+        <div class="field-name justify-content-end"><%= t "crud.table.work_schedule" %></div>
+        <div class="field-value"><%= schedule_html @contact.work_schedule %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.legal_info" %></div>
+        <div class="field-value info">
+          <p><%= @contact.self_emloyed %></p>
+          <p><%= @contact.inn %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

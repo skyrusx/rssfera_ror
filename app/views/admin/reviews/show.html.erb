@@ -1,0 +1,62 @@
+<div class="page-subtitle-box d-flex justify-content-between">
+  <h4><%= t "reviews.show_review_title" %></h4>
+  <div class="link-group mb-4">
+    <%= link_to edit_admin_review_path(@review.id), class: "text-light" do %>
+      <i class="bi bi-pencil-square"></i>
+    <% end %>
+    <%= link_to admin_review_path(@review.id), data: { turbo_method: "delete", turbo_confirm: t("crud.table.confirm") }, class: "text-light" do %>
+      <i class="bi bi-trash3"></i>
+    <% end %>
+  </div>
+</div>
+
+<div class="admin-crud reviews">
+  <div class="row review__data">
+    <div class="col-lg-9">
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.status" %></div>
+        <div class="field-value"><%= review_status @review.status, true %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.author" %></div>
+        <div class="field-value"><%= @review.author %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.email" %></div>
+        <div class="field-value"><%= @review.email %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.rating" %></div>
+        <div class="field-value"><%= @review.rating %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.created_at" %></div>
+        <div class="field-value"><%= date_format @review.created_at %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.published_at" %></div>
+        <div class="field-value"><%= date_format @review.published_at %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.employee" %></div>
+        <div class="field-value"><%= team_member_name @review %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.feedback" %></div>
+        <div class="field-value info"><%= @review.feedback.html_safe %></div>
+      </div>
+    </div>
+
+    <div class="col-lg-3">
+      <div class="d-flex justify-content-center list-images">
+        <div class="img-thumbnail">
+          <% if @review.avatar.attached? %>
+            <%= image_tag(@review.avatar, id: "selected-image", class: "selected-image") %>
+          <% else %>
+            <%= image_tag "avatar/avatar-placeholder.png", id: "selected-image", class: "selected-image preview" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

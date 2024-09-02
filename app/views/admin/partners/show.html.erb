@@ -1,0 +1,46 @@
+<div class="page-subtitle-box d-flex justify-content-between">
+  <h4><%= t "partners.show_partner_title" %></h4>
+  <div class="link-group mb-4">
+    <%= link_to edit_admin_partner_path(@partner.id), class: "text-light" do %>
+      <i class="bi bi-pencil-square"></i>
+    <% end %>
+    <%= link_to admin_partner_path(@partner.id), data: { turbo_method: "delete", turbo_confirm: t("crud.table.confirm") }, class: "text-light" do %>
+      <i class="bi bi-trash3"></i>
+    <% end %>
+  </div>
+</div>
+
+<div class="admin-crud partners">
+  <div class="row partner__data">
+    <div class="col-lg-9">
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.status" %></div>
+        <div class="field-value"><%= activity_status @partner.status, true %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.name" %></div>
+        <div class="field-value"><%= @partner.name %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.anchor" %></div>
+        <div class="field-value"><%= @partner.anchor %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.description" %></div>
+        <div class="field-value info"><%= @partner.description.html_safe %></div>
+      </div>
+    </div>
+
+    <div class="col-lg-3">
+      <div class="d-flex justify-content-center list-images">
+        <div class="img-thumbnail">
+          <% if @partner.logo.attached? %>
+            <%= image_tag(@partner.logo, id: "selected-image", class: "selected-image") %>
+          <% else %>
+            <%= image_tag "avatar/avatar-placeholder.png", id: "selected-image", class: "selected-image preview" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

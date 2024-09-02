@@ -1,0 +1,141 @@
+<div class="page-subtitle-box d-flex justify-content-between">
+  <h4><%= t "realties.show_realty_title" %></h4>
+  <div class="link-group mb-4">
+    <%= link_to edit_admin_realty_path(@realty.id), class: "text-light" do %>
+      <i class="bi bi-pencil-square"></i>
+    <% end %>
+    <%= link_to admin_realty_path(@realty.id), data: { turbo_method: "delete", turbo_confirm: t("crud.table.confirm") }, class: "text-light" do %>
+      <i class="bi bi-trash3"></i>
+    <% end %>
+  </div>
+</div>
+
+<div class="admin-crud realties">
+  <div class="row realty__data">
+    <div class="col-lg-9">
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.status" %></div>
+        <div class="field-value"><%= activity_status @realty.status, true %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.photos" %></div>
+        <div class="field-value info">
+          <% if @realty.photos.attached? %>
+            <div id="photos" class="carousel slide">
+              <div class="carousel-indicators">
+                <% (0..@realty.photos.size-1).each do |index| %>
+                  <%
+                    classes = "active" if index.zero?
+                    aria_current = true if index.zero?
+                  %>
+                  <%= button_tag "", type: "button", "data-bs-target": "#photos", "data-bs-slide-to": index, class: classes, "aria-current": aria_current, "aria-label": "Photo #{index}"  %>
+                <% end %>
+              </div>
+              <div class="carousel-inner">
+                <% @realty.photos.each.with_index do |photo, index| %>
+                  <div class="carousel-item <%= "active" if index.zero? %>">
+                    <%= image_tag photo, class: "d-block w-100" %>
+                  </div>
+                <% end %>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#photos" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#photos" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.name" %></div>
+        <div class="field-value"><%= @realty.name %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.slug" %></div>
+        <div class="field-value"><%= @realty.slug %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.type_object" %></div>
+        <div class="field-value"><%= @realty.type_object %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.realty_category" %></div>
+        <div class="field-value"><%= @realty.realty_category.name %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.city_district_street" %></div>
+        <div class="field-value"><%= @realty.city.name %></div>
+        <div class="field-value"><%= @realty.district.name %></div>
+        <div class="field-value"><%= @realty.street.name %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.location" %></div>
+        <div class="field-value"><%= @realty.location %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.price" %></div>
+        <div class="field-value"><%= price_data @realty.price, @realty.realty_category.name %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.payments" %></div>
+        <div class="field-value"><%= payment_data @realty.payments, @realty.realty_category.name %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.description" %></div>
+        <div class="field-value info"><%= @realty.description.html_safe %></div>
+      </div>
+
+      <div class="mb-4 mb-3 specifications">
+        <div class="input-group">
+          <span class="input-group-text w-100"><%= t "crud.table.specifications" %></span>
+        </div>
+
+        <% prev_section = "" %>
+        <% @realty.specifications.each do |key, field| %>
+          <% unless prev_section == field["section"] %>
+            <div class="input-group">
+              <span class="input-group-text w-100"><%= field["section"] %></span>
+            </div>
+          <% end %>
+
+          <div class="d-flex field">
+            <span class="input-group-text justify-content-end"><%= field["field"] %></span>
+            <div class="field-value"><%= field["value"] %></div>
+          </div>
+
+          <% prev_section = field["section"] %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col-lg-3">
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-center"><%= t "crud.table.employee" %></div>
+      </div>
+      <% if @realty.team_member.photo.attached? %>
+        <div class="d-flex field justify-content-center list-images mb-4 mb-3">
+          <div class="img-thumbnail">
+            <%= image_tag(@realty.team_member.photo, id: "selected-image", class: "selected-image") %>
+          </div>
+        </div>
+      <% end %>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-value justify-content-center"><%= @realty.team_member.whole_name %></div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<div class="page-subtitle-box d-flex justify-content-between">
+  <h4><%= t "teams.show_team_member_title" %></h4>
+  <div class="link-group mb-4">
+    <%= link_to edit_admin_team_member_path(@team_member.id), class: "text-light" do %>
+      <i class="bi bi-pencil-square"></i>
+    <% end %>
+    <%= link_to admin_team_member_path(@team_member.id), data: { turbo_method: "delete", turbo_confirm: t("crud.table.confirm") }, class: "text-light" do %>
+      <i class="bi bi-trash3"></i>
+    <% end %>
+  </div>
+</div>
+
+<div class="admin-crud teams">
+  <div class="row team-member__data">
+    <div class="col-lg-9">
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.status" %></div>
+        <div class="field-value"><%= activity_status @team_member.status, true %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.full_name" %></div>
+        <div class="field-value"><%= @team_member.whole_name %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.slug" %></div>
+        <div class="field-value"><%= @team_member.slug %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end flex-wrap"><%= t "crud.table.job_title" %></div>
+        <div class="field-value"><%= list_objects @team_member.job_titles.pluck(:name), "show" %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.email" %></div>
+        <div class="field-value"><%= @team_member.email %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.phone_number" %></div>
+        <div class="field-value"><%= @team_member.phone %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.whatsapp" %></div>
+        <div class="field-value"><%= whatsapp @team_member.whatsapp %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.rating" %></div>
+        <div class="field-value"><%= rating_with_reviews @team_member %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.info" %></div>
+        <div class="field-value info"><%= @team_member.info.html_safe %></div>
+      </div>
+    </div>
+
+    <div class="col-lg-3">
+      <div class="d-flex justify-content-center list-images">
+        <div class="img-thumbnail">
+          <% if @team_member.photo.attached? %>
+            <%= image_tag(@team_member.photo, id: "selected-image", class: "selected-image") %>
+          <% else %>
+            <%= image_tag "team-placeholder.png", id: "selected-image", class: "selected-image preview" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

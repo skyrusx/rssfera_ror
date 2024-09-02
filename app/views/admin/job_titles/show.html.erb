@@ -1,0 +1,30 @@
+<div class="page-subtitle-box d-flex justify-content-between">
+  <h4><%= t "job_titles.show_job_title" %></h4>
+  <div class="link-group mb-4">
+    <%= link_to edit_admin_job_title_path(@job_title.id), class: "text-light" do %>
+      <i class="bi bi-pencil-square"></i>
+    <% end %>
+    <%= link_to admin_job_title_path(@job_title.id), data: { turbo_method: "delete", turbo_confirm: t("crud.table.confirm") }, class: "text-light" do %>
+      <i class="bi bi-trash3"></i>
+    <% end %>
+  </div>
+</div>
+
+<div class="admin-crud job-titles">
+  <div class="row job-title__data">
+    <div class="col-lg-9">
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.status" %></div>
+        <div class="field-value"><%= activity_status @job_title.status, true %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.name" %></div>
+        <div class="field-value"><%= @job_title.name %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.employees" %></div>
+        <div class="field-value"><%= list_employees @job_title.employees %></div>
+      </div>
+    </div>
+  </div>
+</div>

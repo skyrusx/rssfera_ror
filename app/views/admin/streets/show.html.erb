@@ -1,0 +1,34 @@
+<div class="page-subtitle-box d-flex justify-content-between">
+  <h4><%= t "streets.show_street_title" %></h4>
+  <div class="link-group mb-4">
+    <%= link_to edit_admin_street_path(@street.id), class: "text-light" do %>
+      <i class="bi bi-pencil-square"></i>
+    <% end %>
+    <%= link_to admin_street_path(@street.id), data: { turbo_method: "delete", turbo_confirm: t("crud.table.confirm") }, class: "text-light" do %>
+      <i class="bi bi-trash3"></i>
+    <% end %>
+  </div>
+</div>
+
+<div class="admin-crud streets">
+  <div class="row street__data">
+    <div class="col-lg-9">
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.name" %></div>
+        <div class="field-value"><%= @street.name %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.district" %></div>
+        <div class="field-value"><%= @street.district.name %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.city" %></div>
+        <div class="field-value"><%= @street.district.city.name %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.realties" %></div>
+        <div class="field-value"><%= @street.realties.size %></div>
+      </div>
+    </div>
+  </div>
+</div>
