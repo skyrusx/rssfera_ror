@@ -2,3 +2,8 @@
 //= link_directory ../stylesheets .css
 //= link_tree ../../javascript .js
 //= link_tree ../../../vendor/javascript .js
+//= link bootstrap.bundle.min.js
+//= link jquery.inputmask.js
+//= link select2.min.js
+//= link_tree ../fonts
+//= link_tree ../../javascript/scripts .js
