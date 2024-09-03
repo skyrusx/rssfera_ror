@@ -2,6 +2,7 @@
 puts "Seeding Contacts..."
 
 Contact.delete_all
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE contacts RESTART IDENTITY")
 
 contacts = [
   {

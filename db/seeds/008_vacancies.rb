@@ -2,6 +2,13 @@
 puts "Seeding Vacancies..."
 
 Vacancy.delete_all
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE vacancies RESTART IDENTITY")
+
+VacancyEmploymentTypeJoin.delete_all
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE vacancy_employment_type_joins RESTART IDENTITY")
+
+VacancySkillJoin.delete_all
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE vacancy_skill_joins RESTART IDENTITY")
 
 location = "Мурманск, улица Полярные Зори, 44"
 published_at = DateTime.new(2024, 06, 01, 16, 00, 00)

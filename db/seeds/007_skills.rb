@@ -2,6 +2,7 @@
 puts "Seeding Skills..."
 
 Skill.delete_all
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE skills RESTART IDENTITY")
 
 skills = [
   { name: "Агентские продажи", status: true },

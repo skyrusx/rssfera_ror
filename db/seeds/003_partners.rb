@@ -2,6 +2,7 @@
 puts "Seeding Partners..."
 
 Partner.delete_all
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE partners RESTART IDENTITY")
 
 partners = [
   {

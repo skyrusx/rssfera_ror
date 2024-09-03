@@ -2,6 +2,10 @@
 puts "Seeding Team Members..."
 
 TeamMember.delete_all
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE team_members RESTART IDENTITY")
+
+TeamMemberJobTitleJoin.delete_all
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE team_member_job_title_joins RESTART IDENTITY")
 
 team_members = [
   {

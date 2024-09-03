@@ -2,6 +2,7 @@
 puts "Seeding Social Links..."
 
 SocialLink.delete_all
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE social_links RESTART IDENTITY")
 
 social_links = [
   { name: "ВКонтакте", status: true, link: "https://vk.com/rssfera" },

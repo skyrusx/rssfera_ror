@@ -2,6 +2,7 @@
 puts "Seeding Streets..."
 
 Street.delete_all
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE streets RESTART IDENTITY")
 
 streets = {
   "Мурманск" => {

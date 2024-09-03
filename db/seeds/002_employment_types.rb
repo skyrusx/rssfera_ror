@@ -2,6 +2,7 @@
 puts "Seeding Employment Types..."
 
 EmploymentType.delete_all
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE employment_types RESTART IDENTITY")
 
 employment_types = [
   { name: "Возможна подработка: сменами по 4-6 часов", status: true },

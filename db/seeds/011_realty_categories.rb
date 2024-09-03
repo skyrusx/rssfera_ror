@@ -2,6 +2,7 @@
 puts "Seeding Realty Categories..."
 
 RealtyCategory.delete_all
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE realty_categories RESTART IDENTITY")
 
 realty_categories = [
   { name: "Аренда", status: true },

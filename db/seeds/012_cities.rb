@@ -2,6 +2,7 @@
 puts "Seeding Cities..."
 
 City.delete_all
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE cities RESTART IDENTITY")
 
 cities = [
   { name: "Мурманск", status: true },

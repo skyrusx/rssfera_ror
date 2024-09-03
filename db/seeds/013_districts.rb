@@ -2,6 +2,7 @@
 puts "Seeding Districts..."
 
 District.delete_all
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE districts RESTART IDENTITY")
 
 districts = {
   "Мурманск" => [

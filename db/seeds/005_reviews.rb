@@ -2,6 +2,7 @@
 puts "Seeding Reviews..."
 
 Review.delete_all
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE reviews RESTART IDENTITY")
 
 reviews = [
   {

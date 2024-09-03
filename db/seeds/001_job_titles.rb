@@ -2,6 +2,7 @@
 puts "Seeding Job Titles..."
 
 JobTitle.delete_all
+ActiveRecord::Base.connection.execute("TRUNCATE TABLE job_titles RESTART IDENTITY")
 
 job_titles = [
   { name: "HR Менеджер", status: true },
