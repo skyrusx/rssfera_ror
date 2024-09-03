@@ -31,7 +31,7 @@
       </div>
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.job_title" %></div>
-        <div class="field-value"><%= list_objects @vacancy.job_titles.pluck(:name) %></div>
+        <div class="field-value"><%= @vacancy.job_title.name %></div>
       </div>
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.experience" %></div>
