@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_01_102330) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_03_025327) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -114,17 +114,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_01_102330) do
     t.jsonb "specifications", default: "{}"
     t.bigint "team_member_id"
     t.bigint "realty_category_id"
-    t.bigint "city_id"
-    t.bigint "district_id"
-    t.bigint "street_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "type_object"
+    t.integer "city_id"
+    t.integer "district_id"
+    t.integer "street_id"
+    t.index ["realty_category_id"], name: "index_realties_on_realty_category_id"
+    t.index ["team_member_id"], name: "index_realties_on_team_member_id"
     t.index ["city_id"], name: "index_realties_on_city_id"
     t.index ["district_id"], name: "index_realties_on_district_id"
-    t.index ["realty_category_id"], name: "index_realties_on_realty_category_id"
     t.index ["street_id"], name: "index_realties_on_street_id"
-    t.index ["team_member_id"], name: "index_realties_on_team_member_id"
   end
 
   create_table "realty_categories", force: :cascade do |t|
@@ -140,13 +140,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_01_102330) do
     t.text "feedback"
     t.float "rating"
     t.datetime "published_at"
-    t.bigint "team_member_id_id"
+    t.bigint "team_member_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"
-    t.bigint "team_member_id"
     t.index ["team_member_id"], name: "index_reviews_on_team_member_id"
-    t.index ["team_member_id_id"], name: "index_reviews_on_team_member_id_id"
   end
 
   create_table "skills", force: :cascade do |t|
