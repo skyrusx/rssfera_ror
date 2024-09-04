@@ -1,11 +1,11 @@
 class Admin::TeamMembersController < AdminController
   before_action :find_team_member, only: [:show, :edit, :update, :destroy, :delete_photo]
   before_action :job_titles, only: [:new, :create, :edit, :update]
+  before_action :team_members, only: [:index, :new, :create, :edit, :update]
 
   add_breadcrumb I18n.t("admin_breadcrumbs.team_members"), :admin_team_members_path
 
   def index
-    @team_members = TeamMember.all
   end
 
   def show
@@ -65,7 +65,7 @@ class Admin::TeamMembersController < AdminController
 
   def team_member_params
     params.require(:team_member).permit(
-      :first_name, :last_name, :patronymic_name, :slug, :phone, :email, :info, :whatsapp, :status, :photo,
+      :first_name, :last_name, :patronymic_name, :slug, :phone, :email, :info, :whatsapp, :status, :photo, :position,
       :job_title_ids => [], :review_ids => [], :vacancy_ids => []
     )
   end
@@ -76,5 +76,9 @@ class Admin::TeamMembersController < AdminController
 
   def job_titles
     @job_titles = JobTitle.active
+  end
+
+  def team_members
+    @team_members = TeamMember.order(:position)
   end
 end

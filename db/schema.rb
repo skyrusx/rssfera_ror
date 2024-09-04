@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_03_025327) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_04_084236) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -92,6 +92,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_025327) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "status", default: true
+    t.integer "position", default: 0, null: false
   end
 
   create_table "partners", force: :cascade do |t|
@@ -122,9 +123,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_025327) do
     t.integer "street_id"
     t.index ["realty_category_id"], name: "index_realties_on_realty_category_id"
     t.index ["team_member_id"], name: "index_realties_on_team_member_id"
-    t.index ["city_id"], name: "index_realties_on_city_id"
-    t.index ["district_id"], name: "index_realties_on_district_id"
-    t.index ["street_id"], name: "index_realties_on_street_id"
   end
 
   create_table "realty_categories", force: :cascade do |t|
@@ -189,6 +187,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_025327) do
     t.datetime "updated_at", null: false
     t.boolean "status", default: true
     t.float "rating"
+    t.integer "position", default: 0, null: false
   end
 
   create_table "vacancies", force: :cascade do |t|

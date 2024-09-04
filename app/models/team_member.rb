@@ -6,6 +6,8 @@ class TeamMember < ApplicationRecord
   has_many :realties
   has_one_attached :photo
 
+  is_positionable start: 1
+
   after_create :fill_slug
 
   scope :active, -> { where(status: true) }
