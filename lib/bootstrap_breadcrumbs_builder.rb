@@ -1,6 +1,6 @@
 class BootstrapBreadcrumbsBuilder < BreadcrumbsOnRails::Breadcrumbs::Builder
   def render
-    @context.content_tag(:ol, class: 'breadcrumb m-0') do
+    @context.content_tag(:ol, class: 'breadcrumb') do
       elements_count = @elements.size
       i = 0
       @elements.collect do |element|
