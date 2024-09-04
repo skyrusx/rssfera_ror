@@ -1,0 +1,51 @@
+<div class="content-info">
+  <div class="content-info__bg"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 col-12">
+        <div class="title">Контактная информация</div>
+        <div class="footer-contact-info">
+          <div class="info-item" title="<%= @contacts.address_full %>">
+            <i class="bi bi-geo-alt-fill"></i>
+            <%= @contacts.address_short %>
+          </div>
+
+          <div class="info-item">
+            <i class="bi bi-telephone-fill"></i>
+            <%= link_phone @contacts.phone %>
+          </div>
+
+          <div class="info-item">
+            <i class="bi bi-envelope"></i>
+            <%= link_email @contacts.email %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4 offset-lg-4 col-12">
+        <div class="title">Юридическая информация</div>
+        <div class="footer-contact-info">
+          <div class="info-item">
+            <i class="bi bi-file-text"></i>
+            <%= @contacts.self_emloyed %>
+          </div>
+
+          <div class="info-item">
+            <i class="bi bi-file-text"></i>
+            <%= @contacts.inn %>
+          </div>
+
+          <% if @social_links.present? %>
+            <div class="btn-group">
+              <% @social_links.each do |social_link| %>
+                <%= link_to social_link.link, class: "btn btn-outline-secondary", target: "_blank", title: social_link.name do %>
+                  <%= image_tag "social-links/#{social_link.name}.svg" %>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

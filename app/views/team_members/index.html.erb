@@ -1,0 +1,67 @@
+<section class="team-page bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <%= render "application/shared/breadcrumbs" %>
+      </div>
+    </div>
+
+    <div class="row team-info">
+      <div class="col-lg-12">
+        <h2>Познакомтесь с нашими сотрудниками</h2>
+        <h4 class="text-success">Преданная своему делу команда</h4>
+      </div>
+    </div>
+
+    <% if @team_members.present? %>
+      <div class="row team-members">
+        <% @team_members.each do |team_member| %>
+          <div class="member col-lg-3">
+            <div class="card">
+              <div class="card-image">
+                <%= link_to team_member_path(team_member.slug) do %>
+                  <%= image_tag team_member.photo, class: "card-img-top", alt: team_member.whole_name %>
+                <% end %>
+                <div class="team-info">
+                  <div class="name"><%= team_member.whole_name %></div>
+                  <%= list_positions team_member.job_titles %>
+                </div>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Контакты</h5>
+              </div>
+              <ul class="list-group list-group-flush card-contacts">
+                <li class="list-group-item">
+                  <i class="bi bi-telephone-fill"></i>
+                  <%= link_phone team_member.phone %>
+                </li>
+                <li class="list-group-item">
+                  <i class="bi bi-envelope"></i>
+                  <%= link_email team_member.email %>
+                </li>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1 explore">
+        <div class="explore-wrapper">
+          <div class="explore-info">
+            <h1>Присоединяйтесь к нам!</h1>
+            <p>Если желаете стать частью нашей команды</p>
+          </div>
+          <div class="explore-link">
+            <%= link_to "#", class: "btn btn-light" do %>
+              Вакансии <i class="bi bi-arrow-right"></i>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

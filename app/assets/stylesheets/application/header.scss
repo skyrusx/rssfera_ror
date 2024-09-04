@@ -1,0 +1,167 @@
+.header {
+  .navbar-brand {
+    img {
+      width: 100px;
+    }
+  }
+
+  .navbar-collapse {
+    .navbar-nav {
+      align-items: center;
+
+      .nav-item {
+        .nav-link {
+          text-transform: uppercase;
+          color: #fff;
+          font-size: 1.1em;
+          padding: 0.5em 1em;
+
+          &:focus {
+            color: #fff;
+            font-size: 1.1em;
+            padding: 0.5em 1em;
+          }
+
+          &:hover {
+            color: #75b08a;
+          }
+        }
+
+        &.active {
+          .nav-link {
+            color: #75b08a;
+          }
+        }
+      }
+
+      .dropdown-menu {
+        top: 100%;
+        border-radius: unset;
+        background: #198754;
+        border: unset;
+        z-index: 1;
+        padding-top: 15px;
+
+        .dropdown-item {
+          color: white;
+
+          &:hover {
+            background-color: #75b08a;
+          }
+        }
+      }
+    }
+  }
+
+  .title {
+    height: 300px;
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    .title-bg {
+      background: rgba(117, 176, 138, .8);
+      position: absolute;
+      content: "";
+      top: 0;
+      left: 0;
+      background-size: 100%;
+      width: 100%;
+      display: block;
+      height: 100%;
+    }
+
+    h1 {
+      position: relative;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 25px 0;
+      color: white;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    .navbar {
+      .navbar-brand {
+        margin: 0 1em;
+        padding: unset;
+        background: white;
+        border-radius: 50%;
+        border: 3px solid #198754;
+        z-index: 10;
+
+        img {
+          width: 100px;
+          padding: 10px;
+          margin: unset;
+        }
+      }
+
+      .navbar-collapse {
+        z-index: 2;
+
+        .dropdown:hover>.dropdown-menu {
+          display: block;
+        }
+
+        .dropdown>.dropdown-toggle:active {
+          pointer-events: none;
+        }
+      }
+
+      .bg-main-menu {
+        background-color: #198754;
+        position: absolute;
+        width: 100%;
+        height: 60px;
+        left: 0;
+        z-index: 1;
+      }
+    }
+
+    .title {
+      margin-top: -31px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .header {
+    .navbar {
+      background-color: #198754;
+
+      .navbar-brand {
+        padding: unset;
+        background: white;
+        border-radius: 50%;
+        border: 3px solid #198754;
+        margin: 0 1rem 0 0;
+
+        img {
+          padding: 5px;
+          width: 60px;
+          margin: unset;
+        }
+      }
+
+      .navbar-nav {
+        align-items: start;
+
+        .dropdown-menu {
+          padding-top: unset;
+          margin-left: 15px;
+        }
+      }
+
+      .bg-main-menu {
+        display: none;
+      }
+    }
+  }
+}

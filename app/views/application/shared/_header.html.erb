@@ -1,0 +1,74 @@
+<header class="header">
+  <nav class="navbar navbar-expand-md navbar-dark">
+    <div class="container-fluid">
+      <%= link_to root_path, class: "navbar-brand d-md-none" do %>
+        <%= image_tag "logo.png", title: "РиелтСтройСфера" %>
+      <% end %>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Купить
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="buy-room.html">Комнату</a></li>
+              <li><a class="dropdown-item" href="buy-flat.html">Квартиру</a></li>
+              <li><a class="dropdown-item" href="buy-house.html">Загородный дом</a></li>
+              <li><a class="dropdown-item" href="buy-land.html">Земельный участок</a></li>
+              <li><a class="dropdown-item" href="buy-commercial.html">Коммерческая недвижимость</a></li>
+              <li><a class="dropdown-item" href="buy-garage.html">Гараж</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="base-property.html">База недвижимости</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Продать
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="sell-room.html">Комнату</a></li>
+              <li><a class="dropdown-item" href="sell-flat.html">Квартиру</a></li>
+              <li><a class="dropdown-item" href="sell-house.html">Загородный дом</a></li>
+              <li><a class="dropdown-item" href="sell-land.html">Земельный участок</a></li>
+              <li><a class="dropdown-item" href="sell-commercial.html">Коммерческая недвижимость</a></li>
+              <li><a class="dropdown-item" href="sell-garage.html">Гараж</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="search-buyer.html">Подбор покупателей</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Аренда
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="rent-property.html">Снять недвижимость</a></li>
+              <li><a class="dropdown-item" href="rent-out-property.html">Сдать недвижимость</a></li>
+            </ul>
+          </li>
+          <%= link_to root_path, class: "navbar-brand d-none d-md-block" do %>
+            <%= image_tag "logo.png", title: "РиелтСтройСфера" %>
+          <% end %>
+          <li class="nav-item active">
+            <a class="nav-link" href="team.html">Сотрудники</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="vacancy.html">Вакансии</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contacts.html">Контакты</a>
+          </li>
+        </ul>
+      </div>
+      <div class="bg-main-menu"></div>
+    </div>
+  </nav>
+
+  <div class="title text-center" style="background-image: url(<%= asset_url("#{controller_name}.png") %>);">
+    <div class="title-bg"></div>
+    <h1>Сотрудники</h1>
+  </div>
+</header>

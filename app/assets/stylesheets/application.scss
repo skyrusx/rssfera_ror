@@ -17,5 +17,15 @@
 @import "bootstrap";
 @import url("bootstrap-icons.min.css");
 @import url("fonts.css");
+@import url("select2.min.css");
+@import url("application/header.scss");
+@import url("application/sections.scss");
+@import url("application/breadcrumbs.scss");
+@import url("application/explore.scss");
+@import url("application/content-info.scss");
+@import url("application/footer.scss");
 
-
+body {
+  background-color: #75b08a;
+  font-family: 'Roboto Regular';
+}

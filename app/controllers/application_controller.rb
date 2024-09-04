@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   layout :layout
+  add_breadcrumb "Главная", :root_path
 
   private
 
