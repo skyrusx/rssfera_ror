@@ -15,8 +15,8 @@ class Review < ApplicationRecord
   private
 
   def update_team_member_rating
-    team_member = TeamMember.find_by_id(self.team_member_id)
-    reviews = Review.where(status: "published", team_member_id: team_member.id)
+    team_member = self.team_member
+    reviews = Review.where(team_member_id: team_member.id)
     return if reviews.size.zero?
     rating = reviews.pluck(:rating).sum / reviews.size
     team_member.rating = (rating * 2.0).round / 2.0
