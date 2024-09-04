@@ -1,4 +1,6 @@
 module Admin::HtmlHelper
+  include Rails.application.routes.url_helpers
+
   def list_employees(list)
     employee_names = list.map(&:whole_name)
 
@@ -45,16 +47,12 @@ module Admin::HtmlHelper
     content_tag(:i, nil, class: "bi #{data[:class]}", title: data[:title])
   end
 
-  def team_member_name(object)
-    TeamMember.find_by_id(object.team_member_id)&.whole_name
-  end
-
   def date_format(date, public = false)
     public ? l(@vacancy.published_at, format: "%e %b %Y, %H:%M") : date&.strftime("%d.%m.%Y %H:%M:%S")
   end
 
   def rating_with_reviews(team_member)
-    reviews = team_member.reviews.published
+    reviews = team_member.reviews
     "#{team_member.rating} (#{reviews.size} #{Russian.p(reviews.size, "отзыв", "отзыва", "отзывов")})"
   end
 
@@ -115,5 +113,13 @@ module Admin::HtmlHelper
     value = format_price(value, "₽")
     return value if type == "Продажа"
     [value, "в месяц"].join(" / ")
+  end
+
+  def realty_list(data)
+    data.map do |id, name|
+      content_tag(:div, class: "realty-list") do
+        content_tag(:a, name, href: admin_realty_path(id), target: "_blank", class: "realty-item")
+      end
+    end.reduce(&:+)
   end
 end
