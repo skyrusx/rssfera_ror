@@ -53,7 +53,7 @@
             <%= image_tag "logo.png", title: "РиелтСтройСфера" %>
           <% end %>
           <li class="nav-item active">
-            <a class="nav-link" href="team.html">Сотрудники</a>
+            <%= link_to "Сотрудники", team_members_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="vacancy.html">Вакансии</a>
