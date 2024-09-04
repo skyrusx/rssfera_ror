@@ -24,7 +24,7 @@
           <th scope="row" class="text-center"><%= index %></th>
           <td>
             <%= vacancy.name %>
-            <div class="assigned"><%= team_member_name vacancy %></div>
+            <div class="assigned"><%= vacancy.team_member.whole_name %></div>
           </td>
           <td class="text-center">
             <div class="note"><%= vacancy.experience %></div>
