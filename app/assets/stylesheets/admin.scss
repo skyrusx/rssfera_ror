@@ -3,6 +3,10 @@
 @import url("fonts.css");
 @import url("select2.min.css");
 
+#submenu2 {
+  height: 100px;
+}
+
 body {
   background-color: #4CAF50;
   font-family: 'Roboto Regular';
@@ -108,6 +112,11 @@ body {
 .main-menu .nav-item.menu-title {
   color: #4CAF50;
   margin-top: 5px;
+  cursor: pointer;
+
+  &:hover {
+    color: #B2FF59;
+  }
 }
 
 .main-menu {
@@ -210,6 +219,16 @@ body {
 .page-content .table tbody tr th,
 .page-content .table tbody tr td {
   background-color: unset;
+}
+
+.admin-crud a,
+.admin-crud a:active {
+  color: #B2FF59;
+  text-decoration: unset;
+}
+
+.admin-crud a:hover {
+  color: white;
 }
 
 .admin-crud .input-group-text,
