@@ -17,9 +17,9 @@
     </tr>
     </thead>
     <tbody>
-    <% @job_titles.each.with_index(1) do |job_title, index| %>
+    <% @job_titles.each do |job_title| %>
       <tr>
-        <th scope="row" class="text-center"><%= index %></th>
+        <th scope="row" class="text-center"><%= job_title.position %></th>
         <td><%= job_title.name %></td>
         <td><%= list_employees job_title.employees %></td>
         <td class="status text-center"><%= activity_status job_title.status %></td>

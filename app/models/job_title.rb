@@ -5,6 +5,8 @@ class JobTitle < ApplicationRecord
   has_many :vacancies, through: :vacancy_employment_type_joins, source: :vacancy
   has_many :vacancies
 
+  is_positionable start: 1
+
   scope :active, -> { where(status: true) }
 
   def employees

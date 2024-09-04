@@ -1,11 +1,12 @@
 class Admin::JobTitlesController < AdminController
   before_action :find_job_title, only: [:show, :edit, :update, :destroy]
   before_action :team_members, only: [:new, :create, :edit, :update]
+  before_action :job_titles, only: [:index, :new, :create, :edit, :update]
 
   add_breadcrumb I18n.t("admin_breadcrumbs.job_titles"), :admin_job_titles_path
 
   def index
-    @job_titles = JobTitle.all
+    @job_titles = JobTitle.order(:position)
   end
 
   def show
@@ -54,7 +55,7 @@ class Admin::JobTitlesController < AdminController
   private
 
   def job_title_params
-    params.require(:job_title).permit(:name, :status, :team_member_ids => [], :vacancy_ids => [])
+    params.require(:job_title).permit(:name, :status, :position, :team_member_ids => [], :vacancy_ids => [])
   end
 
   def find_job_title
@@ -63,5 +64,9 @@ class Admin::JobTitlesController < AdminController
 
   def team_members
     @team_members = TeamMember.active
+  end
+
+  def job_titles
+    @job_titles = JobTitle.order(:position)
   end
 end
