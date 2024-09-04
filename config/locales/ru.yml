@@ -538,6 +538,7 @@ ru:
       realty_category: "Категория"
       payments: "Платежи"
       specifications: "Характеристики"
+      position: "Позиция"
       photos: "Фотографии"
       generate: "Сгенерировать"
       select_photo: "Выберите фото"
@@ -575,6 +576,7 @@ ru:
       street: "Пожалуйста выберите улицу"
       location: "Пожалуйста введите местоположение"
       price: "Пожалуйста укажите цену"
+      position: "Пожалуйста укажите позицию"
     valid: "Заполнено!"
 
   placeholders:
