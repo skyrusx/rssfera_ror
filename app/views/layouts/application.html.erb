@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="ru">
   <head>
-    <title>Rssfera</title>
+    <title><%= meta_data.meta_title %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="keywords" content="<%= meta_data.meta_keywords %>">
+    <meta name="description" content="<%= meta_data.meta_description %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -14,7 +16,7 @@
   <body>
     <%= render "application/shared/header" %>
     <%= yield %>
-    <%= render "application/shared/content_info" if @contacts.present? %>
+    <%= render "application/shared/content_info" %>
     <%= render "application/shared/footer" %>
   </body>
 </html>
