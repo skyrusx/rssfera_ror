@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "pages#index"
+  root "application#index"
 
   # resources :pages, param: :slug, path: ''
 
@@ -50,9 +50,11 @@ Rails.application.routes.draw do
     resources :cities
     resources :districts
     resources :streets
+    resources :settings, except: [:new, :create, :destroy]
   end
 
   resources :team_members, path: :team, param: :slug, only: [:index, :show]
+  resources :partners, param: :slug, only: :index
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
