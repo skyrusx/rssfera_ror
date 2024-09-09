@@ -6,6 +6,8 @@ class Vacancy < ApplicationRecord
   belongs_to :job_title
   belongs_to :team_member
 
+  scope :active, -> { where(status: true) }
+
   INCOME_TYPES = [
     { type: 1, value: "на руки" },
     { type: 2, value: "до вычета налогов" }
