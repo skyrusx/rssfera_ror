@@ -1,0 +1,199 @@
+<section class="team-page bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <%= render "application/shared/breadcrumbs" %>
+      </div>
+    </div>
+
+    <div class="details-wrapper bg-white">
+      <div class="row">
+        <div class="col-lg-3 col-12">
+          <%= image_tag @team_member.photo, class: "img-thumbnail", alt: @team_member.whole_name %>
+        </div>
+
+        <div class="col-lg-9 col-12">
+          <div class="user-info__wrapper">
+            <div class="detail-user-info">
+              <div class="rating">
+                <span class="rating-count">
+                  <% rating_stars(@team_member.rating).each do |key, value| %>
+                    <% star_class = [:fill, :half].include?(key) ? "bi bi-star-#{key}" : "bi bi-star" %>
+                    <% value.times do %>
+                      <i class="<%= star_class %>"></i>
+                    <% end %>
+                  <% end %>
+                </span>
+                <%= rating_reviews @team_member %>
+              </div>
+
+              <h3><%= @team_member.whole_name %> <i class="bi bi-check-circle-fill"></i></h3>
+
+              <p class="role">
+                <i class="bi bi-person-fill-exclamation"></i>
+                <%= list_positions_detail @team_member.job_titles.pluck(:name) %>
+              </p>
+            </div>
+
+            <div class="detail-actions">
+              <%= link_call @team_member.phone %>
+              <%= link_whatsapp(@team_member.phone) if @team_member.whatsapp %>
+            </div>
+          </div>
+
+          <div class="contact-list">
+            <div class="info-item">
+              <i class="bi bi-telephone-fill"></i>
+              <%= link_phone @team_member.phone %>
+            </div>
+            <div class="info-item">
+              <i class="bi bi-envelope"></i>
+              <%= link_email @team_member.email %>
+            </div>
+          </div>
+
+          <% if @team_member.info.present? %>
+            <div class="accordion" id="user-info">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#about-team<%= @team_member.id %>" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                    <%= accordion_button_name @team_member.job_titles.pluck(:name) %>
+                  </button>
+                </h2>
+                <div id="about-team<%= @team_member.id %>" class="accordion-collapse collapse show">
+                  <div class="accordion-body">
+                    <%= @team_member.info.html_safe %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-8">
+        <% if @realties.present? %>
+          <div class="my-objects bg-white">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+              <% @realty_data[:tabs].each.with_index do |tab, index| %>
+                <li class="nav-item" role="presentation">
+                  <%
+                    btn_class = index.zero? ? "nav-link active" : "nav-link"
+                    area_selected = true if index.zero?
+                  %>
+                  <%= button_tag class: btn_class, id: "objects-#{tab[:id]}-tab", type: :button, role: :tab, data: { "bs-toggle": :pill, "bs-target": "#objects-#{tab[:id]}" }, aria: { controls: "objects-#{tab[:id]}", selected: area_selected } do %>
+                    <%= tab_name tab[:name], tab[:count] %>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+              <% @realty_data[:contents].each.with_index do |content, index| %>
+                <% content_classes = index.zero? ? "tab-pane fade show active" : "tab-pane fade" %>
+                <div class="<%= content_classes %>" id="objects-<%= content[:id] %>" role="tabpanel" aria-labelledby="objects-<%= content[:id] %>-tab" tabindex="<%= index %>">
+                  <% slides = content[:objects].each_slice(2) %>
+
+                  <div id="carousel-objects" class="carousel slide">
+                    <div class="carousel-indicators">
+                      <% slides.with_index do |_, index| %>
+                        <% class_active = "active" if index.zero? %>
+                        <%= button_tag '', class: class_active, type: :button, data: { "bs-target": "#carousel-objects", "bs-slide-to": index }, aria: { current: (true if index.zero?), label: "Slide #{index}" } %>
+                      <% end %>
+                    </div>
+                    <div class="carousel-inner">
+                      <% slides.with_index do |objects, index| %>
+                        <% carousel_classes = index.zero? ? "carousel-item active" : "carousel-item" %>
+
+                        <div class="<%= carousel_classes %>">
+                          <div class="row">
+                            <% objects.each do |object| %>
+                              <div class="object col-lg-6">
+                                <div class="card">
+                                  <%= link_to "#" do %>
+                                    <%= image_tag object.photos.first, class: "d-block w-100", alt: object.name %>
+                                  <% end %>
+                                  <div class="card-body">
+                                    <span class="card-price"><%= realty_price(price: object.price, type: object.realty_category.name) %></span>
+                                    <h5 class="card-title">
+                                      <%= link_to object.name, "#" %>
+                                    </h5>
+                                    <div class="card-text">
+                                      <small class="card-location">
+                                        <i class="bi bi-geo-alt-fill"></i>
+                                        <%= object.location %>
+                                      </small>
+                                      <div class="card-description"><%= object.description.html_safe %></div>
+                                    </div>
+                                  </div>
+                                  <div class="card-footer text-body-secondary">
+                                    <% object_footer = realty_footer(object.specifications) %>
+                                    <div class="num-rooms"><span>Комнаты:</span> <%= object_footer[:rooms] %></div>
+                                    <div class="square"><span>Площадь:</span> <%= object_footer[:square] %></div>
+                                    <div class="floor-info"><span>Этаж:</span> <%= object_footer[:floor] %></div>
+                                  </div>
+                                </div>
+                              </div>
+                            <% end %>
+                          </div>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="reviews bg-white">
+          <div class="accordion" id="user-reviews">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <%= button_tag class: "accordion-button", type: :button, data: { "bs-toggle": :collapse, "bs-target": "#team#{@team_member.id}-reviews" }, aria: { expanded: true, controls: "panelsStayOpen-collapseOne" } do %>
+                  <%= accordion_button("Отзывы", @reviews.size) %>
+                <% end %>
+              </h2>
+              <div id="team<%= @team_member.id %>-reviews" class="accordion-collapse collapse show">
+                <div class="accordion-body review-card">
+                  <% if @reviews.present? %>
+                    <% @reviews.each do |review| %>
+                      <div class="customer-review">
+                        <div class="customer-info">
+                          <div class="customer-name">
+                            <%= image_tag review.avatar, alt: review.author %>
+                            <div>
+                              <h5><%= review.author %></h5>
+                              <p><%= l(review.published_at, format: "%d %B %Y").gsub(/\b./, &:upcase) %></p>
+                            </div>
+                          </div>
+
+                          <div class="rating">
+                          <span class="rating-count">
+                            <% rating_stars(@team_member.rating).each do |key, value| %>
+                              <% star_class = [:fill, :half].include?(key) ? "bi bi-star-#{key}" : "bi bi-star" %>
+                              <% value.times do %>
+                                <i class="<%= star_class %>"></i>
+                              <% end %>
+                            <% end %>
+                          </span>
+                            <%= rating_review @team_member %>
+                          </div>
+                        </div>
+
+                        <div class="review-comment">
+                          <%= review.feedback.html_safe %>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
