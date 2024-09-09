@@ -19,6 +19,6 @@ class TeamMember < ApplicationRecord
   private
 
   def fill_slug
-    self.slug = Translit.convert(self.whole_name(separator: "-"), :english).downcase
+    self.slug = self.whole_name.parameterize
   end
 end
