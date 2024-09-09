@@ -9,7 +9,7 @@ class Admin::TeamMembersController < AdminController
   end
 
   def show
-    add_breadcrumb I18n.t("admin_breadcrumbs.show_team_member"), :new_admin_team_member_path
+    add_breadcrumb I18n.t("admin_breadcrumbs.show_team_member"), :admin_team_member_path
   end
 
   def new
