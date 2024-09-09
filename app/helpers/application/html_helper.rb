@@ -96,4 +96,41 @@ module Application::HtmlHelper
     end
     result
   end
+
+  def vacancy_info(vacancy)
+    items = []
+
+    items << { icon: "bi bi-person-check-fill", name: "Тип занятости:", value: vacancy.employment_types.pluck(:name) } if vacancy.employment_types
+    items << { icon: "bi bi-geo-alt-fill", name: "Местоположение:", value: vacancy.location } if vacancy.location
+    items << { icon: "bi bi-person-lines-fill", name: "Должность:", value: vacancy.job_title.name } if vacancy.job_title
+    items << { icon: "bi bi-luggage-fill", name: "Опыт работы:", value: vacancy.experience } if vacancy.experience
+    items << { icon: "bi bi-cash-coin", name: "Уровень дохода:", value: income(vacancy) }
+    items << { icon: "bi bi-clock-fill", name: "Дата публикации:", value: date_format(vacancy.published_at, true) } if vacancy.published_at
+
+    content_tag(:ul, class: "list-none") do
+      items.map do |item|
+        values = if item[:value].kind_of?(Array)
+                   item[:value].map do |value|
+                     content_tag(:span, value)
+                   end.reduce(&:+)
+                 else
+                   content_tag(:span, item[:value])
+                 end
+
+        content_tag(:li, class: "items-center mb-3") do
+          content_tag(:i, '', class: item[:icon]).html_safe + content_tag(:div, class: "item-info") do
+            content_tag(:p, item[:name]) + values
+          end
+        end
+      end.reduce(&:+)
+    end
+  end
+
+  def vacancy_skills(vacancy)
+    content_tag(:div, class: "list-skills") do
+      vacancy.skills.pluck(:name).map do |skill|
+        content_tag(:div, skill, class: "skill-item")
+      end.reduce(&:+)
+    end
+  end
 end
