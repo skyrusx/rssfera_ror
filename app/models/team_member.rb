@@ -4,7 +4,10 @@ class TeamMember < ApplicationRecord
   has_many :reviews
   has_many :vacancies
   has_many :realties
-  has_one_attached :photo
+
+  has_one_attached :photo do |attachable|
+    attachable.variant :thumb, resize_to_fill: [75, 80, { crop: :attention }]
+  end
 
   is_positionable start: 1
 
