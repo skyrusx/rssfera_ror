@@ -1,0 +1,139 @@
+<% if @realties.present? %>
+  <section id="new-objects" class="new-objects bg-light">
+    <div class="container">
+      <div class="row text-center section-header">
+        <h1>Новые объекты</h1>
+        <p class="subtitle">Удобный сервис для продажи и поиска обектов недвижимости</p>
+      </div>
+
+      <div class="all-objects row">
+        <% @realties.each do |realty| %>
+          <div class="object col-lg-4">
+            <div class="card">
+              <%= link_to "#" do %>
+                <div id="object<%= realty.id %>" class="carousel slide">
+                  <div class="carousel-inner">
+                    <% if realty.photos.attached? %>
+                      <% realty.photos.each.with_index do |photo, index| %>
+                        <% carousel_classes = index.zero? ? "carousel-item active" : "carousel-item" %>
+                        <div class="<%= carousel_classes %>">
+                          <%= image_tag photo, class: "d-block w-100", alt: realty.name %>
+                        </div>
+                      <% end %>
+                    <% end %>
+                  </div>
+                  <button class="carousel-control-prev" type="button" data-bs-target="#object<%= realty.id %>" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#object<%= realty.id %>" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+              <% end %>
+              <div class="card-body">
+                <span class="card-price"><%= realty_price(price: realty.price, type: realty.realty_category.name) %></span>
+                <h5 class="card-title"><%= link_to realty.name, "#" %></h5>
+                <div class="card-text">
+                  <small class="card-location">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    <%= realty.location %>
+                  </small>
+                  <div class="card-description"><%= realty.description.html_safe %></div>
+                </div>
+              </div>
+              <div class="card-footer text-body-secondary">
+                <% realty_footer = realty_footer(realty.specifications) %>
+                <div class="num-rooms"><span>Комнаты:</span> <%= realty_footer[:rooms] %></div>
+                <div class="square"><span>Площадь:</span> <%= realty_footer[:square] %></div>
+                <div class="floor-info"><span>Этаж:</span> <%= realty_footer[:floor] %></div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="col-12 text-center">
+          <%= pagination @realties, "new-objects" %>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>
+
+<section class="section rea-area bg-overlay ptb_100">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10">
+        <div class="section-heading text-center m-0">
+          <h2 class="text-white">Ищете лучшее агентство недвижимости?</h2>
+          <p class="text-white mt-4">У нас богатая база объектов недвижимости. А наши опытные риелторы, готовы предоставить подробные консультации по всем вопросам.</p>
+          <%= link_to "связаться с нами", "#", class: "btn btn-light mt-4" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<% if @team_members.present? %>
+  <section class="team bg-white">
+    <div class="container">
+      <div class="row text-center section-header">
+        <h1>Наши сотрудники</h1>
+        <p class="subtitle">Преданная своему делу команда</p>
+      </div>
+
+      <div class="team-members row">
+        <% @team_members.each do |team_member| %>
+          <div class="member col-lg-3">
+            <div class="card">
+              <div class="card-image">
+                <%= link_to team_member_path(team_member.slug) do %>
+                  <%= image_tag team_member.photo, class: "card-img-top", alt: team_member.whole_name %>
+                <% end %>
+                <div class="team-info">
+                  <div class="name"><%= team_member.whole_name %></div>
+                  <%= list_positions team_member.job_titles %>
+                </div>
+              </div>
+              <div class="card-body">
+                <h5 class="card-title">Контакты</h5>
+              </div>
+              <ul class="list-group list-group-flush card-contacts">
+                <li class="list-group-item">
+                  <i class="bi bi-telephone-fill"></i>
+                  <%= link_phone team_member.phone %>
+                </li>
+                <li class="list-group-item">
+                  <i class="bi bi-envelope"></i>
+                  <%= link_email team_member.email %>
+                </li>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+<% end %>
+
+<% if @partners.present? %>
+  <section class="partners-list bg-light">
+    <div class="container">
+      <div class="row text-center section-header">
+        <h1>Партнеры</h1>
+        <p class="subtitle">Каждый день мы укрепляем доверие благодаря общению, прозрачности и результатам</p>
+      </div>
+
+      <div class="row">
+        <% @partners.each do |partner| %>
+          <div class="col-12 col-lg text-center partner-item">
+            <%= link_to partners_path(anchor: partner.anchor) do %>
+              <%= image_tag partner.logo, class: "d-block", alt: partner.name %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+<% end %>
