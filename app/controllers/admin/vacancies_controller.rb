@@ -56,7 +56,7 @@ class Admin::VacanciesController < AdminController
   def vacancy_params
     params.require(:vacancy).permit(
       :name, :status, :location, :job_title_id, :experience, :income_from, :income_to, :income_type, :published_at,
-      :description, :team_member_id, :more_info, :employment_type_ids => [], :skill_ids => []
+      :description, :team_member_id, :more_info, :slug, :employment_type_ids => [], :skill_ids => []
     )
   end
 

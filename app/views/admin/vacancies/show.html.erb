@@ -17,38 +17,52 @@
         <div class="field-name justify-content-end"><%= t "crud.table.status" %></div>
         <div class="field-value"><%= activity_status @vacancy.status, true %></div>
       </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.name" %></div>
         <div class="field-value"><%= @vacancy.name %></div>
       </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.slug" %></div>
+        <div class="field-value"><%= @vacancy.slug %></div>
+      </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end flex-wrap"><%= t "crud.table.employment_types" %></div>
         <div class="field-value"><%= list_objects @vacancy.employment_types.pluck(:name) %></div>
       </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.location" %></div>
         <div class="field-value"><%= @vacancy.location %></div>
       </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.job_title" %></div>
         <div class="field-value"><%= @vacancy.job_title.name %></div>
       </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.experience" %></div>
         <div class="field-value"><%= @vacancy.experience %></div>
       </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.income" %></div>
         <div class="field-value"><%= income @vacancy %></div>
       </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.published_at" %></div>
         <div class="field-value"><%= date_format @vacancy.published_at, true %></div>
       </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.skills" %></div>
         <div class="field-value"><%= list_objects @vacancy.skills.pluck(:name) %></div>
       </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.contact_info" %></div>
         <div class="field-value"><%= @vacancy.team_member.whole_name %></div>
@@ -58,6 +72,7 @@
         <div class="field-name justify-content-end"><%= t "crud.table.description" %></div>
         <div class="field-value info"><%= @vacancy.description.html_safe %></div>
       </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.more_info" %></div>
         <div class="field-value info"><%= @vacancy.more_info.html_safe %></div>
