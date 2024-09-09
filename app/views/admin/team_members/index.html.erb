@@ -1,4 +1,10 @@
-<div class="d-flex justify-content-end page-content__header">
+<div class="page-content__header d-flex justify-content-between">
+  <div class="page-subtitle-box d-flex align-items-center">
+    <h4><%= t "teams.list_team_member_title" %></h4>
+    <%= link_to edit_admin_setting_path(meta_data.id), class: "mx-2", title: "Настройки" do %>
+      <i class="bi bi-gear"></i>
+    <% end %>
+  </div>
   <%= link_to new_admin_team_member_path, class: "btn btn-light" do %>
     <i class="bi bi-plus"></i>
     <%= t "teams.new_team_member" %>
@@ -18,7 +24,7 @@
       </tr>
     </thead>
     <tbody>
-      <% @team_members.each.with_index(1) do |team_member, index| %>
+      <% @team_members.each do |team_member| %>
         <tr>
           <th scope="row" class="text-center"><%= team_member.position %></th>
           <td>
