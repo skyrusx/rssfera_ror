@@ -8,8 +8,5 @@ class Vacancy < ApplicationRecord
 
   scope :active, -> { where(status: true) }
 
-  INCOME_TYPES = [
-    { type: 1, value: "на руки" },
-    { type: 2, value: "до вычета налогов" }
-  ]
+  INCOME_TYPES = ["на руки", "до вычета налогов"]
 end
