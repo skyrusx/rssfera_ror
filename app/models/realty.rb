@@ -7,6 +7,8 @@ class Realty < ApplicationRecord
 
   has_many_attached :photos
 
+  scope :active, -> { where(status: true) }
+
   TYPES = {
     1 => "Комната",
     2 => "Квартира",
