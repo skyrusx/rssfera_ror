@@ -37,7 +37,7 @@
 
       <div class="mb-4 mb-3">
         <div class="input-group">
-          <span class="input-group-text justify-content-end"><%= base_url %></span>
+          <span class="input-group-text justify-content-end"><%= base_url("team") %></span>
           <%= form.text_field :slug, class: "form-control slug", "aria-describedby": "generate-slug", placeholder: t("placeholders.team_members.slug"), required: true %>
           <span id="generate-slug" class="btn btn-light"><%= t "crud.table.generate" %></span>
 

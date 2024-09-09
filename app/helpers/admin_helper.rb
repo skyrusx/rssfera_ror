@@ -5,8 +5,8 @@ module AdminHelper
     t params["controller"].gsub('/', '_')
   end
 
-  def base_url
-    request.base_url + "/team/"
+  def base_url(section)
+    request.base_url + "/#{section}/"
   end
 
   def active_class(link_path)
