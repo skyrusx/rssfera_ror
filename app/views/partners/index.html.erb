@@ -1,0 +1,25 @@
+<section class="partners-page bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <%= render "application/shared/breadcrumbs" %>
+      </div>
+    </div>
+
+    <% if @partners.present? %>
+      <div class="partners">
+        <% @partners.each do |partner| %>
+          <div id="<%= partner.anchor %>" class="partner-item row">
+            <div class="col-lg-6 partner-logo">
+              <%= image_tag partner.logo, alt: partner.name %>
+            </div>
+            <div class="col-lg-6 partner-desc">
+              <h4><%= partner.name %></h4>
+              <%= partner.description.html_safe %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</section>
