@@ -79,7 +79,7 @@ module Application::HtmlHelper
   end
 
   def realty_price(price: nil, symbol: "₽", type: "Продажа")
-    converted_price = "#{price.reverse.gsub(/...(?=.)/,'\& ').reverse} #{symbol}"
+    converted_price = "#{price.reverse.gsub(/...(?=.)/, '\& ').reverse} #{symbol}"
     type == "Продажа" ? converted_price : "#{converted_price} / в месяц"
   end
 
