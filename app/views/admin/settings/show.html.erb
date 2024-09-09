@@ -1,0 +1,37 @@
+<div class="page-subtitle-box d-flex justify-content-between">
+  <h4><%= t "settings.show_setting_title" %></h4>
+  <div class="link-group mb-4">
+    <%= link_to edit_admin_setting_path(@setting.id), class: "text-light" do %>
+      <i class="bi bi-pencil-square"></i>
+    <% end %>
+  </div>
+</div>
+
+<div class="admin-crud teams">
+  <div class="row team-member__data">
+    <div class="col-lg-9">
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.page" %></div>
+        <div class="field-value"><%= Setting::PAGES[@setting.page] %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.page_name" %></div>
+        <div class="field-value"><%= @setting.page_name %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.meta.title" %></div>
+        <div class="field-value"><%= @setting.meta_title %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end flex-wrap"><%= t "crud.table.meta.keywords" %></div>
+        <div class="field-value"><%= @setting.meta_keywords %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.meta.description" %></div>
+        <div class="field-value"><%= @setting.meta_description %></div>
+      </div>
+    </div>
+
+    <div class="col-lg-3"></div>
+  </div>
+</div>

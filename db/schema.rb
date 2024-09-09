@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_04_084236) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_08_085918) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -102,6 +102,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_04_084236) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "position", default: 0, null: false
   end
 
   create_table "realties", force: :cascade do |t|
@@ -143,6 +144,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_04_084236) do
     t.datetime "updated_at", null: false
     t.string "status"
     t.index ["team_member_id"], name: "index_reviews_on_team_member_id"
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.string "page"
+    t.string "page_name"
+    t.string "meta_title"
+    t.text "meta_keywords"
+    t.text "meta_description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "skills", force: :cascade do |t|

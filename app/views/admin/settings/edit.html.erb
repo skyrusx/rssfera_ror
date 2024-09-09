@@ -1,0 +1,42 @@
+<div class="page-subtitle-box"><h4><%= t "settings.edit_setting_title" %></h4></div>
+
+<%= form_with model: @setting, url: admin_setting_path(@setting), html: { class: "admin-crud settings needs-validation", novalidate: true } do |form| %>
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.page" %></span>
+        <%= form.select :status, Setting::PAGES.map { |page| [page.last, page.first] }, { include_blank: false, selected: @setting.page }, { class: "form-select select2" } %>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.page_name" %></span>
+        <%= form.text_field :page_name, class: "form-control", required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.name" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.meta.title" %></span>
+        <%= form.text_field :meta_title, class: "form-control" %>
+      </div>
+
+      <div class="mb-4 mb-3">
+        <div class="input-group">
+          <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.meta.keywords" %></span>
+          <%= form.text_area :meta_keywords, class: "form-control meta", rows: 5 %>
+        </div>
+
+        <div class="form-text">Meta Keywords (Ключевые слова): вводить через запятую. Пример: продажа квартир, услуги риелтора, недвижимость</div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.meta.description" %></span>
+        <%= form.text_area :meta_description, class: "form-control meta", rows: 5 %>
+      </div>
+    </div>
+
+    <div class="col-lg-3"></div>
+  </div>
+
+  <%= form.submit t("crud.table.save_button"), class: "btn btn-light" %>
+<% end %>
