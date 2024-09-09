@@ -4,10 +4,9 @@
       <%= link_to root_path, class: "navbar-brand d-md-none" do %>
         <%= image_tag "logo.png", title: "РиелтСтройСфера" %>
       <% end %>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <%= button_tag class: "navbar-toggler", type: :button, data: { "bs-toggle": :collapse, "bs-target": "#navbarNav", aria: { controls: :navbarNav, expanded: false, label: "Переключение навигации" } } do %>
         <span class="navbar-toggler-icon"></span>
-      </button>
+      <% end %>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item dropdown">
@@ -52,7 +51,7 @@
           <%= link_to root_path, class: "navbar-brand d-none d-md-block" do %>
             <%= image_tag "logo.png", title: "РиелтСтройСфера" %>
           <% end %>
-          <li class="nav-item active">
+          <li class="<%= link_active_class(team_members_path) %>">
             <%= link_to "Сотрудники", team_members_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
@@ -67,8 +66,19 @@
     </div>
   </nav>
 
-  <div class="title text-center" style="background-image: url(<%= asset_url("#{controller_name}.png") %>);">
-    <div class="title-bg"></div>
-    <h1>Сотрудники</h1>
-  </div>
+  <% if current_page?(root_path) %>
+    <div class="realty" style="background-image: url(<%= asset_url("#{controller_name}.png") %>);">
+      <div class="all-objects text-center">
+        <h2>Поиск объявлений и подбор недвижимости</h2>
+        <h4>Лучшие предложения</h4>
+        <%= link_to "Для тех, кто покупает", "#", class: "btn btn-success" %>
+        <%= link_to "Для тех, кто продает", "#", class: "btn btn-success" %>
+      </div>
+    </div>
+  <% else %>
+    <div class="title text-center" style="background-image: url(<%= asset_url("#{controller_name}.png") %>);">
+      <div class="title-bg"></div>
+      <h1><%= meta_data.page_name %></h1>
+    </div>
+  <% end %>
 </header>
