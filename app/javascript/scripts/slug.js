@@ -9,7 +9,7 @@ $(document).on('turbo:load', function() {
       }
     });
 
-    slug = slugValues.join("-");
+    slug = slugValues.join("-").replace(/ /g, '-');
 
     $("input.slug").val(translit(slug).toLowerCase());
   });
