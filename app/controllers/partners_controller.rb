@@ -1,7 +1,9 @@
 class PartnersController < ApplicationController
-  add_breadcrumb I18n.t("admin_breadcrumbs.partners"), :partners_path
+  include ApplicationHelper
 
   def index
+    add_breadcrumb meta_data.page_name, :partners_path
+
     @partners = Partner.active
   end
 end
