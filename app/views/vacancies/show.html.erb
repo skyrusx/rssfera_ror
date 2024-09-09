@@ -1,0 +1,176 @@
+<section class="vacancy-page bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <%= render "application/shared/breadcrumbs" %>
+      </div>
+    </div>
+
+    <div class="row vacancy-detail">
+      <div class="col-lg-4 col-12 mb-3">
+        <div class="sidebar-wrapper">
+          <div class="sidebar">
+            <h5>Информация о вакансии</h5>
+
+            <div class="sidebar-info">
+              <%= vacancy_info(@vacancy) %>
+            </div>
+          </div>
+
+          <div class="respond d-lg-block d-none">
+            <div class="accordion" id="vacancy-response">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#response-form" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+                    Откликнуться
+                  </button>
+                </h2>
+                <div id="response-form" class="accordion-collapse collapse">
+                  <div class="accordion-body">
+                    <form class="needs-validation respond-form" novalidate>
+                      <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Ваше имя" required>
+                        <div class="invalid-feedback">Пожалуйста введите имя</div>
+                        <div class="valid-feedback">Заполнено!</div>
+                      </div>
+                      <div class="mb-3">
+                        <input type="email" class="form-control" placeholder="Ваш email" required>
+                        <div class="invalid-feedback">Пожалуйста введите email</div>
+                        <div class="valid-feedback">Заполнено!</div>
+                      </div>
+                      <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Ваш телефон" required>
+                        <div class="invalid-feedback">Пожалуйста введите телефон</div>
+                        <div class="valid-feedback">Заполнено!</div>
+                      </div>
+                      <div class="mb-3">
+                        <select class="form-select" placeholder="Должность" required>
+                          <option value="">Должность</option>
+                          <option value="1" selected>Стажёр по недвижимости</option>
+                          <option value="2">Помощник риелтора</option>
+                          <option value="3">Менеджер по продаже недвижимости</option>
+                          <option value="4">Менеджер по аренде недвижимости</option>
+                          <option value="5">Менеджер по недвижимости</option>
+                          <option value="6">Специалист по работе с недвижимостью</option>
+                          <option value="7">Агент по недвижимости</option>
+                          <option value="8">Агент по недвижимости</option>
+                          <option value="9">Агент по продаже недвижимости</option>
+                          <option value="10">Риелтор</option>
+                        </select>
+                        <div class="invalid-feedback">Пожалуйста выберите тип недвижимости</div>
+                        <div class="valid-feedback">Заполнено!</div>
+                      </div>
+                      <div class="mb-3">
+                        <textarea class="form-control" rows="5" placeholder="Сообщение"></textarea>
+                        <div class="invalid-feedback">Пожалуйста введите текст сообщения</div>
+                        <div class="valid-feedback">Заполнено!</div>
+                      </div>
+                      <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success">Отправить</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-8 col-12 mb-3">
+        <%= @vacancy.description.html_safe %>
+
+        <h5>Ключевые навыки:</h5>
+        <%= vacancy_skills(@vacancy) %>
+
+        <h5>Контактная информация:</h5>
+        <ul class="list-none">
+          <li class="items-center mb-2 d-flex align-items-center vacancy-contact">
+            <% team_member = @vacancy.team_member %>
+            <%= link_to team_member_path(team_member.slug) do %>
+              <%= image_tag team_member.photo.variant(:thumb), class: "img-thumbnail", alt: team_member.whole_name %>
+            <% end %>
+            <div class="vacancy-contact__info">
+              <div class="user-name">
+                <%= link_to team_member.whole_name, team_member_path(team_member.slug) %>
+              </div>
+              <p class="user-role">HR Менеджер</p>
+              <div class="contact-list">
+                <div class="info-item">
+                  <i class="bi bi-telephone-fill"></i>
+                  <%= link_phone team_member.phone %>
+                </div>
+                <div class="info-item">
+                  <i class="bi bi-envelope"></i>
+                  <%= link_email team_member.email %>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+
+        <hr>
+
+        <%= @vacancy.more_info.html_safe %>
+      </div>
+
+      <div class="respond d-lg-none d-block col-12">
+        <div class="accordion" id="vacancy-response-mobile">
+          <div class="accordion-item">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#response-form-mobile" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+                Откликнуться
+              </button>
+            </h2>
+            <div id="response-form-mobile" class="accordion-collapse collapse">
+              <div class="accordion-body">
+                <form class="needs-validation respond-form" novalidate>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Ваше имя" required>
+                    <div class="invalid-feedback">Пожалуйста введите имя</div>
+                    <div class="valid-feedback">Заполнено!</div>
+                  </div>
+                  <div class="mb-3">
+                    <input type="email" class="form-control" placeholder="Ваш email" required>
+                    <div class="invalid-feedback">Пожалуйста введите email</div>
+                    <div class="valid-feedback">Заполнено!</div>
+                  </div>
+                  <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Ваш телефон" required>
+                    <div class="invalid-feedback">Пожалуйста введите телефон</div>
+                    <div class="valid-feedback">Заполнено!</div>
+                  </div>
+                  <div class="mb-3">
+                    <select class="form-select" placeholder="Должность" required>
+                      <option value="">Должность</option>
+                      <option value="1" selected>Стажёр по недвижимости</option>
+                      <option value="2">Помощник риелтора</option>
+                      <option value="3">Менеджер по продаже недвижимости</option>
+                      <option value="4">Менеджер по аренде недвижимости</option>
+                      <option value="5">Менеджер по недвижимости</option>
+                      <option value="6">Специалист по работе с недвижимостью</option>
+                      <option value="7">Агент по недвижимости</option>
+                      <option value="8">Агент по недвижимости</option>
+                      <option value="9">Агент по продаже недвижимости</option>
+                      <option value="10">Риелтор</option>
+                    </select>
+                    <div class="invalid-feedback">Пожалуйста выберите тип недвижимости</div>
+                    <div class="valid-feedback">Заполнено!</div>
+                  </div>
+                  <div class="mb-3">
+                    <textarea class="form-control" rows="5" placeholder="Сообщение"></textarea>
+                    <div class="invalid-feedback">Пожалуйста введите текст сообщения</div>
+                    <div class="valid-feedback">Заполнено!</div>
+                  </div>
+                  <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success">Отправить</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
