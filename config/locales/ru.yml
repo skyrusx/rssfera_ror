@@ -208,10 +208,12 @@ ru:
   admin_districts: "Районы"
   admin_streets: "Улицы"
   admin_realties: "Объекты"
+  admin_settings: "Настройки"
 
   teams:
     team_members: "Сотрудники"
     new_team_member: "Новый сотрудник"
+    list_team_member_title: "Список сотрудников"
     show_team_member_title: "Просмотр данных сотрудника"
     new_team_member_title: "Добавить нового сотрудника"
     edit_team_member_title: "Изменить данные сотрудника"
@@ -415,6 +417,14 @@ ru:
     destroy:
       success: "Данные объекта успешно удалены"
 
+  settings:
+    list_setting_title: "Список настроек"
+    show_setting_title: "Просмотр настроек"
+    edit_setting_title: "Изменение настроек"
+    update:
+      success: "Настройки успешно изменены"
+      error: "Ошибка изменения настроек"
+
   admin_breadcrumbs:
     team_members: "Сотрудники"
     show_team_member: "Данные сотрудника"
@@ -486,6 +496,10 @@ ru:
     new_realty: "Новый объект"
     edit_realty: "Изменение объекта"
 
+    settings: "Настройки"
+    show_setting: "Настройки"
+    edit_setting: "Изменение настроек"
+
   crud:
     table:
       id: "#"
@@ -550,6 +564,12 @@ ru:
       save_button: "Сохранить"
       confirm: "Вы уверены, что хотите удалить?"
       not_found: "Упс! Данные не найдены."
+      page: "Настройки для страницы"
+      page_name: "Название страницы"
+      meta:
+        title: "Meta Title"
+        keywords: "Meta Keywords"
+        description: "Meta Description"
 
   validation:
     invalid:
@@ -633,3 +653,7 @@ ru:
     realty_slug: "Уникальный идентификатор URL для отображения на сайте. Используется как Код объекта"
     anchor: "Якорная ссылка, нужна для скроллинга к нужному элементу на странице"
     rating: "Рейтинг указывается от 0 до 5 с шагом 0,5"
+
+  app:
+    contact_info: "Контактная информация"
+    legal_info: "Юридическая информация"
