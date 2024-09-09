@@ -4,7 +4,12 @@ class Review < ApplicationRecord
 
   after_save :update_team_member_rating
 
-  scope :published, -> { where(status: "published") }
+  scope :published, -> {
+    where(
+      "published_at <= :published_at and status = :status",
+      published_at: Time.zone.now, status: "published"
+    ).where.not(published_at: nil)
+  }
 
   STATUSES = {
     new: "Новый",
@@ -16,7 +21,7 @@ class Review < ApplicationRecord
 
   def update_team_member_rating
     team_member = self.team_member
-    reviews = Review.where(team_member_id: team_member.id)
+    reviews = team_member.reviews.published
     return if reviews.size.zero?
     rating = reviews.pluck(:rating).sum / reviews.size
     team_member.rating = (rating * 2.0).round / 2.0
