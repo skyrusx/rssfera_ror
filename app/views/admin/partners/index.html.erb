@@ -18,9 +18,9 @@
       </tr>
     </thead>
     <tbody>
-      <% @partners.each.with_index(1) do |partner, index| %>
+      <% @partners.each do |partner| %>
         <tr>
-          <th scope="row" class="text-center"><%= index %></th>
+          <th scope="row" class="text-center"><%= partner.position %></th>
           <td class="text-center">
             <% if partner.logo.attached? %>
               <%= image_tag(partner.logo, class: "mini-avatar") %>

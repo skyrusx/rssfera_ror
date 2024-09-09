@@ -1,10 +1,10 @@
 class Admin::PartnersController < AdminController
   before_action :find_partner, only: [:show, :edit, :update, :destroy]
+  before_action :partners, only: [:index, :new, :create, :edit, :update]
 
   add_breadcrumb I18n.t("admin_breadcrumbs.partners"), :admin_partners_path
 
   def index
-    @partners = Partner.all
   end
 
   def show
@@ -63,10 +63,14 @@ class Admin::PartnersController < AdminController
   private
 
   def partner_params
-    params.require(:partner).permit(:name, :status, :anchor, :description, :logo)
+    params.require(:partner).permit(:name, :status, :anchor, :description, :logo, :position)
   end
 
   def find_partner
     @partner = Partner.find(params[:id])
+  end
+
+  def partners
+    @partners = Partner.order(:position)
   end
 end
