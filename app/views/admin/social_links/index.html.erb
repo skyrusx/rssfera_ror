@@ -42,6 +42,8 @@
       <% end %>
     </tbody>
   </table>
+
+  <%= render "admin/shared/pagination_info", collection: @social_links, total: @total_social_links %>
 <% else %>
   <div class="alert alert-success text-center" role="alert"><%= t "crud.table.not_found" %></div>
 <% end %>

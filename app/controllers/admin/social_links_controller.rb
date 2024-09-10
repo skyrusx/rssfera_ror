@@ -4,7 +4,8 @@ class Admin::SocialLinksController < AdminController
   add_breadcrumb I18n.t("admin_breadcrumbs.social_links"), :admin_social_links_path
 
   def index
-    @social_links = SocialLink.all
+    @social_links = SocialLink.paginate(page: params[:page], per_page: 10).order(:created_at)
+    @total_social_links = SocialLink.all.size
   end
 
   def show
