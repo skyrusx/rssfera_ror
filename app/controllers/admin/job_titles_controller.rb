@@ -6,7 +6,8 @@ class Admin::JobTitlesController < AdminController
   add_breadcrumb I18n.t("admin_breadcrumbs.job_titles"), :admin_job_titles_path
 
   def index
-    @job_titles = JobTitle.order(:position)
+    @job_titles = JobTitle.paginate(page: params[:page], per_page: 10).order(:position)
+    @total_job_titles = JobTitle.all.size
   end
 
   def show

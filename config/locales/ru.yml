@@ -566,6 +566,7 @@ ru:
       not_found: "Упс! Данные не найдены."
       page: "Настройки для страницы"
       page_name: "Название страницы"
+      vacancies: "Вакансии"
       meta:
         title: "Meta Title"
         keywords: "Meta Keywords"
