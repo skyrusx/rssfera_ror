@@ -20,7 +20,6 @@
               <% @realty.photos.each.with_index do |photo, index| %>
                 <div class="<%= "img-thumbnail-#{index}" %> img-thumbnail">
                   <%= image_tag(photo, class: "selected-image") %>
-                  <p><%= photo.id %></p>
                   <%= link_to delete_photo_admin_realty_path(id: @realty.id, photo_id: photo.id), data: { turbo_method: "delete", turbo_confirm: t("crud.table.confirm") }, class: "text-danger" do %>
                     <i class="bi bi-x-circle-fill"></i>
                   <% end %>
