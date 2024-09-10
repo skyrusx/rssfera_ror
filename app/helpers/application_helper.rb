@@ -17,8 +17,8 @@ module ApplicationHelper
     page_fullpath == link_path ? "nav-item active" : "nav-item"
   end
 
-  def pagination(collection, anchor)
-    params = { anchor: "new-objects" }
+  def pagination(collection, anchor = "new-objects")
+    params = { anchor: anchor }
     will_paginate(
       collection,
       params: params,
