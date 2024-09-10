@@ -55,7 +55,7 @@
       </div>
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.realties" %></div>
-        <div class="field-value info"><%= realty_list @team_member.realties.pluck(:id, :name) %></div>
+        <div class="field-value info"><%= realty_list @team_member.realties.active %></div>
       </div>
     </div>
 

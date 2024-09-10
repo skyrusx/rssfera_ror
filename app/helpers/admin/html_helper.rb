@@ -115,10 +115,11 @@ module Admin::HtmlHelper
     [value, "в месяц"].join(" / ")
   end
 
-  def realty_list(data)
-    data.map do |id, name|
+  def realty_list(realties)
+    realties.map do |realty|
+      realty_name = [realty.name, "(#{realty.realty_category.name})"].join(" ")
       content_tag(:div, class: "realty-list") do
-        content_tag(:a, name, href: admin_realty_path(id), target: "_blank", class: "realty-item")
+        content_tag(:a, realty_name, href: admin_realty_path(realty.id), target: "_blank", class: "realty-item")
       end
     end.reduce(&:+)
   end
