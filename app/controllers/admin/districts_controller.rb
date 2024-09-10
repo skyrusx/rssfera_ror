@@ -5,7 +5,7 @@ class Admin::DistrictsController < AdminController
   add_breadcrumb I18n.t("admin_breadcrumbs.districts"), :admin_districts_path
 
   def index
-    @districts = District.paginate(page: params[:page], per_page: 10).order(:city_id)
+    @districts = District.paginate(page: params[:page], per_page: 10).order(:city_id, :name)
     @total_districts = District.all.size
   end
 
