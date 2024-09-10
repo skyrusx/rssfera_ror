@@ -5,6 +5,7 @@
         <%= link_to "", title: "Уведомления", class: "nav-link mx-3" do %>
           <i class="bi bi-bell"></i>
         <% end %>
+
         <div class="dropdown admin">
           <%= link_to "", class: "d-flex align-items-center text-white text-decoration-none dropdown-toggle", "data-bs-toggle": :dropdown, "aria-expanded": false do %>
             <%= image_tag "admin-avatar.png", width: "30", height: "30", class: "rounded-circle", alt: "Admin" %>
@@ -14,11 +15,6 @@
             <li>
               <%= link_to root_path, class: "dropdown-item", target: "_blank" do %>
                 <i class="bi bi-globe"></i> Сайт
-              <% end %>
-            </li>
-            <li>
-              <%= link_to "#", class: "dropdown-item" do %>
-                <i class="bi bi-gear"></i> Настройки
               <% end %>
             </li>
             <li>
@@ -34,6 +30,10 @@
             </li>
           </ul>
         </div>
+
+        <%= link_to admin_settings_path, class: "nav-link mx-3", title: "Настройки" do %>
+          <i class="bi bi-gear"></i>
+        <% end %>
       </div>
     </div>
   </div>
