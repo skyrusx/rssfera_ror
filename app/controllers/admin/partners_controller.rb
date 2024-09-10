@@ -71,6 +71,7 @@ class Admin::PartnersController < AdminController
   end
 
   def partners
-    @partners = Partner.order(:position)
+    @partners = Partner.paginate(page: params[:page], per_page: 10).order(:position)
+    @total_partners = Partner.all.size
   end
 end
