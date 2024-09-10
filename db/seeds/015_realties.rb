@@ -1,6 +1,10 @@
 # Realties
 puts "Seeding Realties..."
 
+Realty.all.each do |realty|
+  realty.photos.purge
+end
+
 Realty.delete_all
 ActiveRecord::Base.connection.execute("TRUNCATE TABLE realties RESTART IDENTITY")
 
