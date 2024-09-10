@@ -1,6 +1,4 @@
 class Contact < ApplicationRecord
-  # serialize :work_schedule, coder: YAML, type: Hash unless %i[json jsonb hstore].include?(columns_hash['work_schedule'].type)
-
   WORK_SCHEDULE = {
     1 => { "day" => "monday", "start" => "09:00", "end" => "19:00" },
     2 => { "day" => "tuesday", "start" => "09:00", "end" => "19:00" },
