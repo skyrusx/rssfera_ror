@@ -21,54 +21,52 @@
             <div class="accordion" id="vacancy-response">
               <div class="accordion-item">
                 <h2 class="accordion-header">
-                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#response-form" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
-                    Откликнуться
-                  </button>
+                  <%= button_tag "Откликнуться", class: "accordion-button collapsed", type: :button, data: { "bs-toggle": :collapse, "bs-target": "#response-form" }, aria: { expanded: false, controls: "panelsStayOpen-collapseOne" } %>
                 </h2>
+
                 <div id="response-form" class="accordion-collapse collapse">
                   <div class="accordion-body">
-                    <form class="needs-validation respond-form" novalidate>
-                      <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Ваше имя" required>
-                        <div class="invalid-feedback">Пожалуйста введите имя</div>
-                        <div class="valid-feedback">Заполнено!</div>
-                      </div>
-                      <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Ваш email" required>
-                        <div class="invalid-feedback">Пожалуйста введите email</div>
-                        <div class="valid-feedback">Заполнено!</div>
-                      </div>
-                      <div class="mb-3">
-                        <input type="text" class="form-control" placeholder="Ваш телефон" required>
-                        <div class="invalid-feedback">Пожалуйста введите телефон</div>
-                        <div class="valid-feedback">Заполнено!</div>
-                      </div>
-                      <div class="mb-3">
-                        <select class="form-select" placeholder="Должность" required>
-                          <option value="">Должность</option>
-                          <option value="1" selected>Стажёр по недвижимости</option>
-                          <option value="2">Помощник риелтора</option>
-                          <option value="3">Менеджер по продаже недвижимости</option>
-                          <option value="4">Менеджер по аренде недвижимости</option>
-                          <option value="5">Менеджер по недвижимости</option>
-                          <option value="6">Специалист по работе с недвижимостью</option>
-                          <option value="7">Агент по недвижимости</option>
-                          <option value="8">Агент по недвижимости</option>
-                          <option value="9">Агент по продаже недвижимости</option>
-                          <option value="10">Риелтор</option>
-                        </select>
-                        <div class="invalid-feedback">Пожалуйста выберите тип недвижимости</div>
-                        <div class="valid-feedback">Заполнено!</div>
-                      </div>
-                      <div class="mb-3">
-                        <textarea class="form-control" rows="5" placeholder="Сообщение"></textarea>
-                        <div class="invalid-feedback">Пожалуйста введите текст сообщения</div>
-                        <div class="valid-feedback">Заполнено!</div>
-                      </div>
+                    <%= form_with model: @message, url: messages_path, html: { class: "needs-validation respond-form", novalidate: true } do |form| %>
+                      <%= form.hidden_field :status, value: :new %>
+                      <%= form.hidden_field :category, value: :response %>
+                      <%= form.hidden_field :name, value: form_title("response", controller_name, @vacancy.job_title.name) %>
+
+                      <%= fields_for :fields do |fields| %>
+                        <div class="mb-3">
+                          <%= fields.text_field :name, class: "form-control", placeholder: "Ваше имя", required: true %>
+                          <div class="invalid-feedback">Пожалуйста введите имя</div>
+                          <div class="valid-feedback">Заполнено!</div>
+                        </div>
+
+                        <div class="mb-3">
+                          <%= fields.text_field :email, class: "form-control email-mask", placeholder: "Ваш email", required: true %>
+                          <div class="invalid-feedback">Пожалуйста введите email</div>
+                          <div class="valid-feedback">Заполнено!</div>
+                        </div>
+
+                        <div class="mb-3">
+                          <%= fields.text_field :phone, class: "form-control phone-mask", placeholder: "Ваш телефон", required: true %>
+                          <div class="invalid-feedback">Пожалуйста введите телефон</div>
+                          <div class="valid-feedback">Заполнено!</div>
+                        </div>
+
+                        <div class="mb-3">
+                          <%= fields.select :position, @job_titles, { include_blank: false, selected: @vacancy.job_title_id }, { class: "form-select", placeholder: "Должность" } %>
+                          <div class="invalid-feedback">Пожалуйста выберите должность</div>
+                          <div class="valid-feedback">Заполнено!</div>
+                        </div>
+
+                        <div class="mb-3">
+                          <%= fields.text_area :message, class: "form-control", placeholder: "Сообщение", rows: 5 %>
+                          <div class="invalid-feedback">Пожалуйста введите текст сообщения</div>
+                          <div class="valid-feedback">Заполнено!</div>
+                        </div>
+                      <% end %>
+
                       <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-success">Отправить</button>
+                        <%= form.button t("app.button.send"), type: :submit, class: "btn btn-success" %>
                       </div>
-                    </form>
+                    <% end %>
                   </div>
                 </div>
               </div>
@@ -118,54 +116,52 @@
         <div class="accordion" id="vacancy-response-mobile">
           <div class="accordion-item">
             <h2 class="accordion-header">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#response-form-mobile" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
-                Откликнуться
-              </button>
+              <%= button_tag "Откликнуться", class: "accordion-button collapsed", type: :button, data: { "bs-toggle": :collapse, "bs-target": "#response-form-mobile" }, aria: { expanded: false, controls: "panelsStayOpen-collapseOne" } %>
             </h2>
+
             <div id="response-form-mobile" class="accordion-collapse collapse">
               <div class="accordion-body">
-                <form class="needs-validation respond-form" novalidate>
-                  <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Ваше имя" required>
-                    <div class="invalid-feedback">Пожалуйста введите имя</div>
-                    <div class="valid-feedback">Заполнено!</div>
-                  </div>
-                  <div class="mb-3">
-                    <input type="email" class="form-control" placeholder="Ваш email" required>
-                    <div class="invalid-feedback">Пожалуйста введите email</div>
-                    <div class="valid-feedback">Заполнено!</div>
-                  </div>
-                  <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Ваш телефон" required>
-                    <div class="invalid-feedback">Пожалуйста введите телефон</div>
-                    <div class="valid-feedback">Заполнено!</div>
-                  </div>
-                  <div class="mb-3">
-                    <select class="form-select" placeholder="Должность" required>
-                      <option value="">Должность</option>
-                      <option value="1" selected>Стажёр по недвижимости</option>
-                      <option value="2">Помощник риелтора</option>
-                      <option value="3">Менеджер по продаже недвижимости</option>
-                      <option value="4">Менеджер по аренде недвижимости</option>
-                      <option value="5">Менеджер по недвижимости</option>
-                      <option value="6">Специалист по работе с недвижимостью</option>
-                      <option value="7">Агент по недвижимости</option>
-                      <option value="8">Агент по недвижимости</option>
-                      <option value="9">Агент по продаже недвижимости</option>
-                      <option value="10">Риелтор</option>
-                    </select>
-                    <div class="invalid-feedback">Пожалуйста выберите тип недвижимости</div>
-                    <div class="valid-feedback">Заполнено!</div>
-                  </div>
-                  <div class="mb-3">
-                    <textarea class="form-control" rows="5" placeholder="Сообщение"></textarea>
-                    <div class="invalid-feedback">Пожалуйста введите текст сообщения</div>
-                    <div class="valid-feedback">Заполнено!</div>
-                  </div>
+                <%= form_with model: @message, url: messages_path, html: { class: "needs-validation respond-form", novalidate: true } do |form| %>
+                  <%= form.hidden_field :status, value: :new %>
+                  <%= form.hidden_field :category, value: :response %>
+                  <%= form.hidden_field :name, value: form_title("response", controller_name, @vacancy.job_title.name) %>
+
+                  <%= fields_for :fields do |fields| %>
+                    <div class="mb-3">
+                      <%= fields.text_field :name, class: "form-control", placeholder: "Ваше имя", required: true %>
+                      <div class="invalid-feedback">Пожалуйста введите имя</div>
+                      <div class="valid-feedback">Заполнено!</div>
+                    </div>
+
+                    <div class="mb-3">
+                      <%= fields.text_field :email, class: "form-control email-mask", placeholder: "Ваш email", required: true %>
+                      <div class="invalid-feedback">Пожалуйста введите email</div>
+                      <div class="valid-feedback">Заполнено!</div>
+                    </div>
+
+                    <div class="mb-3">
+                      <%= fields.text_field :phone, class: "form-control phone-mask", placeholder: "Ваш телефон", required: true %>
+                      <div class="invalid-feedback">Пожалуйста введите телефон</div>
+                      <div class="valid-feedback">Заполнено!</div>
+                    </div>
+
+                    <div class="mb-3">
+                      <%= fields.select :position, @job_titles, { include_blank: false, selected: @vacancy.job_title_id }, { class: "form-select", placeholder: "Должность" } %>
+                      <div class="invalid-feedback">Пожалуйста выберите должность</div>
+                      <div class="valid-feedback">Заполнено!</div>
+                    </div>
+
+                    <div class="mb-3">
+                      <%= fields.text_area :message, class: "form-control", placeholder: "Сообщение", rows: 5 %>
+                      <div class="invalid-feedback">Пожалуйста введите текст сообщения</div>
+                      <div class="valid-feedback">Заполнено!</div>
+                    </div>
+                  <% end %>
+
                   <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-success">Отправить</button>
+                    <%= form.button t("app.button.send"), type: :submit, class: "btn btn-success" %>
                   </div>
-                </form>
+                <% end %>
               </div>
             </div>
           </div>

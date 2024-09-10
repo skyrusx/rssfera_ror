@@ -11,10 +11,12 @@ class Message < ApplicationRecord
 
   CATEGORIES = {
     message: "Сообщение",
+    response: "Отклик",
     review: "Отзыв"
   }
 
   PAGE_TITLES = {
-    contacts: "из формы обратной связи (страница Контакты)"
+    contacts: "из формы обратной связи (страница Контакты)",
+    vacancies: "на вакасию"
   }
 end

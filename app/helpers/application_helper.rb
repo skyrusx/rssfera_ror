@@ -44,7 +44,13 @@ module ApplicationHelper
     classes
   end
 
-  def form_title(category, page)
-    [Message::CATEGORIES[category.to_sym], Message::PAGE_TITLES[page.to_sym]].join(" ")
+  def form_title(category, page, part = nil)
+    title = [
+              Message::CATEGORIES[category.to_sym],
+              Message::PAGE_TITLES[page.to_sym]
+            ].join(" ")
+
+    title += " #{part}" if part
+    title
   end
 end
