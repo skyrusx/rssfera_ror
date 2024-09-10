@@ -5,7 +5,8 @@ class Admin::CitiesController < AdminController
   add_breadcrumb I18n.t("admin_breadcrumbs.cities"), :admin_cities_path
 
   def index
-    @cities = City.all.sort
+    @cities = City.paginate(page: params[:page], per_page: 10).order(name: :desc)
+    @total_cities = City.all.size
   end
 
   def show
