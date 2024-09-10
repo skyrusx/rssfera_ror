@@ -23,5 +23,6 @@ class TeamMember < ApplicationRecord
 
   def fill_slug
     self.slug = self.whole_name.parameterize
+    self.save
   end
 end
