@@ -2,8 +2,9 @@
   <div class="row">
     <div class="col-12">
       <div class="top-menu d-flex justify-content-end align-items-center">
-        <%= link_to "", title: "Уведомления", class: "nav-link mx-3" do %>
+        <%= link_to admin_messages_path, title: "Уведомления", class: "nav-link mx-3 position-relative" do %>
           <i class="bi bi-bell"></i>
+          <%= unread_messages %>
         <% end %>
 
         <div class="dropdown admin">

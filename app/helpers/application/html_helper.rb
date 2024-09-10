@@ -133,4 +133,13 @@ module Application::HtmlHelper
       end.reduce(&:+)
     end
   end
+
+  def unread_messages
+    counter = Message.unread.size
+    return if counter.zero?
+
+    content_tag(:span, class: "position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger") do
+      counter.to_s.html_safe + content_tag(:span, "Непрочитанные сообщения", class: "visually-hidden")
+    end
+  end
 end

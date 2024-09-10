@@ -1,0 +1,36 @@
+<div class="page-subtitle-box"><h4><%= t "messages.edit_message_title" %></h4></div>
+
+<%= form_with model: @message, url: admin_message_path(@message), html: { class: "admin-crud cities needs-validation", novalidate: true } do |form| %>
+  <%= form.hidden_field :category, value: @message.category %>
+
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.status" %></span>
+        <%= form.select :status, Message::STATUSES.map { |status| [status.last, status.first] }, { include_blank: false, selected: @message.status }, { class: "form-select select2" } %>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.name" %></span>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="mb-4 mb-3">
+        <div class="input-group">
+          <span class="input-group-text w-100"><%= t "crud.table.fields" %></span>
+        </div>
+
+        <% @message.fields.each do |field| %>
+          <div class="input-group">
+            <span class="input-group-text justify-content-end"><%= t "crud.table.#{field[0]}" %></span>
+            <%= fields_for :fields do |fields| %>
+              <%= fields.text_field field[0].to_sym, value: field[1], class: "form-control" %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%= form.submit t("crud.table.save_button"), class: "btn btn-light" %>
+<% end %>

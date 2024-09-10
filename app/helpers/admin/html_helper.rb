@@ -47,6 +47,23 @@ module Admin::HtmlHelper
     content_tag(:i, nil, class: "bi #{data[:class]}", title: data[:title])
   end
 
+  def message_status(value, only_value = false)
+    value = value.to_sym
+
+    return Message::STATUSES[value] if only_value
+
+    data = case value
+           when :new then { class: "bi-info-circle-fill", title: Message::STATUSES[value] }
+           when :viewed then { class: "bi-disc-fill", title: Message::STATUSES[value] }
+           when :at_work then { class: "bi-clock-fill", title: Message::STATUSES[value] }
+           when :completed then { class: "bi-check-circle-fill", title: Message::STATUSES[value] }
+           when :rejected then { class: "bi-x-circle-fill", title: Message::STATUSES[value] }
+           else nil
+           end
+
+    content_tag(:i, nil, class: "bi #{data[:class]}", title: data[:title])
+  end
+
   def date_format(date, public = false)
     public ? l(@vacancy.published_at, format: "%e %b %Y, %H:%M") : date&.strftime("%d.%m.%Y %H:%M:%S")
   end

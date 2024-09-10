@@ -209,6 +209,7 @@ ru:
   admin_streets: "Улицы"
   admin_realties: "Объекты"
   admin_settings: "Настройки"
+  admin_messages: "Сообщения"
 
   teams:
     team_members: "Сотрудники"
@@ -425,6 +426,16 @@ ru:
       success: "Настройки успешно изменены"
       error: "Ошибка изменения настроек"
 
+  messages:
+    list_message_title: "Список сообщений"
+    show_message: "Просмотр собщения"
+    edit_message_title: "Изменение сообщения"
+    update:
+      success: "Сообщение успешно изменено"
+      error: "Ошибка изменения сообщения"
+    destroy:
+      success: "Сообщение удалено"
+
   admin_breadcrumbs:
     team_members: "Сотрудники"
     show_team_member: "Данные сотрудника"
@@ -500,6 +511,10 @@ ru:
     show_setting: "Настройки"
     edit_setting: "Изменение настроек"
 
+    messages: "Сообщения"
+    show_message: "Данные сообщения"
+    edit_message: "Изменение сообщения"
+
   crud:
     table:
       id: "#"
@@ -524,6 +539,7 @@ ru:
       author: "Автор"
       rating: "Рейтинг"
       created_at: "Дата создания"
+      updated_at: "Дата изменения"
       published_at: "Дата публикации"
       feedback: "Отзыв"
       description: "Описание"
@@ -553,6 +569,8 @@ ru:
       payments: "Платежи"
       specifications: "Характеристики"
       position: "Позиция"
+      fields: "Данные из формы"
+      subject: "Тема"
       photos: "Фотографии"
       generate: "Сгенерировать"
       select_photo: "Выберите фото"
@@ -567,6 +585,8 @@ ru:
       page: "Настройки для страницы"
       page_name: "Название страницы"
       vacancies: "Вакансии"
+      messages:
+        category: "Тип"
       meta:
         title: "Meta Title"
         keywords: "Meta Keywords"
@@ -660,3 +680,12 @@ ru:
   app:
     contact_info: "Контактная информация"
     legal_info: "Юридическая информация"
+
+    form:
+      messages:
+        create:
+          success: "Мы уже приступили к работе по Вашей заявке. Свяжемся в ближайшее время."
+          error: "Ошибка отправки сообщения!"
+
+    button:
+      send: "Отправить"

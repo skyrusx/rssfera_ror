@@ -27,4 +27,24 @@ module ApplicationHelper
       next_label: "&raquo;"
     )
   end
+
+  def build_alert_classes(alert_type)
+    classes = 'alert alert-dismissable '
+    case alert_type.to_sym
+    when :alert, :danger, :error, :validation_errors
+      classes += 'alert-danger'
+    when :warning, :todo
+      classes += 'alert-warning'
+    when :notice, :success
+      classes += 'alert-success'
+    else
+      classes += 'alert-info'
+    end
+
+    classes
+  end
+
+  def form_title(category, page)
+    [Message::CATEGORIES[category.to_sym], Message::PAGE_TITLES[page.to_sym]].join(" ")
+  end
 end
