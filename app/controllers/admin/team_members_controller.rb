@@ -79,6 +79,7 @@ class Admin::TeamMembersController < AdminController
   end
 
   def team_members
-    @team_members = TeamMember.order(:position)
+    @team_members = TeamMember.paginate(page: params[:page], per_page: 10).order(:position)
+    @total_team_members = TeamMember.all.size
   end
 end
