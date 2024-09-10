@@ -102,7 +102,7 @@ realties.each.with_index(1) do |realty_data, index|
                    when 5 then "Новожилов"
                    when 6 then "Захарова"
                    when 7 then "Медведева"
-                   else "Павлова"
+                   else "Стрелец"
                    end
 
     team_member = TeamMember.find_by_last_name(tm_last_name)
