@@ -4,7 +4,8 @@ class Admin::RealtyCategoriesController < AdminController
   add_breadcrumb I18n.t("admin_breadcrumbs.realty_categories"), :admin_realty_categories_path
 
   def index
-    @realty_categories = RealtyCategory.all
+    @realty_categories = RealtyCategory.paginate(page: params[:page], per_page: 10).order(:name)
+    @total_realty_categories = RealtyCategory.all.size
   end
 
   def show

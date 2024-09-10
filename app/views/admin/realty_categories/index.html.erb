@@ -11,6 +11,7 @@
       <tr>
         <th scope="col" class="text-center"><%= t "crud.table.id" %></th>
         <th scope="col"><%= t "crud.table.name" %></th>
+        <th scope="col" class="text-center"><%= t "crud.table.realties" %></th>
         <th scope="col" class="text-center"><%= t "crud.table.status" %></th>
         <th scope="col" colspan="3"></th>
       </tr>
@@ -20,6 +21,7 @@
         <tr>
           <th scope="row" class="text-center"><%= index %></th>
           <td><%= category.name %></td>
+          <td class="text-center"><%= category.realties.size %></td>
           <td class="status text-center"><%= activity_status category.status %></td>
           <td>
             <%= link_to admin_realty_category_path(category.id), class: "text-light" do %>
@@ -40,6 +42,8 @@
       <% end %>
     </tbody>
   </table>
+
+  <%= render "admin/shared/pagination_info", collection: @realty_categories, total: @total_realty_categories %>
 <% else %>
   <div class="alert alert-success text-center" role="alert"><%= t "crud.table.not_found" %></div>
 <% end %>
