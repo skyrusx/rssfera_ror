@@ -53,6 +53,8 @@
       <% end %>
     </tbody>
   </table>
+
+  <%= render "admin/shared/pagination_info", collection: @vacancies, total: @total_vacancies %>
 <% else %>
   <div class="alert alert-success text-center" role="alert"><%= t "crud.table.not_found" %></div>
 <% end %>
