@@ -5,7 +5,9 @@ class Admin::RealtiesController < AdminController
   add_breadcrumb I18n.t("admin_breadcrumbs.realties"), :admin_realties_path
 
   def index
-    @realties = Realty.all.sort_by{ |realty| realty.realty_category.name }.reverse
+    # @realties = Realty.all.sort_by{ |realty| realty.realty_category.name }.reverse
+    @realties = Realty.paginate(page: params[:page], per_page: 10).order(:created_at)
+    @total_realties = Realty.all.size
   end
 
   def show
