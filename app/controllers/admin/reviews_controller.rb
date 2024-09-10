@@ -5,7 +5,9 @@ class Admin::ReviewsController < AdminController
   add_breadcrumb I18n.t("admin_breadcrumbs.reviews"), :admin_reviews_path
 
   def index
-    @reviews = Review.all.order("author DESC")
+    # @reviews = Review.all.order("author DESC")
+    @reviews = Review.paginate(page: params[:page], per_page: 9).order(:team_member_id)
+    @total_reviews = Review.all.size
   end
 
   def show
