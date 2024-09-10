@@ -44,6 +44,7 @@ class Admin::PartnersController < AdminController
   end
 
   def destroy
+    @partner.logo.purge
     @partner.destroy
 
     flash[:success] = I18n.t("partners.destroy.success")

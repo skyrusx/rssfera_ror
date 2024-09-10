@@ -47,6 +47,7 @@ class Admin::ReviewsController < AdminController
   end
 
   def destroy
+    @review.avatar.purge
     @review.destroy
 
     flash[:success] = I18n.t("reviews.destroy.success")

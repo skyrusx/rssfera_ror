@@ -50,6 +50,7 @@ class Admin::RealtiesController < AdminController
   end
 
   def destroy
+    @realty.photos.purge
     @realty.destroy
 
     flash[:success] = I18n.t("realties.destroy.success")
