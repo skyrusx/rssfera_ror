@@ -4,7 +4,8 @@ class Admin::EmploymentTypesController < AdminController
   add_breadcrumb I18n.t("admin_breadcrumbs.employment_types"), :admin_employment_types_path
 
   def index
-    @employment_types = EmploymentType.all
+    @employment_types = EmploymentType.paginate(page: params[:page], per_page: 10)
+    @total_employment_types = EmploymentType.all.size
   end
 
   def show
