@@ -694,6 +694,38 @@ ul.list-none, ul.list-none li {
   border-color: #4CAF50;
 }
 
+.pagination-info {
+  color: white;
+
+  .pagination {
+    justify-content: center;
+    margin: unset;
+
+    .page-link {
+      box-shadow: unset;
+      color: #75b08a;
+
+      &:focus {
+        color: #75b08a;
+      }
+
+      &:hover {
+        color: white;
+        background: #75b08a;
+        border-color: #75b08a;
+      }
+    }
+
+    .page-item.active {
+      .page-link {
+        color: white;
+        background: #75b08a;
+        border-color: #75b08a;
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 768px) {
   #admin-page .middle {
     display: flex;

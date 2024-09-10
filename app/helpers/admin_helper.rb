@@ -57,4 +57,16 @@ module AdminHelper
       }
     end
   end
+
+  def admin_pagination(collection)
+    will_paginate(
+      collection, renderer: WillPaginate::ActionView::BootstrapLinkRenderer,
+      previous_label: "&laquo;",
+      next_label: "&raquo;"
+    )
+  end
+
+  def showing_results(size, total)
+    "Показано #{size} из #{total}"
+  end
 end
