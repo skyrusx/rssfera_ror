@@ -24,7 +24,7 @@ default: &default
 #  database: rssfera_development
 development:
   adapter: postgresql
-  database: rssfera_development
+  database: rssfera_new_development
   host: localhost
   username: postgres
   password: adminrus
