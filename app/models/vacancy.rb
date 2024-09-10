@@ -6,7 +6,16 @@ class Vacancy < ApplicationRecord
   belongs_to :job_title
   belongs_to :team_member
 
+  after_create :fill_slug
+
   scope :active, -> { where(status: true) }
 
   INCOME_TYPES = ["на руки", "до вычета налогов"]
+
+  private
+
+  def fill_slug
+    self.slug = self.name.parameterize
+    self.save
+  end
 end
