@@ -5,7 +5,8 @@ class Admin::StreetsController < AdminController
   add_breadcrumb I18n.t("admin_breadcrumbs.streets"), :admin_streets_path
 
   def index
-    @streets = Street.all.sort_by{ |street| street.district.city.name}
+    @streets = Street.paginate(page: params[:page], per_page: 50).order(:district_id, name: :desc)
+    @total_streets = Street.all.size
   end
 
   def show
