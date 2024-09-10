@@ -5,7 +5,7 @@ class Admin::VacanciesController < AdminController
   add_breadcrumb I18n.t("admin_breadcrumbs.vacancies"), :admin_vacancies_path
 
   def index
-    @vacancies = Vacancy.paginate(page: params[:page], per_page: 10).order(:team_member_id)
+    @vacancies = Vacancy.paginate(page: params[:page], per_page: 10).order(published_at: :desc)
     @total_vacancies = Vacancy.all.size
   end
 
