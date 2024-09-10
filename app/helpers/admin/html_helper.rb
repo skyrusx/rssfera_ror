@@ -52,7 +52,7 @@ module Admin::HtmlHelper
   end
 
   def rating_with_reviews(team_member)
-    reviews = team_member.reviews
+    reviews = team_member.reviews.published
     "#{team_member.rating} (#{reviews.size} #{Russian.p(reviews.size, "отзыв", "отзыва", "отзывов")})"
   end
 
