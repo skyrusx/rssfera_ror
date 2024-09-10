@@ -4,7 +4,8 @@ class Admin::SkillsController < AdminController
   add_breadcrumb I18n.t("admin_breadcrumbs.skills"), :admin_skills_path
 
   def index
-    @skills = Skill.all
+    @skills = Skill.paginate(page: params[:page], per_page: 10)
+    @total_skills = Skill.all.size
   end
 
   def show
