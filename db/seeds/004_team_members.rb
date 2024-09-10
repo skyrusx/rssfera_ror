@@ -58,12 +58,12 @@ team_members = [
     HTML
   },
   {
-    first_name: "Мария", last_name: "Павлова", patronymic_name: "Александровна", rating: 0.0,
-    phone: "+7 (911) 302-95-85", email: "mapavlovarss@mail.ru", whatsapp: true, status: true,
+    first_name: "Михаил", last_name: "Стрелец", patronymic_name: "Сергеевич", rating: 0.0,
+    phone: "+7 (921) 666-77-71", email: "smsstrelec@gmail.com", whatsapp: true, status: true,
     info: <<-HTML
 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.</p>
     HTML
-  },
+  }
 ]
 
 positions = {
@@ -74,15 +74,16 @@ positions = {
   "Новожилов Илья Витальевич" => "HR Менеджер, Маркетолог, Специалист по недвижимости",
   "Захарова Светлана Олеговна" => "Администратор, Помощник руководителя",
   "Медведева Ксения Викторовна" => "Агент по недвижимости",
-  "Павлова Мария Александровна" => "Агент по недвижимости"
+  "Стрелец Михаил Сергеевич" => "Агент по недвижимости"
 }
 
 team_members.each.with_index(1) do |team_member_data, index|
   team_member = TeamMember.find_or_create_by(team_member_data)
+  filename = team_member.whole_name == "Стрелец Михаил Сергеевич" ? "team-0#{index + 1}.png" : "team-0#{index}.png"
 
   team_member.photo.attach(
-    io: File.open(File.join(Rails.root, "app/assets/images/team/team-0#{index}.png")),
-    filename: "team-0#{index}.png"
+    io: File.open(File.join(Rails.root, "app/assets/images/team/#{filename}")),
+    filename: filename
   )
 
   position_names = positions[team_member.whole_name].split(", ")
