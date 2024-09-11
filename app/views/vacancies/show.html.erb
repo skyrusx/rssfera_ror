@@ -131,7 +131,7 @@
                   <%= form_with model: @message, url: messages_path, html: { class: "needs-validation respond-form", novalidate: true } do |form| %>
                     <%= form.hidden_field :status, value: :new %>
                     <%= form.hidden_field :category, value: :response_mobile %>
-                    <%= form.hidden_field :name, value: form_title("response", controller_name, @vacancy.job_title.name) %>
+                    <%= form.hidden_field :name, value: form_title("response_mobile", controller_name, @vacancy.job_title.name) %>
 
                     <%= fields_for :fields do |fields| %>
                       <div class="mb-3">
