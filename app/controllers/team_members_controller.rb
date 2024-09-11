@@ -24,6 +24,8 @@ class TeamMembersController < ApplicationController
     end
 
     @reviews = @team_member.reviews.published
+    @message = Message.new
+    @review = Message.new
 
     add_breadcrumb meta_data.page_name, :team_members_path
     add_breadcrumb @team_member.whole_name, :team_member_path

@@ -188,11 +188,129 @@
                       </div>
                     <% end %>
                   <% end %>
+
+                  <% if flash.key?("review") %>
+                    <%= render "application/shared/flash_messages", exclude: "review" %>
+                  <% else %>
+                    <div class="property-review">
+                      <h5 class="card-title">Оставить отзыв</h5>
+
+                      <%= form_with model: @review, url: messages_path, html: { class: "needs-validation review-form", novalidate: true } do |form| %>
+                        <%= form.hidden_field :status, value: :new %>
+                        <%= form.hidden_field :category, value: :review %>
+                        <%= form.hidden_field :name, value: form_title("review", "review_#{controller_name}", @team_member.whole_name) %>
+
+                        <%= fields_for :fields do |fields| %>
+                          <div class="row">
+                            <div class="col-lg-6 col-12 mb-3">
+                              <%= fields.text_field :name, class: "form-control", placeholder: "Ваше имя", required: true %>
+                              <div class="invalid-feedback">Пожалуйста введите имя</div>
+                              <div class="valid-feedback">Заполнено!</div>
+                            </div>
+                            <div class="col-lg-6 col-12 mb-3">
+                              <%= fields.text_field :email, class: "form-control email-mask", placeholder: "E-mail" %>
+                            </div>
+                          </div>
+
+                          <div class="mb-3">
+                            <%= fields.text_area :message, class: "form-control", placeholder: "Отзыв", rows: 5, required: true %>
+                            <div class="invalid-feedback">Пожалуйста введите текст отзыва</div>
+                            <div class="valid-feedback">Заполнено!</div>
+                          </div>
+
+                          <div class="mb-3 d-flex">
+                            <div class="rating-group justify-content-center">
+                              <% (0..5).step(0.5).with_index do |rating, index| %>
+                                <% if index.zero? %>
+                                  <%= radio_button_tag "fields[rating]", 0, class: "rating__input rating__input--none", id: "rating2-0", checked: true  %>
+                                  <%= label_tag nil, nil, class: "rating__label", "area-label": "0 stars", for: "rating2-0" %>
+                                <% else %>
+                                  <% radio_id = ["rating2", rating.to_s.gsub(".", "")].join("-") %>
+
+                                  <% if rating.to_s.split(".").last.to_i.zero? %>
+                                    <%= label_tag nil, class: "rating__label", "area-label": "#{rating} stars", for: radio_id do %>
+                                      <i class="rating__icon rating__icon--star bi bi-star-fill"></i>
+                                    <% end %>
+                                    <%= radio_button_tag "fields[rating]", rating, class: "rating__input", id: radio_id %>
+                                  <% else %>
+                                    <%= label_tag nil, class: "rating__label rating__label--half", "area-label": "#{rating} stars", for: radio_id do %>
+                                      <i class="rating__icon rating__icon--star bi bi-star-half"></i>
+                                    <% end %>
+                                    <%= radio_button_tag "fields[rating]", rating, class: "rating__input", id: radio_id %>
+                                  <% end %>
+                                <% end %>
+                              <% end %>
+                            </div>
+                          </div>
+                        <% end %>
+
+                        <div class="d-grid gap-2">
+                          <%= form.button t("app.button.send"), type: :submit, class: "btn btn-success" %>
+                        </div>
+                      <% end %>
+                    </div>
+                  <% end %>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="col-lg-4 col-12">
+        <% if flash.key?("message") %>
+          <%= render "application/shared/flash_messages", exclude: "message" %>
+        <% else %>
+          <div class="feedback-form bg-white">
+            <div class="sidebar-card">
+              <%= form_with model: @message, url: messages_path, html: { class: "needs-validation message-form", novalidate: true } do |form| %>
+                <%= form.hidden_field :status, value: :new %>
+                <%= form.hidden_field :category, value: :message %>
+                <%= form.hidden_field :name, value: form_title("message", controller_name, @team_member.whole_name) %>
+
+                <div class="sidebar-card-title">
+                  <h5>Написать сообщение</h5>
+                </div>
+
+                <%= fields_for :fields do |fields| %>
+                  <%= fields.hidden_field :team_member_id, value: @team_member.id %>
+
+                  <div class="mb-3">
+                    <%= fields.text_field :name, class: "form-control", placeholder: "Ваше имя", required: true %>
+                    <div class="invalid-feedback">Пожалуйста введите имя</div>
+                    <div class="valid-feedback">Заполнено!</div>
+                  </div>
+
+                  <div class="mb-3">
+                    <%= fields.text_field :email, class: "form-control email-mask", placeholder: "Ваш email", required: true %>
+                    <div class="invalid-feedback">Пожалуйста введите email</div>
+                    <div class="valid-feedback">Заполнено!</div>
+                  </div>
+
+                  <div class="mb-3">
+                    <%= fields.text_field :phone, class: "form-control phone-mask", placeholder: "Ваш телефон", required: true %>
+                    <div class="invalid-feedback">Пожалуйста введите телефон</div>
+                    <div class="valid-feedback">Заполнено!</div>
+                  </div>
+
+                  <div class="mb-3">
+                    <%= fields.select :type_realty, Realty::TYPES.map { |key, value| [value, key] }, { include_blank: false, prompt: "Тип недвижимости" }, { class: "form-select" } %>
+                  </div>
+
+                  <div class="mb-3">
+                    <%= fields.text_area :message, class: "form-control", placeholder: "Сообщение", rows: 5 %>
+                    <div class="invalid-feedback">Пожалуйста введите текст сообщения</div>
+                    <div class="valid-feedback">Заполнено!</div>
+                  </div>
+                <% end %>
+
+                <div class="d-grid gap-2">
+                  <%= form.button t("app.button.send"), type: :submit, class: "btn btn-success" %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

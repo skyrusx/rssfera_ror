@@ -18,6 +18,8 @@ class Message < ApplicationRecord
 
   PAGE_TITLES = {
     contacts: "из формы обратной связи (страница Контакты)",
-    vacancies: "на вакасию"
+    vacancies: "на вакасию",
+    team_members: "из формы обратной связи для",
+    review_team_members: "для сотрудника",
   }
 end
