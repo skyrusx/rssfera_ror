@@ -53,4 +53,23 @@ module ApplicationHelper
     title += " #{part}" if part
     title
   end
+
+  def working_hours(work_schedule)
+    result = {}
+
+    work_schedule.values.group_by { |v| v["start"] }.each.with_index do |(_, values), index|
+      start_time = values.first["start"]
+      end_time = values.last["end"]
+
+      first_day = t("weekday.#{values.first['day'].to_s}")
+      last_day = t("weekday.#{values.last['day'].to_s}")
+
+      times = (start_time.empty? && end_time.empty?) ? "выходной" : [start_time, end_time].join(" - ")
+      days = values.size == 1 ? first_day : [first_day, last_day].join(" - ")
+
+      result[index] = { times: times, days: days}
+    end
+
+    result
+  end
 end
