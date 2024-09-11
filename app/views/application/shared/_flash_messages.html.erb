@@ -1,0 +1,8 @@
+<% flash.delete(exclude) %>
+
+<% flash.each do |type, message| %>
+  <div class="alert <%= build_alert_classes(type) %> alert-dismissible fade show" role="alert">
+    <%= message %>
+    <%= button_tag "", type: :button, class: "btn-close", data: { "bs-dismiss": :alert }, aria: { label: "Закрыть" } %>
+  </div>
+<% end %>
