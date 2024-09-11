@@ -1016,6 +1016,20 @@ form {
           }
         }
       }
+
+      .btn-group {
+        a {
+          background-color: #198754;
+
+          &:focus {
+            background-color: #198754;
+          }
+
+          &:hover {
+            background-color: #75B08A;
+          }
+        }
+      }
     }
 
     h5 {
@@ -2719,8 +2733,15 @@ ul.list-none {
 
     .realty {
       height: 300px;
+      position: relative;
 
       .all-objects {
+        width: 100%;
+        transform: unset;
+        top: unset;
+        height: 100%;
+        padding: 25px 0;
+
         .btn {
           text-transform: uppercase;
           padding-left: 20px;
