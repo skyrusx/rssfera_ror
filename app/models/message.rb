@@ -12,6 +12,7 @@ class Message < ApplicationRecord
   CATEGORIES = {
     message: "Сообщение",
     response: "Отклик",
+    response_mobile: "Отклик",
     review: "Отзыв"
   }
 

@@ -5,6 +5,7 @@ class MessagesController < ApplicationController
     @message.save
 
     if @message.save
+      flash[@message.category] = true
       flash[:success] = I18n.t("app.form.messages.create.success")
     else
       flash[:error] = I18n.t("app.form.messages.create.error")
