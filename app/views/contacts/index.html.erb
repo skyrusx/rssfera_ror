@@ -13,16 +13,10 @@
           вам в ближайшее время. Если вы живете неподалеку, можете посетить наш офис.
         </div>
 
-        <% if flash.any? %>
-          <% flash.each do |type, message| %>
-            <div class="alert <%= build_alert_classes(type) %> alert-dismissible fade show" role="alert">
-              <%= message %>
-              <%= button_tag "", type: :button, class: "btn-close", data: { "bs-dismiss": :alert, label: "Close" } %>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-          <% end %>
+        <% if flash.key?("message") %>
+          <%= render "application/shared/flash_messages", exclude: "message" %>
         <% else %>
-          <%= form_with model: @message, url: messages_path, html: { class: "needs-validation", novalidate: true } do |form| %>
+          <%= form_with model: @message, url: messages_path, html: { class: "needs-validation contact-form", novalidate: true } do |form| %>
             <%= form.hidden_field :status, value: :new %>
             <%= form.hidden_field :category, value: :message %>
             <%= form.hidden_field :name, value: form_title("message", controller_name) %>
@@ -38,7 +32,7 @@
 
                 <div class="col-lg-6 col-12">
                   <%= fields.label :email, "E-mail", class: "form-label" %>
-                  <%= fields.text_field :email, class: "form-control", placeholder: "example@rssfera.ru", required: true %>
+                  <%= fields.text_field :email, class: "form-control email-mask", required: true %>
                   <div class="invalid-feedback">Пожалуйста введите ваш email</div>
                   <div class="valid-feedback">Заполнено!</div>
                 </div>
@@ -47,7 +41,7 @@
               <div class="row mb-3">
                 <div class="col-lg-6 col-12">
                   <%= fields.label :phone, "Телефон", class: "form-label" %>
-                  <%= fields.text_field :phone, class: "form-control", placeholder: "+7 (999) 999-99-99", required: true %>
+                  <%= fields.text_field :phone, class: "form-control phone-mask", required: true %>
                   <div class="invalid-feedback">Пожалуйста введите ваш номер телефона</div>
                   <div class="valid-feedback">Заполнено!</div>
                 </div>
@@ -60,13 +54,13 @@
 
               <div class="mb-3">
                 <%= fields.label :message, "Сообщение", class: "form-label" %>
-                <%= fields.text_area :message, class: "form-control", rows: 5 %>
+                <%= fields.text_area :message, class: "form-control", rows: 5, required: true %>
                 <div class="invalid-feedback">Пожалуйста введите текст сообщения</div>
                 <div class="valid-feedback">Заполнено!</div>
               </div>
             <% end %>
 
-            <%= form.submit t("app.button.send"), class: "btn btn-success" %>
+            <%= form.button t("app.button.send"), type: :submit, class: "btn btn-success" %>
           <% end %>
         <% end %>
       </div>

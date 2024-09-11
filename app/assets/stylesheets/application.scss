@@ -1656,6 +1656,51 @@ p {
   }
 }
 
+.contact-form {
+  input {
+    &:focus {
+      background-color: white;
+      outline: 0;
+      box-shadow: unset;
+    }
+
+    margin: 0;
+    padding: 10px 15px;
+    background: white;
+    border: 1px solid #f4f4f4;
+    font-weight: normal;
+    width: 100%;
+    resize: none;
+    border-radius: 5px;
+    min-height: 45px;
+    font-size: 14px;
+  }
+
+  textarea {
+    &:focus {
+      background-color: white;
+      outline: 0;
+      box-shadow: unset;
+    }
+
+    margin: 0;
+    padding: 10px 15px;
+    background: white;
+    border: 1px solid #f4f4f4;
+    font-weight: normal;
+    width: 100%;
+    resize: none;
+    border-radius: 5px;
+    min-height: 45px;
+    font-size: 14px;
+  }
+
+  .form-control {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 0 #0000, 0 0 #0000, 0 0 3px #3c485826 !important;
+  }
+}
+
 .callme-form {
   input {
     &:focus {
