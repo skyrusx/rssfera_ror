@@ -153,7 +153,7 @@
                       </div>
 
                       <div class="mb-3">
-                        <%= fields.select :position, @job_titles, { include_blank: false, selected: @vacancy.job_title_id }, { class: "form-select" } %>
+                        <%= fields.select :position, @job_titles, { include_blank: false, selected: @vacancy.job_title.name }, { class: "form-select" } %>
                         <div class="invalid-feedback">Пожалуйста выберите должность</div>
                         <div class="valid-feedback">Заполнено!</div>
                       </div>
