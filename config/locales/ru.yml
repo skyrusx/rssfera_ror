@@ -585,6 +585,9 @@ ru:
       page: "Настройки для страницы"
       page_name: "Название страницы"
       vacancies: "Вакансии"
+      message: "Сообщение"
+      team_member: "Сотрудник"
+      type_realty: "Тип недвижимости"
       messages:
         category: "Тип"
       meta:
