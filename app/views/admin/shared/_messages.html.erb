@@ -7,7 +7,7 @@
         <div class="toast-header">
           <%= toast_data[:icon] %>
           <strong class="me-auto"><%= toast_data[:title] %></strong>
-          <small>11 mins ago</small>
+          <small><%= Time.zone.now.strftime("%H:%M:%S") %></small>
           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
         <div class="toast-body"><%= message %></div>
