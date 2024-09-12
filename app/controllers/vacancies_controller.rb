@@ -27,7 +27,7 @@ class VacanciesController < ApplicationController
   def show
     @vacancy = Vacancy.find_by_slug(params[:slug])
     @message = Message.new
-    @job_titles = JobTitle.active.pluck(:name, :id)
+    @job_titles = JobTitle.active.pluck(:name)
 
     add_breadcrumb meta_data.page_name, :vacancies_path
     add_breadcrumb @vacancy.name, :vacancy_path
