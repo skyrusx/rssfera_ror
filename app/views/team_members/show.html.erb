@@ -201,6 +201,8 @@
                         <%= form.hidden_field :name, value: form_title("review", "review_#{controller_name}", @team_member.whole_name) %>
 
                         <%= fields_for :fields do |fields| %>
+                          <%= fields.hidden_field :team_member, value: @team_member.whole_name %>
+
                           <div class="row">
                             <div class="col-lg-6 col-12 mb-3">
                               <%= fields.text_field :name, class: "form-control", placeholder: "Ваше имя", required: true %>
@@ -273,7 +275,7 @@
                 </div>
 
                 <%= fields_for :fields do |fields| %>
-                  <%= fields.hidden_field :team_member_id, value: @team_member.id %>
+                  <%= fields.hidden_field :team_member, value: @team_member.whole_name %>
 
                   <div class="mb-3">
                     <%= fields.text_field :name, class: "form-control", placeholder: "Ваше имя", required: true %>
@@ -294,7 +296,7 @@
                   </div>
 
                   <div class="mb-3">
-                    <%= fields.select :type_realty, Realty::TYPES.map { |key, value| [value, key] }, { include_blank: false, prompt: "Тип недвижимости" }, { class: "form-select" } %>
+                    <%= fields.select :type_realty, Realty::TYPES.values, { include_blank: false, prompt: "Тип недвижимости" }, { class: "form-select" } %>
                   </div>
 
                   <div class="mb-3">
