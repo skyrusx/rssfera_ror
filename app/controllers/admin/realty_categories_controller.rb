@@ -54,7 +54,7 @@ class Admin::RealtyCategoriesController < AdminController
   private
 
   def realty_category_params
-    params.require(:realty_category).permit(:name, :status)
+    params.require(:realty_category).permit(:name, :status, :slug)
   end
 
   def find_realty_category

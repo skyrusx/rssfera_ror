@@ -7,11 +7,24 @@
           <%= form.label :status, class: "form-check-label" %>
         </div>
       </div>
+
       <div class="input-group mb-4 mb-3">
         <span class="input-group-text justify-content-end"><%= t "crud.table.name" %></span>
-        <%= form.text_field :name, class: "form-control", placeholder: t("placeholders.realty_categories.name"), required: true %>
+        <%= form.text_field :name, class: "form-control slug-item", placeholder: t("placeholders.realty_categories.name"), required: true %>
         <div class="invalid-feedback"><%= t "validation.invalid.name" %></div>
         <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="mb-4 mb-3">
+        <div class="input-group">
+          <span class="input-group-text justify-content-end"><%= base_url %></span>
+          <%= form.text_field :slug, class: "form-control slug", "aria-describedby": "generate-slug", placeholder: t("placeholders.realty_categories.slug"), required: true %>
+          <span id="generate-slug" class="btn btn-light"><%= t "crud.table.generate" %></span>
+
+          <div class="invalid-feedback"><%= t "validation.invalid.slug" %></div>
+          <div class="valid-feedback"><%= t "validation.valid" %></div>
+        </div>
+        <div class="form-text"><%= t "hint.vacancy_slug" %></div>
       </div>
     </div>
   </div>

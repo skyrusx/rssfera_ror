@@ -17,9 +17,15 @@
         <div class="field-name justify-content-end"><%= t "crud.table.status" %></div>
         <div class="field-value"><%= activity_status @realty_category.status, true %></div>
       </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.name" %></div>
         <div class="field-value"><%= @realty_category.name %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.slug" %></div>
+        <div class="field-value"><%= @realty_category.slug %></div>
       </div>
     </div>
   </div>

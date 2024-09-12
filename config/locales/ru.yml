@@ -646,6 +646,7 @@ ru:
       link: "https://vk.com/rssfera"
     realty_categories:
       name: "Аренда"
+      slug: "arenda"
     cities:
       name: "Мурманск"
     districts:

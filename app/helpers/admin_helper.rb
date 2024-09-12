@@ -5,7 +5,8 @@ module AdminHelper
     t params["controller"].gsub('/', '_')
   end
 
-  def base_url(section)
+  def base_url(section = nil)
+    return request.base_url if section.nil?
     request.base_url + "/#{section}/"
   end
 
