@@ -39,13 +39,11 @@
               <li><a class="dropdown-item" href="search-buyer.html">Подбор покупателей</a></li>
             </ul>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Аренда
-            </a>
+          <li class="<%= dropdown_active("rents") %>">
+            <%= link_to "Аренда", rents_path, class: "nav-link dropdown-toggle", role: :button, data: { "bs-toggle": :dropdown }, aria: { expanded: false } %>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="rent-property.html">Снять недвижимость</a></li>
-              <li><a class="dropdown-item" href="rent-out-property.html">Сдать недвижимость</a></li>
+              <li><%= link_to "Снять недвижимость", rents_path, class: dropdown_active_class(rents_path) %></li>
+              <li><%= link_to "Сдать недвижимость", rents_out_path, class: dropdown_active_class(rents_out_path) %></li>
             </ul>
           </li>
           <%= link_to root_path, class: "navbar-brand d-none d-md-block" do %>

@@ -557,6 +557,10 @@ ul.list-none, ul.list-none li {
   }
 }
 
+.admin-crud #images img {
+  height: 250px;
+}
+
 .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
   background-color: #4CAF50;
 }

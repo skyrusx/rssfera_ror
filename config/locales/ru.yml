@@ -525,6 +525,7 @@ ru:
       full_name: "Фамилия Имя Отчество"
       job_title: "Должность"
       phone: "Телефон"
+      phone_short: "Телефон"
       phone_number: "Номер телефона"
       whatsapp: "Наличие WhatsApp"
       email: "E-mail"
@@ -551,6 +552,7 @@ ru:
       more_info: "Дополнительная информация"
       link: "Ссылка"
       city_district_street: "Город, район, улица"
+      address: "Адрес"
       address_full: "Полный адрес"
       address_short: "Адрес"
       work_schedule: "Режим работы"
@@ -588,6 +590,17 @@ ru:
       message: "Сообщение"
       team_member: "Сотрудник"
       type_realty: "Тип недвижимости"
+      username: "Имя"
+      username_short: "Имя"
+      details: "Доп. информация"
+      details_short: "Доп. информация"
+      room_size: "Количество комнат"
+      cost: "Стоимость, ₽"
+      square: "Площадь, кв.м"
+      floor: "Этаж"
+      floors: "Количество этажей"
+      condition: "Состояние"
+      communication_method: "Способ связи"
       messages:
         category: "Тип"
       meta:
@@ -693,3 +706,8 @@ ru:
 
     button:
       send: "Отправить"
+      send_request: "Отправить заявку"
+
+    breadcrumbs:
+      rents: "Снять недвижимость"
+      rents_out: "Сдать недвижимость"

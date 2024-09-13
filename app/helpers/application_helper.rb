@@ -17,6 +17,16 @@ module ApplicationHelper
     page_fullpath == link_path ? "nav-item active" : "nav-item"
   end
 
+  def dropdown_active_class(link_path)
+    page_fullpath = request.fullpath
+    page_fullpath.gsub!("/#{params[:slug]}", "") if params[:slug].present?
+    page_fullpath == link_path ? "dropdown-item active" : "dropdown-item"
+  end
+
+  def dropdown_active(page_name)
+    controller_name == page_name ? "nav-item dropdown active" : "nav-item dropdown"
+  end
+
   def pagination(collection, anchor)
     params = { anchor: anchor }
     will_paginate(
