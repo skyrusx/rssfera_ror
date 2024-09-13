@@ -34,37 +34,35 @@
                         <%= form.hidden_field :category, value: :response %>
                         <%= form.hidden_field :name, value: form_title("response", controller_name, @vacancy.job_title.name) %>
 
-                        <%= fields_for :fields do |fields| %>
-                          <div class="mb-3">
-                            <%= fields.text_field :name, class: "form-control", placeholder: "Ваше имя", required: true %>
-                            <div class="invalid-feedback">Пожалуйста введите имя</div>
-                            <div class="valid-feedback">Заполнено!</div>
-                          </div>
+                        <div class="mb-3">
+                          <%= text_field_tag "fields[0][username]", nil, class: "form-control", placeholder: "Ваше имя", required: true %>
+                          <div class="invalid-feedback">Пожалуйста введите имя</div>
+                          <div class="valid-feedback">Заполнено!</div>
+                        </div>
 
-                          <div class="mb-3">
-                            <%= fields.text_field :email, class: "form-control email-mask", placeholder: "Ваш email", required: true %>
-                            <div class="invalid-feedback">Пожалуйста введите email</div>
-                            <div class="valid-feedback">Заполнено!</div>
-                          </div>
+                        <div class="mb-3">
+                          <%= text_field_tag "fields[1][email]", nil, class: "form-control email-mask", placeholder: "Ваш email", required: true %>
+                          <div class="invalid-feedback">Пожалуйста введите email</div>
+                          <div class="valid-feedback">Заполнено!</div>
+                        </div>
 
-                          <div class="mb-3">
-                            <%= fields.text_field :phone, class: "form-control phone-mask", placeholder: "Ваш телефон", required: true %>
-                            <div class="invalid-feedback">Пожалуйста введите телефон</div>
-                            <div class="valid-feedback">Заполнено!</div>
-                          </div>
+                        <div class="mb-3">
+                          <%= text_field_tag "fields[2][phone]", nil, class: "form-control phone-mask", placeholder: "Ваш телефон", required: true %>
+                          <div class="invalid-feedback">Пожалуйста введите телефон</div>
+                          <div class="valid-feedback">Заполнено!</div>
+                        </div>
 
-                          <div class="mb-3">
-                            <%= fields.select :position, @job_titles, { include_blank: false, selected: @vacancy.job_title.name }, { class: "form-select" } %>
-                            <div class="invalid-feedback">Пожалуйста выберите должность</div>
-                            <div class="valid-feedback">Заполнено!</div>
-                          </div>
+                        <div class="mb-3">
+                          <%= select_tag "fields[3][job_title]", options_for_select(@job_titles, @vacancy.job_title.name), include_blank: false, class: "form-select" %>
+                          <div class="invalid-feedback">Пожалуйста выберите должность</div>
+                          <div class="valid-feedback">Заполнено!</div>
+                        </div>
 
-                          <div class="mb-3">
-                            <%= fields.text_area :message, class: "form-control", placeholder: "Сообщение", rows: 5 %>
-                            <div class="invalid-feedback">Пожалуйста введите текст сообщения</div>
-                            <div class="valid-feedback">Заполнено!</div>
-                          </div>
-                        <% end %>
+                        <div class="mb-3">
+                          <%= text_area_tag "fields[4][message]", nil, class: "form-control", placeholder: "Сообщение", rows: 5 %>
+                          <div class="invalid-feedback">Пожалуйста введите текст сообщения</div>
+                          <div class="valid-feedback">Заполнено!</div>
+                        </div>
 
                         <div class="d-grid gap-2">
                           <%= form.button t("app.button.send"), type: :submit, class: "btn btn-success" %>
@@ -133,37 +131,35 @@
                     <%= form.hidden_field :category, value: :response_mobile %>
                     <%= form.hidden_field :name, value: form_title("response_mobile", controller_name, @vacancy.job_title.name) %>
 
-                    <%= fields_for :fields do |fields| %>
-                      <div class="mb-3">
-                        <%= fields.text_field :name, class: "form-control", placeholder: "Ваше имя", required: true %>
-                        <div class="invalid-feedback">Пожалуйста введите имя</div>
-                        <div class="valid-feedback">Заполнено!</div>
-                      </div>
+                    <div class="mb-3">
+                      <%= text_field_tag "fields[0][username]", nil, class: "form-control", placeholder: "Ваше имя", required: true %>
+                      <div class="invalid-feedback">Пожалуйста введите имя</div>
+                      <div class="valid-feedback">Заполнено!</div>
+                    </div>
 
-                      <div class="mb-3">
-                        <%= fields.text_field :email, class: "form-control email-mask", placeholder: "Ваш email", required: true %>
-                        <div class="invalid-feedback">Пожалуйста введите email</div>
-                        <div class="valid-feedback">Заполнено!</div>
-                      </div>
+                    <div class="mb-3">
+                      <%= text_field_tag "fields[1][email]", nil, class: "form-control email-mask", placeholder: "Ваш email", required: true %>
+                      <div class="invalid-feedback">Пожалуйста введите email</div>
+                      <div class="valid-feedback">Заполнено!</div>
+                    </div>
 
-                      <div class="mb-3">
-                        <%= fields.text_field :phone, class: "form-control phone-mask", placeholder: "Ваш телефон", required: true %>
-                        <div class="invalid-feedback">Пожалуйста введите телефон</div>
-                        <div class="valid-feedback">Заполнено!</div>
-                      </div>
+                    <div class="mb-3">
+                      <%= text_field_tag "fields[2][phone]", nil, class: "form-control phone-mask", placeholder: "Ваш телефон", required: true %>
+                      <div class="invalid-feedback">Пожалуйста введите телефон</div>
+                      <div class="valid-feedback">Заполнено!</div>
+                    </div>
 
-                      <div class="mb-3">
-                        <%= fields.select :position, @job_titles, { include_blank: false, selected: @vacancy.job_title.name }, { class: "form-select" } %>
-                        <div class="invalid-feedback">Пожалуйста выберите должность</div>
-                        <div class="valid-feedback">Заполнено!</div>
-                      </div>
+                    <div class="mb-3">
+                      <%= select_tag "fields[3][job_title]", options_for_select(@job_titles, @vacancy.job_title.name), include_blank: false, class: "form-select" %>
+                      <div class="invalid-feedback">Пожалуйста выберите должность</div>
+                      <div class="valid-feedback">Заполнено!</div>
+                    </div>
 
-                      <div class="mb-3">
-                        <%= fields.text_area :message, class: "form-control", placeholder: "Сообщение", rows: 5 %>
-                        <div class="invalid-feedback">Пожалуйста введите текст сообщения</div>
-                        <div class="valid-feedback">Заполнено!</div>
-                      </div>
-                    <% end %>
+                    <div class="mb-3">
+                      <%= text_area_tag "fields[4][message]", nil, class: "form-control", placeholder: "Сообщение", rows: 5 %>
+                      <div class="invalid-feedback">Пожалуйста введите текст сообщения</div>
+                      <div class="valid-feedback">Заполнено!</div>
+                    </div>
 
                     <div class="d-grid gap-2">
                       <%= form.button t("app.button.send"), type: :submit, class: "btn btn-success" %>
