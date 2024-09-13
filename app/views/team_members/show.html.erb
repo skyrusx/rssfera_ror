@@ -115,7 +115,9 @@
                                     <%= image_tag object.photos.first, class: "d-block w-100", alt: object.name %>
                                   <% end %>
                                   <div class="card-body">
-                                    <span class="card-price"><%= realty_price(price: object.price, type: object.realty_category.name) %></span>
+                                    <span class="card-price">
+                                      <%= realty_price(price: object.price, type: object.realty_category.name) %>
+                                    </span>
                                     <h5 class="card-title">
                                       <%= link_to object.name, "#" %>
                                     </h5>
