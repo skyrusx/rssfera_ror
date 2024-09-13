@@ -24,6 +24,7 @@ class Message < ApplicationRecord
     vacancies: "на вакасию",
     team_members: "из формы обратной связи для",
     review_team_members: "для сотрудника",
-    rents: "на размещение недвижимости в аренду на сайте"
+    rents_out: "на размещение недвижимости в аренду на сайте",
+    rents: "на подбор недвижимости для клиента"
   }
 end

@@ -41,7 +41,7 @@
                 <%= form_with model: @message_extended, url: messages_path, html: { class: "needs-validation form-placement", novalidate: true } do |form| %>
                   <%= form.hidden_field :status, value: :new %>
                   <%= form.hidden_field :category, value: :request %>
-                  <%= form.hidden_field :name, value: form_title("request", controller_name) %>
+                  <%= form.hidden_field :name, value: form_title("request", "#{controller_name}_out") %>
 
                   <div class="mb-3">
                     <%= select_tag "fields[0][type_realty]", options_for_select(Realty::TYPES.values), include_blank: false, class: "form-select", prompt: "Тип недвижимости" %>
@@ -110,7 +110,7 @@
                 <%= form_with model: @message_short, url: messages_path, html: { class: "needs-validation form-placement-short", novalidate: true } do |form| %>
                   <%= form.hidden_field :status, value: :new %>
                   <%= form.hidden_field :category, value: :request %>
-                  <%= form.hidden_field :name, value: form_title("request", controller_name) %>
+                  <%= form.hidden_field :name, value: form_title("request", "#{controller_name}_out") %>
 
                   <div class="mb-3">
                     <%= text_field_tag "fields[0][username_short]", nil, class: "form-control", placeholder: "Ваше имя", required: true %>
