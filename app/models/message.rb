@@ -1,4 +1,6 @@
 class Message < ApplicationRecord
+  has_many_attached :images
+
   scope :unread, -> { where(status: "new") }
 
   STATUSES = {
@@ -13,7 +15,8 @@ class Message < ApplicationRecord
     message: "Сообщение",
     response: "Отклик",
     response_mobile: "Отклик",
-    review: "Отзыв"
+    review: "Отзыв",
+    request: "Заявка"
   }
 
   PAGE_TITLES = {
@@ -21,5 +24,6 @@ class Message < ApplicationRecord
     vacancies: "на вакасию",
     team_members: "из формы обратной связи для",
     review_team_members: "для сотрудника",
+    rents: "на размещение недвижимости в аренду на сайте"
   }
 end

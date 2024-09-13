@@ -20,11 +20,11 @@
           <span class="input-group-text w-100"><%= t "crud.table.fields" %></span>
         </div>
 
-        <% @message.fields.each do |field| %>
+        <% @message.fields.each do |key, data| %>
           <div class="input-group">
-            <span class="input-group-text justify-content-end"><%= t "crud.table.#{field[0]}" %></span>
-            <%= fields_for :fields do |fields| %>
-              <%= fields.text_field field[0].to_sym, value: field[1], class: "form-control" %>
+            <% data.each do |field_name, field_value| %>
+              <span class="input-group-text justify-content-end"><%= t "crud.table.#{field_name}" %></span>
+              <%= text_field_tag "fields[#{key}][#{field_name}]", field_value, class: "form-control" %>
             <% end %>
           </div>
         <% end %>

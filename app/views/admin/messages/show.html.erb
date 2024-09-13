@@ -43,13 +43,49 @@
           <span class="input-group-text w-100"><%= t "crud.table.fields" %></span>
         </div>
 
-        <% @message.fields.each do |field| %>
-          <div class="d-flex field">
-            <span class="field-name justify-content-end"><%= t "crud.table.#{field[0]}" %></span>
-            <div class="field-value"><%= field[1] %></div>
-          </div>
+        <% @message.fields.each do |key, data| %>
+          <% data.each do |field_name, field_value| %>
+            <div class="d-flex field">
+              <span class="field-name justify-content-end"><%= t "crud.table.#{field_name}" %></span>
+              <div class="field-value"><%= field_value %></div>
+            </div>
+          <% end %>
         <% end %>
       </div>
+
+      <% if @message.images.attached? %>
+        <div class="mb-4 mb-3 d-flex field">
+          <div class="field-name justify-content-end"><%= t "crud.table.photos" %></div>
+          <div class="field-value justify-content-center">
+            <div id="images" class="carousel slide carousel-fade">
+              <div class="carousel-indicators">
+                <% (0..@message.images.size-1).each do |index| %>
+                  <%
+                    classes = "active" if index.zero?
+                    aria_current = true if index.zero?
+                  %>
+                  <%= button_tag "", type: "button", "data-bs-target": "#images", "data-bs-slide-to": index, class: classes, "aria-current": aria_current, "aria-label": "Image #{index}"  %>
+                <% end %>
+              </div>
+              <div class="carousel-inner">
+                <% @message.images.each.with_index do |image, index| %>
+                  <div class="carousel-item <%= "active" if index.zero? %>">
+                    <%= image_tag image, class: "d-block w-100" %>
+                  </div>
+                <% end %>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#images" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#images" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

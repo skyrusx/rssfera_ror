@@ -17,6 +17,6 @@ class MessagesController < ApplicationController
   private
 
   def message_params
-    params.require(:message).permit(:status, :category, :name, :fields => '{}')
+    params.require(:message).permit(:status, :category, :name, :images => [], :fields => '{}')
   end
 end
