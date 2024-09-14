@@ -707,7 +707,10 @@ ru:
     button:
       send: "Отправить"
       send_request: "Отправить заявку"
+      get_consultation: "Получить консультацию"
 
     breadcrumbs:
       rents: "Снять недвижимость"
       rents_out: "Сдать недвижимость"
+      sells: "Продать"
+      sells_search_buyers: "Подбор покупателей"

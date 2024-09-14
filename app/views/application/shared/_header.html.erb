@@ -24,19 +24,31 @@
               <li><a class="dropdown-item" href="base-property.html">База недвижимости</a></li>
             </ul>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Продать
-            </a>
+          <li class="<%= dropdown_active("sells") %>">
+            <%= link_to "Продать", sells_path, class: "nav-link dropdown-toggle", role: :button, data: { "bs-toggle": :dropdown }, aria: { expanded: false } %>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="sell-room.html">Комнату</a></li>
-              <li><a class="dropdown-item" href="sell-flat.html">Квартиру</a></li>
-              <li><a class="dropdown-item" href="sell-house.html">Загородный дом</a></li>
-              <li><a class="dropdown-item" href="sell-land.html">Земельный участок</a></li>
-              <li><a class="dropdown-item" href="sell-commercial.html">Коммерческая недвижимость</a></li>
-              <li><a class="dropdown-item" href="sell-garage.html">Гараж</a></li>
+              <li>
+                <%= link_to "Комнату", sells_path(realty_id: 1), class: dropdown_active_class(sells_path(realty_id: 1)) %>
+              </li>
+              <li>
+                <%= link_to "Квартиру", sells_path(realty_id: 2), class: dropdown_active_class(sells_path(realty_id: 2)) %>
+              </li>
+              <li>
+                <%= link_to "Загородный дом", sells_path(realty_id: 3), class: dropdown_active_class(sells_path(realty_id: 3)) %>
+              </li>
+              <li>
+                <%= link_to "Земельный участок", sells_path(realty_id: 4), class: dropdown_active_class(sells_path(realty_id: 4)) %>
+              </li>
+              <li>
+                <%= link_to "Коммерческую недвижимость", sells_path(realty_id: 5), class: dropdown_active_class(sells_path(realty_id: 5)) %>
+              </li>
+              <li>
+                <%= link_to "Гараж", sells_path(realty_id: 6), class: dropdown_active_class(sells_path(realty_id: 6)) %>
+              </li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="search-buyer.html">Подбор покупателей</a></li>
+              <li>
+                <%= link_to "Подбор покупателей", sells_search_buyers_path, class: dropdown_active_class(sells_search_buyers_path) %>
+              </li>
             </ul>
           </li>
           <li class="<%= dropdown_active("rents") %>">

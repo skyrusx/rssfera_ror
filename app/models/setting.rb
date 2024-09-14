@@ -5,6 +5,7 @@ class Setting < ApplicationRecord
     "partners" => "Партнеры",
     "vacancies" => "Вакансии",
     "contacts" => "Контакты",
-    "rents" => "Аренда недвижимости"
+    "rents" => "Аренда недвижимости",
+    "sells" => "Продажа недвижимости"
   }
 end

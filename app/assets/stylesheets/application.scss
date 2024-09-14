@@ -2399,6 +2399,7 @@ ul.list-none {
   transition-timing-function: cubic-bezier(.4, 0, .2, 1) !important;
   box-shadow: 0 0 #0000, 0 0 #0000, 0 0 3px #3c485826 !important;
   margin-bottom: 24px;
+  background-image: url("consult.png");
   background-repeat: no-repeat;
   background-position: bottom left 330px;
   background-size: auto 280px;
@@ -2416,6 +2417,7 @@ ul.list-none {
 
 .sell-details__row {
   min-height: 440px;
+  margin-bottom: 50px;
 
   img {
     width: 450px;
