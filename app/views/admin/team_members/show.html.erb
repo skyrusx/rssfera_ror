@@ -63,7 +63,7 @@
       <div class="d-flex justify-content-center list-images">
         <div class="img-thumbnail">
           <% if @team_member.photo.attached? %>
-            <%= image_tag(@team_member.photo, id: "selected-image", class: "selected-image") %>
+            <%= image_tag(@team_member.photo.variant(:full), id: "selected-image", class: "selected-image") %>
           <% else %>
             <%= image_tag "team-placeholder.png", id: "selected-image", class: "selected-image preview" %>
           <% end %>

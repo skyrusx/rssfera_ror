@@ -80,7 +80,7 @@
       <div class="d-flex justify-content-center list-images">
         <div class="img-thumbnail">
           <% if @team_member.photo.attached? %>
-            <%= image_tag(@team_member.photo, id: "selected-image", class: "selected-image") %>
+            <%= image_tag(@team_member.photo.variant(:full), id: "selected-image", class: "selected-image") %>
             <%= link_to delete_photo_admin_team_member_path(id: @team_member.id, image_id: @team_member.photo.id), data: { turbo_method: "delete", turbo_confirm: t("crud.table.confirm") }, class: "text-danger" do %>
               <i class="bi bi-x-circle-fill"></i>
             <% end %>

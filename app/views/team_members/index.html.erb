@@ -20,7 +20,7 @@
             <div class="card">
               <div class="card-image">
                 <%= link_to team_member_path(team_member.slug) do %>
-                  <%= image_tag team_member.photo, class: "card-img-top", alt: team_member.whole_name %>
+                  <%= image_tag team_member.photo.variant(:full), class: "card-img-top", alt: team_member.whole_name %>
                 <% end %>
                 <div class="team-info">
                   <div class="name"><%= team_member.whole_name %></div>

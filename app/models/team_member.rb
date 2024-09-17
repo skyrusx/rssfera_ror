@@ -7,6 +7,7 @@ class TeamMember < ApplicationRecord
 
   has_one_attached :photo do |attachable|
     attachable.variant :thumb, resize_to_fill: [75, 80, { crop: :attention }]
+    attachable.variant :full, resize_to_fill: [250, 380]
   end
 
   is_positionable start: 1
