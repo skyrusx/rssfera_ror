@@ -5,7 +5,7 @@ class Admin::RegionsController < AdminController
   add_breadcrumb I18n.t("admin_breadcrumbs.regions"), :admin_regions_path
 
   def index
-    @regions = Region.paginate(page: params[:page], per_page: 10).order(name: :asc)
+    @regions = Region.paginate(page: params[:page], per_page: 20).order(:created_at)
     @total_regions = Region.all.size
   end
 
