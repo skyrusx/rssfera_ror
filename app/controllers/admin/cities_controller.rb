@@ -55,7 +55,9 @@ class Admin::CitiesController < AdminController
   private
 
   def city_params
-    params.require(:city).permit(:name, :status, :realty_ids => [], :district_ids => [])
+    params.require(:city).permit(
+      :name, :status, :localized_name, :localized_name_short, :full_name, :realty_ids => [], :district_ids => []
+    )
   end
 
   def find_city
