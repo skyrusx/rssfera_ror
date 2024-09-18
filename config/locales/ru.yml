@@ -731,6 +731,9 @@ ru:
       name: "Мурманск"
     districts:
       name: "Центральный"
+      full_name: "Центральный район"
+      localized_name: "район"
+      localized_name_short: "р-н"
     streets:
       name: "Центральная"
     realties:

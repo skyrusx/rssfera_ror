@@ -14,17 +14,35 @@
   <div class="row district__data">
     <div class="col-lg-9">
       <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.full_name" %></div>
+        <div class="field-value"><%= @district.full_name %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.name" %></div>
         <div class="field-value"><%= @district.name %></div>
       </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.localized_name" %></div>
+        <div class="field-value"><%= @district.localized_name %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.localized_name_short" %></div>
+        <div class="field-value"><%= @district.localized_name_short %></div>
+      </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.city" %></div>
         <div class="field-value"><%= @district.city.name %></div>
       </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.realties" %></div>
         <div class="field-value"><%= @district.realties.size %></div>
       </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.streets" %></div>
         <div class="field-value"><%= list_objects @district.streets.pluck(:name).sort %></div>

@@ -21,9 +21,9 @@
       <% @districts.each.with_index(1) do |district, index| %>
         <tr>
           <th scope="row" class="text-center"><%= index %></th>
-          <td><%= district.name %></td>
+          <td><%= district.full_name %></td>
           <td class="text-center">
-            <div class="note"><%= district.city.name %></div>
+            <div class="note"><%= district&.city&.name %></div>
           </td>
           <td class="text-center"><%= district.streets.size %></td>
           <td class="text-center"><%= district.realties.size %></td>
