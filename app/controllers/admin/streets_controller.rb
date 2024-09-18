@@ -55,7 +55,7 @@ class Admin::StreetsController < AdminController
   private
 
   def street_params
-    params.require(:street).permit(:name, :district_id, :realty_ids => [])
+    params.require(:street).permit(:name, :district_id, :localized_name, :localized_name_short, :full_name, :realty_ids => [])
   end
 
   def find_street

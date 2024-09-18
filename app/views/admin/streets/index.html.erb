@@ -21,7 +21,7 @@
       <% @streets.each.with_index(1) do |street, index| %>
         <tr>
           <th scope="row" class="text-center"><%= index %></th>
-          <td><%= street.name %></td>
+          <td><%= street.full_name %></td>
           <td class="text-center">
             <div class="note"><%= street.district.name %></div>
           </td>

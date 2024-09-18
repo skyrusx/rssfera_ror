@@ -736,6 +736,9 @@ ru:
       localized_name_short: "р-н"
     streets:
       name: "Центральная"
+      full_name: "Центральная улица"
+      localized_name: "улица"
+      localized_name_short: "ул."
     realties:
       name: "4-комн. кв. 89 м² этаж 5/5"
       slug: "3755615"

@@ -14,17 +14,35 @@
   <div class="row street__data">
     <div class="col-lg-9">
       <div class="mb-4 mb-3 d-flex field">
-        <div class="field-name justify-content-end"><%= t "crud.table.name" %></div>
-        <div class="field-value"><%= @street.name %></div>
+        <div class="field-name justify-content-end"><%= t "crud.table.city" %></div>
+        <div class="field-value"><%= @street.district.city.name %></div>
       </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.district" %></div>
         <div class="field-value"><%= @street.district.name %></div>
       </div>
+
       <div class="mb-4 mb-3 d-flex field">
-        <div class="field-name justify-content-end"><%= t "crud.table.city" %></div>
-        <div class="field-value"><%= @street.district.city.name %></div>
+        <div class="field-name justify-content-end"><%= t "crud.table.full_name" %></div>
+        <div class="field-value"><%= @street.full_name %></div>
       </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.name" %></div>
+        <div class="field-value"><%= @street.name %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.localized_name" %></div>
+        <div class="field-value"><%= @street.localized_name %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.localized_name_short" %></div>
+        <div class="field-value"><%= @street.localized_name_short %></div>
+      </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.realties" %></div>
         <div class="field-value"><%= @street.realties.size %></div>
