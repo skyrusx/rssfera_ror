@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_12_082433) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_17_180624) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,6 +59,11 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_12_082433) do
     t.boolean "status", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "localized_name"
+    t.string "localized_name_short"
+    t.string "full_name"
+    t.bigint "region_id", null: false
+    t.index ["region_id"], name: "index_cities_on_region_id"
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -73,11 +78,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_12_082433) do
     t.jsonb "work_schedule", default: "{}"
   end
 
+  create_table "countries", force: :cascade do |t|
+    t.string "name"
+    t.string "localized_name"
+    t.string "currency_code"
+    t.string "currency_symbol"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "districts", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "city_id"
+    t.string "localized_name"
+    t.string "localized_name_short"
+    t.string "full_name"
   end
 
   create_table "employment_types", force: :cascade do |t|
@@ -119,7 +136,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_12_082433) do
     t.boolean "status", default: true
     t.string "slug"
     t.string "location"
-    t.string "price"
     t.string "payments"
     t.text "description"
     t.jsonb "specifications", default: "{}"
@@ -131,6 +147,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_12_082433) do
     t.integer "city_id"
     t.integer "district_id"
     t.integer "street_id"
+    t.float "total_area"
+    t.float "living_area"
+    t.float "kitchen_area"
+    t.integer "floor"
+    t.integer "floors"
+    t.integer "number_rooms"
+    t.string "layout"
+    t.string "house"
+    t.string "flat"
+    t.float "price"
+    t.boolean "balcony", default: true
     t.index ["realty_category_id"], name: "index_realties_on_realty_category_id"
     t.index ["team_member_id"], name: "index_realties_on_team_member_id"
   end
@@ -141,6 +168,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_12_082433) do
     t.datetime "updated_at", null: false
     t.boolean "status", default: true
     t.string "slug"
+  end
+
+  create_table "regions", force: :cascade do |t|
+    t.string "name"
+    t.string "localized_name"
+    t.string "localized_name_short"
+    t.bigint "country_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "full_name"
+    t.index ["country_id"], name: "index_regions_on_country_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -186,6 +224,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_12_082433) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "district_id"
+    t.string "localized_name"
+    t.string "localized_name_short"
+    t.string "complete_name"
+    t.string "full_name"
   end
 
   create_table "team_member_job_title_joins", force: :cascade do |t|
@@ -247,4 +289,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_12_082433) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cities", "regions"
 end
