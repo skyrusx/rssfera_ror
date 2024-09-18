@@ -48,6 +48,7 @@ Rails.application.routes.draw do
     resources :contacts, only: [:show, :edit, :update]
     resources :realty_categories
     resources :countries
+    resources :regions
     resources :cities
     resources :districts
     resources :streets
