@@ -376,25 +376,29 @@ ul.list-none, ul.list-none li {
 
 .admin ul {
   border-radius: unset;
-  background-color: #2E7D32;
+  //background-color: #2E7D32;
 
   i {
     margin-right: 5px;
   }
 }
 
-.table thead tr th {
+.admin ul.list-none {
+  background-color: unset;
+}
+
+.admin .table thead tr th {
   //text-align: center;
   color: white;
 }
 
-.table tbody tr th,
-.table tbody tr td {
+.admin .table tbody tr th,
+.admin .table tbody tr td {
   color: #F8F9FA;
   //text-align: center;
 }
 
-.table td.status i {
+.admin .table td.status i {
   &.bi-check-circle-fill {
     color: #B2FF59;
   }
@@ -416,17 +420,17 @@ ul.list-none, ul.list-none li {
   }
 }
 
-.table tr td .mini-avatar {
+.admin .table tr td .mini-avatar {
   width: 30px;
 }
 
-.table tr td .list-positions,
-.table tr td .assigned {
+.admin .table tr td .list-positions,
+.admin .table tr td .assigned {
   font-size: 12px;
   color: #C7C7C7;
 }
 
-.table tr td .note {
+.admin .table tr td .note {
   padding: 2px 5px;
   background-color: #2E7D32;
   border: 1px solid #4CAF50;
@@ -434,7 +438,7 @@ ul.list-none, ul.list-none li {
   display: inline;
 }
 
-.table tbody ul li {
+.admin .table tbody ul li {
   padding: 2px 5px;
   background-color: #2E7D32;
   border: 1px solid #4CAF50;
@@ -640,6 +644,7 @@ ul.list-none, ul.list-none li {
 
 .admin-crud .team-member__data .list-none,
 .admin-crud .job-title__data .list-none,
+.admin-crud .country__data .list-none,
 .admin-crud .city__data .list-none,
 .admin-crud .district__data .list-none {
   display: flex;
@@ -650,7 +655,8 @@ ul.list-none, ul.list-none li {
 .admin-crud .team-member__data .list-none .list-item,
 .admin-crud .job-title__data .list-none .list-item,
 .admin-crud .city__data .list-none .list-item,
-.admin-crud .district__data .list-none .list-item {
+.admin-crud .district__data .list-none .list-item,
+.admin-crud .country__data .list-none .list-item {
   margin: 0 5px 3px 5px;
   padding: 2px 5px;
   background-color: #2E7D32;
