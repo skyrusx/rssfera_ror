@@ -63,6 +63,6 @@ class Admin::CountriesController < AdminController
   end
 
   def regions
-    @regions = @country.present? ? Region.where(country_id: @country.id).sort : Regions.all
+    @regions = @country.present? ? Region.where(country_id: @country.id).sort : Region.all
   end
 end
