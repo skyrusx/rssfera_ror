@@ -649,6 +649,7 @@ ru:
       currency_code: "Код валюты"
       currency_symbol: "Символ валюты"
       regions: "Регионы"
+      region: "Регион"
       country: "Страна"
       cities: "Города"
       full_name: "Полное наименование"

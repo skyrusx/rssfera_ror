@@ -17,14 +17,22 @@
         <div class="field-name justify-content-end"><%= t "crud.table.status" %></div>
         <div class="field-value"><%= activity_status @city.status, true %></div>
       </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.region" %></div>
+        <div class="field-value"><%= @city.region.full_name %></div>
+      </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.name" %></div>
         <div class="field-value"><%= @city.name %></div>
       </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.districts" %></div>
         <div class="field-value"><%= list_objects @city.districts.pluck(:name) %></div>
       </div>
+
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.realties" %></div>
         <div class="field-value"><%= @city.realties.size %></div>

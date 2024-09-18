@@ -1,6 +1,6 @@
 class Admin::CitiesController < AdminController
   before_action :find_city, only: [:show, :edit, :update, :destroy]
-  before_action :districts, only: [:new, :create, :edit, :update]
+  before_action :districts, :regions, only: [:new, :create, :edit, :update]
 
   add_breadcrumb I18n.t("admin_breadcrumbs.cities"), :admin_cities_path
 
@@ -64,5 +64,9 @@ class Admin::CitiesController < AdminController
 
   def districts
     @districts = @city.present? ? District.where(city_id: @city.id).sort : District.all
+  end
+
+  def regions
+    @regions = Region.all
   end
 end

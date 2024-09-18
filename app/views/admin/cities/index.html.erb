@@ -12,6 +12,7 @@
         <th scope="col" class="text-center"><%= t "crud.table.id" %></th>
         <th scope="col"><%= t "crud.table.name" %></th>
         <th scope="col"><%= t "crud.table.districts" %></th>
+        <th scope="col" class="text-center"><%= t "crud.table.region" %></th>
         <th scope="col" class="text-center"><%= t "crud.table.realties" %></th>
         <th scope="col" class="text-center"><%= t "crud.table.status" %></th>
         <th scope="col" colspan="3"></th>
@@ -23,6 +24,9 @@
           <th scope="row" class="text-center"><%= index %></th>
           <td><%= city.name %></td>
           <td><%= list_objects city.districts.pluck(:name) %></td>
+          <td class="text-center">
+            <div class="note"><%= city.region.full_name %></div>
+          </td>
           <td class="text-center"><%= city.realties.size %></td>
           <td class="status text-center"><%= activity_status city.status %></td>
           <td>

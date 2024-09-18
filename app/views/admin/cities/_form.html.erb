@@ -9,12 +9,19 @@
           <%= form.label :status, class: "form-check-label" %>
         </div>
       </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.region" %></span>
+        <%= form.collection_select :region_id, @regions, :id, :full_name, { include_blank: false, selected: @city.region_id }, { class: "form-select select2" } %>
+      </div>
+
       <div class="input-group mb-4 mb-3">
         <span class="input-group-text justify-content-end"><%= t "crud.table.name" %></span>
         <%= form.text_field :name, class: "form-control", placeholder: t("placeholders.cities.name"), required: true %>
         <div class="invalid-feedback"><%= t "validation.invalid.name" %></div>
         <div class="valid-feedback"><%= t "validation.valid" %></div>
       </div>
+
       <div class="input-group mb-4 mb-3">
         <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.district" %></span>
         <%= form.collection_select :district_ids, @districts, :id, :full_name, { include_blank: false, selected: @city.district_ids }, { class: "form-select select2", multiple: true } %>
