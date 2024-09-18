@@ -205,6 +205,7 @@ ru:
   admin_contacts: "Контакты"
   admin_realty_categories: "Категории недвижимости"
   admin_countries: "Страны"
+  admin_regions: "Регионы"
   admin_cities: "Города"
   admin_districts: "Районы"
   admin_streets: "Улицы"
@@ -378,6 +379,21 @@ ru:
     destroy:
       success: "Данные страны успешно удалены"
 
+  regions:
+    list_region_title: "Список регионов"
+    new_region: "Новый регион"
+    show_region_title: "Просмотр данных региона"
+    new_region_title: "Добавить новый регион"
+    edit_region_title: "Изменить данные региона"
+    create:
+      success: "Регион успешно добавлен"
+      error: "Ошибка добавления региона"
+    update:
+      success: "Данные региона успешно изменены"
+      error: "Ошибка изменения данных региона"
+    destroy:
+      success: "Данные региона успешно удалены"
+
   cities:
     new_city: "Новый город"
     show_city_title: "Просмотр данных города"
@@ -508,6 +524,11 @@ ru:
     new_country: "Новая страна"
     edit_country: "Изменение страны"
 
+    regions: "Регионы"
+    show_region: "Данные региона"
+    new_region: "Новый регион"
+    edit_region: "Изменение региона"
+
     cities: "Города"
     show_city: "Данные города"
     new_city: "Новый город"
@@ -543,7 +564,8 @@ ru:
       last_name: "Фамилия"
       first_name: "Имя"
       patronymic_name: "Отчество"
-      full_name: "Фамилия Имя Отчество"
+      user:
+        full_name: "Фамилия Имя Отчество"
       job_title: "Должность"
       phone: "Телефон"
       phone_short: "Телефон"
@@ -623,9 +645,13 @@ ru:
       condition: "Состояние"
       communication_method: "Способ связи"
       localized_name: "Локализованное имя"
+      localized_name_short: "Локализованное имя (сокр.)"
       currency_code: "Код валюты"
       currency_symbol: "Символ валюты"
       regions: "Регионы"
+      country: "Страна"
+      cities: "Города"
+      full_name: "Полное наименование"
       messages:
         category: "Тип"
       meta:
@@ -662,6 +688,8 @@ ru:
       localized_name: "Пожалуйста введите локализованное имя"
       currency_code: "Пожалуйста введите код валюты"
       currency_symbol: "Пожалуйста введите символ валюты"
+      full_name: "Полное наименование"
+      localized_name_short: "Пожалуйста введите локализованное имя (сокр.)"
     valid: "Заполнено!"
 
   placeholders:
@@ -693,6 +721,11 @@ ru:
       localized_name: "Russia"
       currency_code: "RUB"
       currency_symbol: "&#8381;"
+    regions:
+      name: "Мурманская область"
+      full_name: "Полное наименование"
+      localized_name: "область"
+      localized_name_short: "обл."
     cities:
       name: "Мурманск"
     districts:

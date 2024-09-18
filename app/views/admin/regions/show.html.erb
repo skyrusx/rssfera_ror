@@ -1,0 +1,47 @@
+<div class="page-subtitle-box d-flex justify-content-between">
+  <h4><%= t "regions.show_region_title" %></h4>
+  <div class="link-group mb-4">
+    <%= link_to edit_admin_region_path(@region.id), class: "text-light" do %>
+      <i class="bi bi-pencil-square"></i>
+    <% end %>
+    <%= link_to admin_region_path(@region.id), data: { turbo_method: "delete", turbo_confirm: t("crud.table.confirm") }, class: "text-light" do %>
+      <i class="bi bi-trash3"></i>
+    <% end %>
+  </div>
+</div>
+
+<div class="admin-crud countries">
+  <div class="row country__data">
+    <div class="col-lg-9">
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.country" %></div>
+        <div class="field-value"><%= @region.country.name %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.full_name" %></div>
+        <div class="field-value"><%= @region.full_name %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.name" %></div>
+        <div class="field-value"><%= @region.name %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.localized_name" %></div>
+        <div class="field-value"><%= @region.localized_name %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.localized_name_short" %></div>
+        <div class="field-value"><%= @region.localized_name_short %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.cities" %></div>
+        <div class="field-value"><%= list_objects @region.cities.pluck(:full_name) %></div>
+      </div>
+    </div>
+  </div>
+</div>
