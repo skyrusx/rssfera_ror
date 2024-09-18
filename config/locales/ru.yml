@@ -204,6 +204,7 @@ ru:
   admin_social_links: "Социальные сети"
   admin_contacts: "Контакты"
   admin_realty_categories: "Категории недвижимости"
+  admin_countries: "Страны"
   admin_cities: "Города"
   admin_districts: "Районы"
   admin_streets: "Улицы"
@@ -362,6 +363,21 @@ ru:
     destroy:
       success: "Данные категории недвижимости успешно удалены"
 
+  countries:
+    list_country_title: "Список стран"
+    new_country: "Новая страна"
+    show_country_title: "Просмотр данных страны"
+    new_country_title: "Добавить новую страну"
+    edit_country_title: "Изменить данные страны"
+    create:
+      success: "Страна успешно добавлена"
+      error: "Ошибка добавления страны"
+    update:
+      success: "Данные страны успешно изменены"
+      error: "Ошибка изменения данных страны"
+    destroy:
+      success: "Данные страны успешно удалены"
+
   cities:
     new_city: "Новый город"
     show_city_title: "Просмотр данных города"
@@ -487,6 +503,11 @@ ru:
     new_realty_category: "Новая категория недвижимости"
     edit_realty_category: "Изменение категории недвижимости"
 
+    countries: "Страны"
+    show_country: "Данные страны"
+    new_country: "Новая страна"
+    edit_country: "Изменение страны"
+
     cities: "Города"
     show_city: "Данные города"
     new_city: "Новый город"
@@ -601,6 +622,10 @@ ru:
       floors: "Количество этажей"
       condition: "Состояние"
       communication_method: "Способ связи"
+      localized_name: "Локализованное имя"
+      currency_code: "Код валюты"
+      currency_symbol: "Символ валюты"
+      regions: "Регионы"
       messages:
         category: "Тип"
       meta:
@@ -634,6 +659,9 @@ ru:
       location: "Пожалуйста введите местоположение"
       price: "Пожалуйста укажите цену"
       position: "Пожалуйста укажите позицию"
+      localized_name: "Пожалуйста введите локализованное имя"
+      currency_code: "Пожалуйста введите код валюты"
+      currency_symbol: "Пожалуйста введите символ валюты"
     valid: "Заполнено!"
 
   placeholders:
@@ -660,6 +688,11 @@ ru:
     realty_categories:
       name: "Аренда"
       slug: "arenda"
+    countries:
+      name: "Россия"
+      localized_name: "Russia"
+      currency_code: "RUB"
+      currency_symbol: "&#8381;"
     cities:
       name: "Мурманск"
     districts:
@@ -708,9 +741,10 @@ ru:
       send: "Отправить"
       send_request: "Отправить заявку"
       get_consultation: "Получить консультацию"
+      search: "Поиск"
 
     breadcrumbs:
       rents: "Снять недвижимость"
       rents_out: "Сдать недвижимость"
       sells: "Продать"
-      sells_search_buyers: "Подбор покупателей"
+      sells_search_buyers: "Заявки на покупку недвижимости"

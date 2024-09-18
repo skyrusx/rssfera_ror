@@ -1,0 +1,40 @@
+<%= form_with model: @country, url: url_form, html: { class: "admin-crud countries needs-validation", novalidate: true } do |form| %>
+  <div class="row">
+    <div class="col-lg-9">
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.name" %></span>
+        <%= form.text_field :name, class: "form-control", placeholder: t("placeholders.countries.name"), required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.name" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.localized_name" %></span>
+        <%= form.text_field :localized_name, class: "form-control", placeholder: t("placeholders.countries.localized_name"), required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.localized_name" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.currency_code" %></span>
+        <%= form.text_field :currency_code, class: "form-control", placeholder: t("placeholders.countries.currency_code"), required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.currency_code" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.currency_symbol" %></span>
+        <%= form.text_field :currency_symbol, class: "form-control", placeholder: t("placeholders.countries.currency_symbol"), required: true %>
+        <div class="invalid-feedback"><%= t "validation.invalid.currency_symbol" %></div>
+        <div class="valid-feedback"><%= t "validation.valid" %></div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.regions" %></span>
+        <%= form.collection_select :region_ids, @regions, :id, :full_name, { include_blank: false, selected: @country.region_ids }, { class: "form-select select2", multiple: true } %>
+      </div>
+    </div>
+  </div>
+
+  <%= form.submit t("crud.table.save_button"), class: "btn btn-light" %>
+<% end %>

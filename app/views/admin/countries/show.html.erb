@@ -1,0 +1,42 @@
+<div class="page-subtitle-box d-flex justify-content-between">
+  <h4><%= t "countries.show_country_title" %></h4>
+  <div class="link-group mb-4">
+    <%= link_to edit_admin_country_path(@country.id), class: "text-light" do %>
+      <i class="bi bi-pencil-square"></i>
+    <% end %>
+    <%= link_to admin_country_path(@country.id), data: { turbo_method: "delete", turbo_confirm: t("crud.table.confirm") }, class: "text-light" do %>
+      <i class="bi bi-trash3"></i>
+    <% end %>
+  </div>
+</div>
+
+<div class="admin-crud countries">
+  <div class="row country__data">
+    <div class="col-lg-9">
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.name" %></div>
+        <div class="field-value"><%= @country.name %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.localized_name" %></div>
+        <div class="field-value"><%= @country.localized_name %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.currency_code" %></div>
+        <div class="field-value"><%= @country.currency_code %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.currency_symbol" %></div>
+        <div class="field-value"><%= @country.currency_symbol.html_safe %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.regions" %></div>
+        <div class="field-value"><%= list_objects @country.regions.pluck(:full_name) %></div>
+      </div>
+    </div>
+  </div>
+</div>

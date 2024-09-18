@@ -1,0 +1,56 @@
+<div class="page-content__header d-flex justify-content-between">
+  <div class="page-subtitle-box d-flex align-items-center">
+    <h4><%= t "countries.list_country_title" %></h4>
+  </div>
+  <%= link_to new_admin_country_path, class: "btn btn-light" do %>
+    <i class="bi bi-plus"></i>
+    <%= t "countries.new_country" %>
+  <% end %>
+</div>
+
+<% if @countries.present? %>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col" class="text-center"><%= t "crud.table.id" %></th>
+        <th scope="col"><%= t "crud.table.name" %></th>
+        <th scope="col" class="text-center"><%= t "crud.table.localized_name" %></th>
+        <th scope="col" class="text-center"><%= t "crud.table.currency_code" %></th>
+        <th scope="col" class="text-center"><%= t "crud.table.currency_symbol" %></th>
+        <th scope="col" class="text-center"><%= t "crud.table.regions" %></th>
+        <th scope="col" colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @countries.each.with_index(1) do |country, index| %>
+        <tr>
+          <th scope="row" class="text-center"><%= index %></th>
+          <td><%= country.name %></td>
+          <td class="text-center"><%= country.localized_name %></td>
+          <td class="text-center"><%= country.currency_code %></td>
+          <td class="text-center"><%= country.currency_symbol.html_safe %></td>
+          <td class="text-center"><%= country.regions.size %></td>
+          <td>
+            <%= link_to admin_country_path(country.id), class: "text-light" do %>
+              <i class="bi bi-eye"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to edit_admin_country_path(country.id), class: "text-light" do %>
+              <i class="bi bi-pencil-square"></i>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to admin_country_path(country.id), data: { turbo_method: "delete", turbo_confirm: t("crud.table.confirm") }, class: "text-light" do %>
+              <i class="bi bi-trash3"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= render "admin/shared/pagination_info", collection: @countries, total: @total_countries %>
+<% else %>
+  <div class="alert alert-success text-center" role="alert"><%= t "crud.table.not_found" %></div>
+<% end %>
