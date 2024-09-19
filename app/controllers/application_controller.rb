@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
     @partners = Partner.active.sort_by { |partner| partner.position }
     @team_members = TeamMember.active.sort_by { |team_member| team_member.position }
 
-    realties = Realty.active.joins(:realty_category).where(realty_category: { name: "Продажа" })
+    realties = Realty.active.joins(:realty_category).where(realty_category: { slug: %w[buy rent] })
     total_entries = realties.size > 18 ? 18 : realties.size
     @realties = realties.paginate(page: params[:page], per_page: 6, total_entries: total_entries).order(created_at: :desc)
   end
