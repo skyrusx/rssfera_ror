@@ -28,10 +28,12 @@
             <div class="list-positions"><%= realty.location %></div>
           </td>
           <td class="text-center">
-            <div class="note"><%= format_price realty.price, "₽" %></div>
+            <div class="note">
+              <%= number_to_currency realty.price, unit: "₽", strip_insignificant_zeros: true %>
+            </div>
           </td>
           <td class="text-center">
-            <div class="note"><%= realty.type_object %></div>
+            <div class="note"><%= Realty::TYPES[realty.type_object.to_i] %></div>
           </td>
           <td class="text-center">
             <div class="note"><%= realty.realty_category.name %></div>

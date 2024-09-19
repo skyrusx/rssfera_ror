@@ -5,14 +5,18 @@ class Realty < ApplicationRecord
   belongs_to :district
   belongs_to :street
 
-  has_many_attached :photos
+  has_many_attached :photos do |attachable|
+    attachable.variant :medium, resize_to_limit: [800, 450]
+  end
+
+  after_create :fill_slug
 
   scope :active, -> { where(status: true) }
 
   TYPES = {
     1 => "Комната",
     2 => "Квартира",
-    3 => "Загородный дом",
+    3 => "Дом",
     4 => "Земельный участок",
     5 => "Коммерческая недвижимость",
     6 => "Гараж"
@@ -21,7 +25,7 @@ class Realty < ApplicationRecord
   MENU_TYPES = {
     1 => "Комнату",
     2 => "Квартиру",
-    3 => "Загородный дом",
+    3 => "Дом",
     4 => "Земельный участок",
     5 => "Коммерческую недвижимость",
     6 => "Гараж"
@@ -75,4 +79,12 @@ class Realty < ApplicationRecord
     2 => "WhatsApp",
     3 => "Telegram"
   }
+
+  private
+
+  def fill_slug
+    slug = [self.realty_category_id, self.team_member_id, self.city_id, self.district_id, self.street_id].compact.join("")
+    self.slug = [slug, self.id].join("-")
+    self.save
+  end
 end

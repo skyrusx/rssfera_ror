@@ -1,4 +1,7 @@
+<% @realty_id = @realty.id.nil? ? Realty.pluck(:id).max + 1 : @realty.id %>
+
 <%= form_with model: @realty, url: url_form, html: { class: "admin-crud realties needs-validation", novalidate: true } do |form| %>
+  <%= form.hidden_field :id, value: @realty_id %>
   <% @realty.photos.each do |photo| %>
     <%= form.hidden_field :photos, multiple: true, value: photo.signed_id, id: nil %>
   <% end %>
@@ -55,6 +58,8 @@
         <div class="input-group">
           <span class="input-group-text justify-content-end"><%= t "crud.table.slug_short" %></span>
           <%= form.text_field :slug, class: "form-control", placeholder: t("placeholders.realties.slug"), required: true %>
+          <span id="realty-slug" class="btn btn-light"><%= t "crud.table.generate" %></span>
+
           <div class="invalid-feedback"><%= t "validation.invalid.slug" %></div>
           <div class="valid-feedback"><%= t "validation.valid" %></div>
         </div>
@@ -63,7 +68,7 @@
 
       <div class="input-group mb-4 mb-3">
         <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.type_object" %></span>
-        <%= form.select :type_object, Realty::TYPES.values, { include_blank: true, selected: @realty.type_object }, { class: "form-select select2" } %>
+        <%= form.select :type_object, Realty::TYPES.map { |key, value| [value, key] }, { include_blank: true, selected: @realty.type_object }, { class: "form-select select2" } %>
       </div>
 
       <div class="input-group mb-4 mb-3">
@@ -78,7 +83,7 @@
 
       <div class="input-group mb-4 mb-3">
         <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.city" %></span>
-        <%= form.collection_select :city_id, @cities, :id, :name, { include_blank: true, selected: @realty.city_id }, { class: "form-select select2", required: true } %>
+        <%= form.collection_select :city_id, @cities, :id, :full_name, { include_blank: true, selected: @realty.city_id }, { class: "form-select select2", required: true } %>
         <div class="invalid-feedback"><%= t "validation.invalid.city" %></div>
         <div class="valid-feedback"><%= t "validation.valid" %></div>
       </div>
@@ -98,22 +103,20 @@
       </div>
 
       <div class="input-group mb-4 mb-3">
-        <span class="input-group-text justify-content-end"><%= t "crud.table.location" %></span>
-        <%= form.text_field :location, class: "form-control", placeholder: t("placeholders.location"), required: true %>
-        <div class="invalid-feedback"><%= t "validation.invalid.location" %></div>
-        <div class="valid-feedback"><%= t "validation.valid" %></div>
-      </div>
-
-      <div class="input-group mb-4 mb-3">
         <span class="input-group-text justify-content-end"><%= t "crud.table.price" %></span>
-        <%= form.text_field :price, class: "form-control", placeholder: t("placeholders.realties.price"), required: true %>
+        <%= form.text_field :price, class: "form-control price-item", placeholder: t("placeholders.realties.price"), required: true %>
         <div class="invalid-feedback"><%= t "validation.invalid.price" %></div>
         <div class="valid-feedback"><%= t "validation.valid" %></div>
       </div>
 
-      <div class="input-group mb-4 mb-3">
-        <span class="input-group-text justify-content-end"><%= t "crud.table.payments" %></span>
-        <%= form.text_field :payments, class: "form-control", placeholder: t("placeholders.realties.payments"), required: true %>
+      <div class="mb-4 mb-3">
+        <div class="input-group">
+          <span class="input-group-text justify-content-end"><%= t "crud.table.payments" %></span>
+          <%= form.text_field :payments, class: "form-control", placeholder: t("placeholders.realties.payments"), required: true %>
+          <span id="calculate-payments" class="btn btn-light"><%= t "crud.table.calculate" %></span>
+        </div>
+        <div class="form-text"><%= t "hint.realty_payments.sale" %></div>
+        <div class="form-text"><%= t "hint.realty_payments.rent" %></div>
       </div>
 
       <div class="input-group mb-4 mb-3">
@@ -124,27 +127,85 @@
         <%= tinymce %>
       </div>
 
-      <div class="mb-4 mb-3 schedule">
+      <div class="mb-4 mb-3">
         <div class="input-group">
           <span class="input-group-text w-100"><%= t "crud.table.specifications" %></span>
         </div>
 
-        <% prev_section = "" %>
-        <% @specifications.each do |key, data| %>
-          <% unless prev_section == data["section"] %>
-            <div class="input-group">
-              <%= text_field_tag "specs[#{key}][section]", @specifications[key]["section"], class: "form-control input-group-text w-100" %>
-            </div>
-          <% end %>
+        <div class="input-group">
+          <span class="input-group-text justify-content-end"><%= t "crud.table.total_area" %></span>
+          <%= form.text_field :total_area, class: "form-control", placeholder: t("placeholders.realties.total_area") %>
+        </div>
 
-          <div class="input-group">
-            <%= text_field_tag "specs[#{key}][field]", @specifications[key]["field"], class: "form-control" %>
-            <%= text_field_tag "specs[#{key}][value]", @specifications[key]["value"], class: "form-control" %>
+        <div class="input-group">
+          <span class="input-group-text justify-content-end"><%= t "crud.table.living_area" %></span>
+          <%= form.text_field :living_area, class: "form-control", placeholder: t("placeholders.realties.living_area") %>
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-text justify-content-end"><%= t "crud.table.kitchen_area" %></span>
+          <%= form.text_field :kitchen_area, class: "form-control", placeholder: t("placeholders.realties.kitchen_area") %>
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-text justify-content-end"><%= t "crud.table.floor" %></span>
+          <%= form.text_field :floor, class: "form-control", placeholder: t("placeholders.realties.floor") %>
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-text justify-content-end"><%= t "crud.table.floors" %></span>
+          <%= form.text_field :floors, class: "form-control", placeholder: t("placeholders.realties.floors") %>
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-text justify-content-end"><%= t "crud.table.number_rooms" %></span>
+          <%= form.text_field :number_rooms, class: "form-control", placeholder: t("placeholders.realties.number_rooms") %>
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-text justify-content-end"><%= t "crud.table.layout" %></span>
+          <%= form.text_field :layout, class: "form-control", placeholder: t("placeholders.realties.layout") %>
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-text justify-content-end"><%= t "crud.table.house" %></span>
+          <%= form.text_field :house, class: "form-control", placeholder: t("placeholders.realties.house") %>
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-text justify-content-end"><%= t "crud.table.flat" %></span>
+          <%= form.text_field :flat, class: "form-control", placeholder: t("placeholders.realties.flat") %>
+        </div>
+
+        <div class="input-group">
+          <div class="input-group-text checkbox status">
+            <%= form.check_box :balcony, class: "form-check-input mt-0", required: false %>
+            <%= form.label :balcony, class: "form-check-label" %>
           </div>
-
-          <% prev_section = data["section"] %>
-        <% end %>
+        </div>
       </div>
+
+<!--      <div class="mb-4 mb-3 schedule">-->
+<!--        <div class="input-group">-->
+<!--          <span class="input-group-text w-100"><%#= t "crud.table.specifications" %></span>-->
+<!--        </div>-->
+
+        <%# prev_section = "" %>
+        <%# @specifications.each do |key, data| %>
+          <%# unless prev_section == data["section"] %>
+<!--            <div class="input-group">-->
+              <%#= text_field_tag "specs[#{key}][section]", @specifications[key]["section"], class: "form-control input-group-text w-100" %>
+<!--            </div>-->
+          <%# end %>
+
+<!--          <div class="input-group">-->
+            <%#= text_field_tag "specs[#{key}][field]", @specifications[key]["field"], class: "form-control" %>
+            <%#= text_field_tag "specs[#{key}][value]", @specifications[key]["value"], class: "form-control" %>
+<!--          </div>-->
+
+          <%# prev_section = data["section"] %>
+        <%# end %>
+<!--      </div>-->
     </div>
 
     <div class="col-lg-3"></div>

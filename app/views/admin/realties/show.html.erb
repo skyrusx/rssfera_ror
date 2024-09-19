@@ -18,10 +18,10 @@
         <div class="field-value"><%= activity_status @realty.status, true %></div>
       </div>
 
-      <div class="mb-4 mb-3 d-flex field">
-        <div class="field-name justify-content-end"><%= t "crud.table.photos" %></div>
-        <div class="field-value info">
-          <% if @realty.photos.attached? %>
+      <% if @realty.photos.attached? %>
+        <div class="mb-4 mb-3 d-flex field">
+          <div class="field-name justify-content-end"><%= t "crud.table.photos" %></div>
+          <div class="field-value info">
             <div id="photos" class="carousel slide">
               <div class="carousel-indicators">
                 <% (0..@realty.photos.size-1).each do |index| %>
@@ -48,9 +48,9 @@
                 <span class="visually-hidden">Next</span>
               </button>
             </div>
-          <% end %>
+          </div>
         </div>
-      </div>
+      <% end %>
 
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.name" %></div>
@@ -64,7 +64,7 @@
 
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.type_object" %></div>
-        <div class="field-value"><%= @realty.type_object %></div>
+        <div class="field-value"><%= Realty::TYPES[@realty.type_object.to_i] %></div>
       </div>
 
       <div class="mb-4 mb-3 d-flex field">
@@ -74,52 +74,106 @@
 
       <div class="input-group mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.city_district_street" %></div>
-        <div class="field-value"><%= @realty.city.name %></div>
-        <div class="field-value"><%= @realty.district.name %></div>
-        <div class="field-value"><%= @realty.street.name %></div>
-      </div>
-
-      <div class="mb-4 mb-3 d-flex field">
-        <div class="field-name justify-content-end"><%= t "crud.table.location" %></div>
-        <div class="field-value"><%= @realty.location %></div>
+        <div class="field-value"><%= [@realty.city.localized_name_short, @realty.city.name].join(" ") %></div>
+        <div class="field-value"><%= [@realty.district.localized_name_short, @realty.district.name].join(" ") %></div>
+        <div class="field-value"><%= [@realty.street.localized_name_short, @realty.street.name].join(" ") %></div>
       </div>
 
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.price" %></div>
-        <div class="field-value"><%= price_data @realty.price, @realty.realty_category.name %></div>
+        <div class="field-value"><%= realty_price(@realty) %></div>
       </div>
 
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.payments" %></div>
-        <div class="field-value"><%= payment_data @realty.payments, @realty.realty_category.name %></div>
+        <div class="field-value"><%= @realty.payments %></div>
       </div>
 
       <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.description" %></div>
-        <div class="field-value info"><%= @realty.description.html_safe %></div>
+        <div class="field-value info"><%= @realty.description&.html_safe %></div>
       </div>
 
-      <div class="mb-4 mb-3 specifications">
+
+      <div class="mb-4 mb-3">
         <div class="input-group">
           <span class="input-group-text w-100"><%= t "crud.table.specifications" %></span>
         </div>
 
-        <% prev_section = "" %>
-        <% @realty.specifications.each do |key, field| %>
-          <% unless prev_section == field["section"] %>
-            <div class="input-group">
-              <span class="input-group-text w-100"><%= field["section"] %></span>
-            </div>
-          <% end %>
+        <div class="d-flex field">
+          <span class="field-name justify-content-end"><%= t "crud.table.total_area" %></span>
+          <div class="field-value"><%= realty_square(@realty.total_area) %></div>
+        </div>
 
-          <div class="d-flex field">
-            <span class="input-group-text justify-content-end"><%= field["field"] %></span>
-            <div class="field-value"><%= field["value"] %></div>
+        <div class="d-flex field">
+          <span class="field-name justify-content-end"><%= t "crud.table.living_area" %></span>
+          <div class="field-value"><%= realty_square(@realty.living_area) %></div>
+        </div>
+
+        <div class="d-flex field">
+          <span class="field-name justify-content-end"><%= t "crud.table.kitchen_area" %></span>
+          <div class="field-value"><%= realty_square(@realty.kitchen_area) %></div>
+        </div>
+
+        <div class="d-flex field">
+          <span class="field-name justify-content-end"><%= t "crud.table.floor" %></span>
+          <div class="field-value"><%= @realty.floor %></div>
+        </div>
+
+        <div class="d-flex field">
+          <span class="field-name justify-content-end"><%= t "crud.table.floors" %></span>
+          <div class="field-value"><%= @realty.floors %></div>
+        </div>
+
+        <div class="d-flex field">
+          <span class="field-name justify-content-end"><%= t "crud.table.number_rooms" %></span>
+          <div class="field-value"><%= @realty.number_rooms %></div>
+        </div>
+
+        <div class="d-flex field">
+          <span class="field-name justify-content-end"><%= t "crud.table.layout" %></span>
+          <div class="field-value"><%= @realty.layout %></div>
+        </div>
+
+        <div class="d-flex field">
+          <span class="field-name justify-content-end"><%= t "crud.table.balcony" %></span>
+          <div class="field-value"><%= available_value(@realty.balcony) %></div>
+        </div>
+
+        <div class="d-flex field">
+          <span class="field-name justify-content-end"><%= t "crud.table.house" %></span>
+          <div class="field-value"><%= @realty.house %></div>
+        </div>
+
+        <div class="d-flex field">
+          <span class="field-name justify-content-end"><%= t "crud.table.flat" %></span>
+          <div class="field-value"><%= @realty.flat %></div>
+        </div>
+      </div>
+
+      <% unless @realty.specifications.kind_of?(String) %>
+        <div class="mb-4 mb-3 specifications">
+          <div class="input-group">
+            <span class="input-group-text w-100"><%= t "crud.table.specifications" %></span>
           </div>
 
-          <% prev_section = field["section"] %>
-        <% end %>
-      </div>
+          <% prev_section = "" %>
+          <% @realty.specifications.each do |key, field| %>
+            <% unless prev_section == field["section"] %>
+              <div class="input-group">
+                <span class="input-group-text w-100"><%= field["section"] %></span>
+              </div>
+            <% end %>
+
+            <div class="d-flex field">
+              <span class="input-group-text justify-content-end"><%= field["field"] %></span>
+              <div class="field-value"><%= field["value"] %></div>
+            </div>
+
+            <% prev_section = field["section"] %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
 
     <div class="col-lg-3">
