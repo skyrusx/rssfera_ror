@@ -28,5 +28,7 @@ class Message < ApplicationRecord
     rents_out: "на размещение недвижимости в аренду на сайте",
     sells: "на консультацию",
     sells_realty: "на продажу недвижимости",
+    sells_request: "на подбор недвижимости для клиента",
+    realties_call: "на звонок"
   }
 end
