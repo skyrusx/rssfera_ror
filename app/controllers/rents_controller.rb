@@ -3,6 +3,10 @@ class RentsController < ApplicationController
 
   def index
     add_breadcrumb I18n.t("app.breadcrumbs.rents"), :rents_path
+
+    @message = Message.new
+    @category = RealtyCategory.find_by(slug: "rent")
+    @realties = Realty.active.where(realty_category_id: @category.id).order(:created_at)
   end
 
   def out
