@@ -28,7 +28,7 @@
 
               <div class="mb-3">
                 <%= label_tag "fields[0][type_realty]", "Тип недвижимости", class: "form-label" %>
-                <%= select_tag "fields[0][type_realty]", options_for_select(Realty::TYPES.values, @current_realty), include_blank: false, class: "form-select", prompt: "Выбрать", required: true %>
+                <%= select_tag "fields[0][type_realty]", options_for_select(Realty::TYPES.values, @current_realty_type), include_blank: false, class: "form-select", prompt: "Выбрать", required: true %>
                 <div class="invalid-feedback">Пожалуйста укажите тип недвижимости</div>
                 <div class="valid-feedback">Заполнено!</div>
               </div>
