@@ -6,7 +6,21 @@ module ApplicationHelper
   end
 
   def meta_data
-    Setting.find_by(page: controller_name)
+    if controller_name == "realties"
+      realty = Realty.find_by(slug: params[:slug])
+      page_name = realty.realty_category.slug == "rent" ? "Аренда недвижимости" : "Продажа недвижимости"
+      settings_params = {
+        page: "realties",
+        page_name: page_name,
+        meta_title: realty.name,
+        meta_keywords: "",
+        meta_description: ""
+      }
+
+      Setting.create(settings_params)
+    else
+      Setting.find_by(page: controller_name)
+    end
   end
 
   def link_active_class(link_path)
