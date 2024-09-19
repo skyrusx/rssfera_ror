@@ -9,7 +9,11 @@
     <div class="details-wrapper bg-white">
       <div class="row">
         <div class="col-lg-3 col-12">
-          <%= image_tag @team_member.photo.variant(:full), class: "img-thumbnail", alt: @team_member.whole_name %>
+          <% if @team_member.photo.attached? %>
+            <%= image_tag @team_member.photo.variant(:full), class: "img-thumbnail", alt: @team_member.whole_name %>
+          <% else %>
+            <%= image_tag "team-placeholder.png", class: "img-thumbnail preview" %>
+          <% end %>
         </div>
 
         <div class="col-lg-9 col-12">
@@ -108,33 +112,39 @@
 
                         <div class="<%= carousel_classes %>">
                           <div class="row">
-                            <% objects.each do |object| %>
+                            <% objects.each do |realty| %>
                               <div class="object col-lg-6">
                                 <div class="card">
-                                  <%= link_to "#" do %>
-                                    <%= image_tag object.photos.first, class: "d-block w-100", alt: object.name %>
+                                  <%= link_to realty_href(realty) do %>
+                                    <% if realty.photos.attached? %>
+                                      <%= image_tag realty.photos.first, class: "d-block w-100", alt: realty.name %>
+                                    <% else %>
+                                      <%= image_tag "realty-placeholder.png", class: "d-block w-100", alt: realty.name %>
+                                    <% end %>
                                   <% end %>
                                   <div class="card-body">
                                     <span class="card-price">
-                                      <%= realty_price(price: object.price, type: object.realty_category.name) %>
+                                      <%= realty_price(realty) %>
                                     </span>
                                     <h5 class="card-title">
-                                      <%= link_to object.name, "#" %>
+                                      <%= link_to_realty(realty) %>
                                     </h5>
                                     <div class="card-text">
                                       <small class="card-location">
                                         <i class="bi bi-geo-alt-fill"></i>
-                                        <%= object.location %>
+                                        <%= realty_location realty %>
                                       </small>
-                                      <div class="card-description"><%= object.description.html_safe %></div>
+                                      <% if realty.payments.present? %>
+                                        <small class="additional-payments">
+                                          <%= realty.payments %>
+                                        </small>
+                                      <% end %>
+                                      <div class="card-description">
+                                        <%= realty.description&.html_safe %>
+                                      </div>
                                     </div>
                                   </div>
-                                  <div class="card-footer text-body-secondary">
-                                    <% object_footer = realty_footer(object.specifications) %>
-                                    <div class="num-rooms"><span>Комнаты:</span> <%= object_footer[:rooms] %></div>
-                                    <div class="square"><span>Площадь:</span> <%= object_footer[:square] %></div>
-                                    <div class="floor-info"><span>Этаж:</span> <%= object_footer[:floor] %></div>
-                                  </div>
+                                  <%= realty_footer(realty) %>
                                 </div>
                               </div>
                             <% end %>

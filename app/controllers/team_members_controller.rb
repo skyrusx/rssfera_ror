@@ -10,7 +10,7 @@ class TeamMembersController < ApplicationController
   def show
     @team_member = TeamMember.find_by_slug(params[:slug])
 
-    @realties = @team_member.realties.active.group_by(&:type_object).to_h
+    @realties = @team_member.realties.active.joins(:realty_category).where(realty_category: { slug: %w[buy rent] }).group_by(&:type_object).to_h
     count_all_objects = @realties.map { |_, values| values.size }.sum
     content_objects = @realties.map { |_, values| values }.flatten
     @realty_data = {
@@ -19,6 +19,7 @@ class TeamMembersController < ApplicationController
     }
 
     @realties.each do |type, objects|
+      type = Realty::TYPES[type.to_i]
       @realty_data[:tabs] << { id: type.parameterize, name: type, count: objects.size }
       @realty_data[:contents] << { id: type.parameterize, objects: objects }
     end
