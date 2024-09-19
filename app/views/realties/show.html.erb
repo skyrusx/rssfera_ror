@@ -1,0 +1,424 @@
+<section class="rent-page bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <%= render "application/shared/breadcrumbs" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-9 rent-details">
+        <% if @realty.photos.attached? %>
+          <div class="rent-gallery bg-white">
+            <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true">
+              <% @realty.photos.each do |image| %>
+                <%= link_to image do %>
+                  <%= image_tag image.variant(:medium), alt: @realty.name %>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="rent-info bg-white">
+          <div class="object-info">
+            <div class="main-left">
+              <h3><%= @realty.name %></h3>
+              <div class="object-address">
+                <i class="bi bi-geo-alt-fill"></i>
+                <%= realty_location @realty %>
+              </div>
+            </div>
+            <div class="main-right text-end">
+              <h3><%= realty_price(@realty) %></h3>
+              <div class="object-payments"><%= @realty.payments %></div>
+            </div>
+          </div>
+        </div>
+
+        <% if @realty.description.present? %>
+          <div class="rent-about bg-white">
+            <h3>Описание</h3>
+            <%= @realty.description.html_safe %>
+          </div>
+        <% end %>
+
+        <div class="rent-params bg-white">
+          <h3>Характеристики</h3>
+
+          <h5>Общие</h5>
+          <ul class="list-none">
+            <li class="d-flex justify-content-between align-items-center mb-1">
+              <div class="title">Код объекта</div>
+              <div class="desc"><%= @realty.slug %></div>
+            </li>
+            <% if @realty.total_area.present? && @realty.total_area.nonzero? %>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Общая площадь</div>
+                <div class="desc"><%= realty_square(@realty.total_area) %></div>
+              </li>
+            <% end %>
+            <% if @realty.living_area.present? && @realty.living_area.nonzero? %>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Жилая площадь</div>
+                <div class="desc"><%= realty_square(@realty.living_area) %></div>
+              </li>
+            <% end %>
+            <% if @realty.kitchen_area.present? && @realty.kitchen_area.nonzero? %>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Площадь кухни</div>
+                <div class="desc"><%= realty_square(@realty.kitchen_area) %></div>
+              </li>
+            <% end %>
+            <% if @realty.floor.present? && @realty.floors.present? %>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Этаж / Этажность</div>
+                <div class="desc"><%= @realty.floor %> из <%= @realty.floors %></div>
+              </li>
+            <% end %>
+            <% if @realty.number_rooms.present? && @realty.number_rooms.nonzero? %>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Комнатность</div>
+                <div class="desc"><%= @realty.number_rooms %>-комн.</div>
+              </li>
+            <% end %>
+            <% if @realty.layout.present? %>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Планировка</div>
+                <div class="desc"><%= @realty.layout %></div>
+              </li>
+            <% end %>
+            <li class="d-flex justify-content-between align-items-center mb-1">
+              <div class="title">Балкон</div>
+              <div class="desc"><%= available_value @realty.balcony %></div>
+            </li>
+          </ul>
+
+          <% unless @realty.specifications.kind_of?(String) %>
+            <h5>О квартире</h5>
+            <ul class="list-none">
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Код объекта</div>
+                <div class="desc">3755615</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Комнатность</div>
+                <div class="desc">2-комн.</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Общая площадь</div>
+                <div class="desc">46.14 м<sup>2</sup></div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Площадь кухни</div>
+                <div class="desc">5 м<sup>2</sup></div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Ремонт</div>
+                <div class="desc">Современный ремонт</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Количество спален</div>
+                <div class="desc">1</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Санузел</div>
+                <div class="desc">Совмещенный</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Подключённые сервисы</div>
+                <div class="desc">Интернет, кабельное телевидение</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Материал окон</div>
+                <div class="desc">Пластиковые</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Кондиционер</div>
+                <div class="desc">Есть</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Кровать</div>
+                <div class="desc">Есть</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Диван</div>
+                <div class="desc">Есть</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Телевизор</div>
+                <div class="desc">Есть</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Микроволновка</div>
+                <div class="desc">Есть</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Холодильник</div>
+                <div class="desc">Есть</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Плита</div>
+                <div class="desc">Электрическая</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Кухонный гарнитур</div>
+                <div class="desc">Есть</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Кухонный стол</div>
+                <div class="desc">Есть</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Стулья</div>
+                <div class="desc">Есть</div>
+              </li>
+            </ul>
+            <h5>О доме</h5>
+            <ul class="list-none">
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Год постройки</div>
+                <div class="desc">2013</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Этаж / Этажность</div>
+                <div class="desc">3 из 12</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Стены</div>
+                <div class="desc">Монолитные</div>
+              </li>
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Лифт</div>
+                <div class="desc">Пассажирский и грузовой</div>
+              </li>
+            </ul>
+            <h5>Подъезд</h5>
+            <ul class="list-none">
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Колясочная</div>
+                <div class="desc">Есть</div>
+              </li>
+            </ul>
+            <h5>Двор</h5>
+            <ul class="list-none">
+              <li class="d-flex justify-content-between align-items-center mb-1">
+                <div class="title">Двор</div>
+                <div class="desc">Закрытый двор</div>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+
+        <div class="rent-map bg-white">
+          <h3>Инфраструктура района</h3>
+          <ul>
+            <li>Оцените уровень комфорта обустройства района</li>
+            <li>Узнайте расстояние и время до работы, школы или детского сада</li>
+          </ul>
+          <iframe id="map_952243389" frameborder="0" width="100%" height="280px" sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"></iframe>
+          <script type="text/javascript">(function (e, t) {
+              var r = document.getElementById(e);
+              r.contentWindow.document.open(), r.contentWindow.document.write(atob(t)), r.contentWindow.document.close()
+          })("map_952243389", "PGJvZHk+PHN0eWxlPgogICAgICAgIGh0bWwsIGJvZHkgewogICAgICAgICAgICBtYXJnaW46IDA7CiAgICAgICAgICAgIHBhZGRpbmc6IDA7CiAgICAgICAgfQogICAgICAgIGh0bWwsIGJvZHksICNtYXAgewogICAgICAgICAgICB3aWR0aDogMTAwJTsKICAgICAgICAgICAgaGVpZ2h0OiAxMDAlOwogICAgICAgIH0KICAgICAgICAuYnVsbGV0LW1hcmtlciB7CiAgICAgICAgICAgIHdpZHRoOiAyMHB4OwogICAgICAgICAgICBoZWlnaHQ6IDIwcHg7CiAgICAgICAgICAgIGJveC1zaXppbmc6IGJvcmRlci1ib3g7CiAgICAgICAgICAgIGJhY2tncm91bmQtY29sb3I6ICNmZmY7CiAgICAgICAgICAgIGJveC1zaGFkb3c6IDAgMXB4IDNweCAwIHJnYmEoMCwgMCwgMCwgMC4yKTsKICAgICAgICAgICAgYm9yZGVyOiA0cHggc29saWQgIzAyODFmMjsKICAgICAgICAgICAgYm9yZGVyLXJhZGl1czogNTAlOwogICAgICAgIH0KICAgICAgICAucGVybWFuZW50LXRvb2x0aXAgewogICAgICAgICAgICBiYWNrZ3JvdW5kOiBub25lOwogICAgICAgICAgICBib3gtc2hhZG93OiBub25lOwogICAgICAgICAgICBib3JkZXI6IG5vbmU7CiAgICAgICAgICAgIHBhZGRpbmc6IDZweCAxMnB4OwogICAgICAgICAgICBjb2xvcjogIzI2MjYyNjsKICAgICAgICB9CiAgICAgICAgLnBlcm1hbmVudC10b29sdGlwOmJlZm9yZSB7CiAgICAgICAgICAgIGRpc3BsYXk6IG5vbmU7CiAgICAgICAgfQogICAgICAgIC5kZy1wb3B1cF9oaWRkZW5fdHJ1ZSB7CiAgICAgICAgICAgIGRpc3BsYXk6IGJsb2NrOwogICAgICAgIH0KICAgICAgICAubGVhZmxldC1jb250YWluZXIgLmxlYWZsZXQtcG9wdXAgLmxlYWZsZXQtcG9wdXAtY2xvc2UtYnV0dG9uIHsKICAgICAgICAgICAgdG9wOiAwOwogICAgICAgICAgICByaWdodDogMDsKICAgICAgICAgICAgd2lkdGg6IDIwcHg7CiAgICAgICAgICAgIGhlaWdodDogMjBweDsKICAgICAgICAgICAgZm9udC1zaXplOiAyMHB4OwogICAgICAgICAgICBsaW5lLWhlaWdodDogMTsKICAgICAgICB9CiAgICA8L3N0eWxlPjxkaXYgaWQ9Im1hcCI+PC9kaXY+PHNjcmlwdCB0eXBlPSJ0ZXh0L2phdmFzY3JpcHQiIHNyYz0iaHR0cHM6Ly9tYXBzLmFwaS4yZ2lzLnJ1LzIuMC9sb2FkZXIuanM/cGtnPWZ1bGwmYW1wO3NraW49bGlnaHQiPjwvc2NyaXB0PjxzY3JpcHQ+KGZ1bmN0aW9uKGUpe3ZhciB0PUpTT04ucGFyc2UoZSkscj10Lm9yZGVyZWRHZW9tZXRyaWVzLG49dC5tYXBQb3NpdGlvbixhPXQuaXNXaGVlbFpvb21FbmFibGVkO2Z1bmN0aW9uIG8oZSl7cmV0dXJuIGRlY29kZVVSSUNvbXBvbmVudChhdG9iKGUpLnNwbGl0KCIiKS5tYXAoZnVuY3Rpb24oZSl7cmV0dXJuIiUiKygiMDAiK2UuY2hhckNvZGVBdCgwKS50b1N0cmluZygxNikpLnNsaWNlKC0yKX0pLmpvaW4oIiIpKX1ERy50aGVuKGZ1bmN0aW9uKCl7dmFyIGU9REcubWFwKCJtYXAiLHtjZW50ZXI6W24ubGF0LG4ubG9uXSx6b29tOm4uem9vbSxzY3JvbGxXaGVlbFpvb206YSx6b29tQ29udHJvbDohYX0pO0RHLmdlb0pTT04ocix7c3R5bGU6ZnVuY3Rpb24oZSl7dmFyIHQscixuLGEsbztyZXR1cm57ZmlsbENvbG9yOm51bGw9PT0odD1lKXx8dm9pZCAwPT09dD92b2lkIDA6dC5wcm9wZXJ0aWVzLmZpbGxDb2xvcixmaWxsT3BhY2l0eTpudWxsPT09KHI9ZSl8fHZvaWQgMD09PXI/dm9pZCAwOnIucHJvcGVydGllcy5maWxsT3BhY2l0eSxjb2xvcjpudWxsPT09KG49ZSl8fHZvaWQgMD09PW4/dm9pZCAwOm4ucHJvcGVydGllcy5zdHJva2VDb2xvcix3ZWlnaHQ6bnVsbD09PShhPWUpfHx2b2lkIDA9PT1hP3ZvaWQgMDphLnByb3BlcnRpZXMuc3Ryb2tlV2lkdGgsb3BhY2l0eTpudWxsPT09KG89ZSl8fHZvaWQgMD09PW8/dm9pZCAwOm8ucHJvcGVydGllcy5zdHJva2VPcGFjaXR5fX0scG9pbnRUb0xheWVyOmZ1bmN0aW9uKGUsdCl7cmV0dXJuInJhZGl1cyJpbiBlLnByb3BlcnRpZXM/REcuY2lyY2xlKHQsZS5wcm9wZXJ0aWVzLnJhZGl1cyk6REcubWFya2VyKHQse2ljb246ZnVuY3Rpb24oZSl7cmV0dXJuIERHLmRpdkljb24oe2h0bWw6IjxkaXYgY2xhc3M9J2J1bGxldC1tYXJrZXInIHN0eWxlPSdib3JkZXItY29sb3I6ICIrZSsiOyc+PC9kaXY+IixjbGFzc05hbWU6Im92ZXJyaWRlLWRlZmF1bHQiLGljb25TaXplOlsyMCwyMF0saWNvbkFuY2hvcjpbMTAsMTBdfSl9KGUucHJvcGVydGllcy5jb2xvcil9KX0sb25FYWNoRmVhdHVyZTpmdW5jdGlvbihlLHQpe2UucHJvcGVydGllcy5kZXNjcmlwdGlvbiYmdC5iaW5kUG9wdXAobyhlLnByb3BlcnRpZXMuZGVzY3JpcHRpb24pLHtjbG9zZUJ1dHRvbjohMCxjbG9zZU9uRXNjYXBlS2V5OiEwfSksZS5wcm9wZXJ0aWVzLnRpdGxlJiZ0LmJpbmRUb29sdGlwKG8oZS5wcm9wZXJ0aWVzLnRpdGxlKSx7cGVybWFuZW50OiEwLG9wYWNpdHk6MSxjbGFzc05hbWU6InBlcm1hbmVudC10b29sdGlwIn0pfX0pLmFkZFRvKGUpfSl9KSgneyJvcmRlcmVkR2VvbWV0cmllcyI6W3sidHlwZSI6IkZlYXR1cmUiLCJwcm9wZXJ0aWVzIjp7ImNvbG9yIjoiIzE5ODc1NCIsInRpdGxlIjoiTkMzUXV0QyswTHpRdlM0ZzBMclFzaTQ9IiwiZGVzY3JpcHRpb24iOiJQSEErTkMzUXV0QyswTHpRdlM0ZzBMclFzaTRnT0RrZzBMd3lJTkdOMFlMUXNOQzJJRFV2TlR3dmNENEtQSEErMExNdUlOQ2MwWVBSZ05DODBMRFF2ZEdCMExvc0lOQ2YwTDdRdTlHUDBZRFF2ZEdMMExVZzBKZlF2dEdBMExnc0lEUXhJTkM2MEw3UmdOQy8wWVBSZ1NBMFBDOXdQZ284Y0Q0ek1DQXdNREFnNG9LOUlDOGcwTElnMEx6UXRkR0IwWS9SaGp3dmNEND0iLCJ6SW5kZXgiOjEwMDAwMDAwMDB9LCJnZW9tZXRyeSI6eyJ0eXBlIjoiUG9pbnQiLCJjb29yZGluYXRlcyI6WzMzLjA5NjMyOCw2OC45NjQxMjNdfSwiaWQiOjQyNX1dLCJtYXBQb3NpdGlvbiI6eyJsYXQiOjY4Ljk2NDEzNzQ5NzY3ODU1LCJsb24iOjMzLjA5NzgzNjk3MTI4Mjk2Niwiem9vbSI6MTZ9LCJpc1doZWVsWm9vbUVuYWJsZWQiOnRydWV9Jyk8L3NjcmlwdD48c2NyaXB0IGFzeW5jPSIiIHR5cGU9InRleHQvamF2YXNjcmlwdCIgc3JjPSJodHRwczovL3d3dy5nb29nbGV0YWdtYW5hZ2VyLmNvbS9ndGFnL2pzP2lkPVVBLTE1ODg2NjE2OC0xIj48L3NjcmlwdD48c2NyaXB0IHR5cGU9InRleHQvamF2YXNjcmlwdCI+KGZ1bmN0aW9uKGUpe2Z1bmN0aW9uIHQoKXtkYXRhTGF5ZXIucHVzaChhcmd1bWVudHMpfXdpbmRvdy5kYXRhTGF5ZXI9d2luZG93LmRhdGFMYXllcnx8W10sdCgianMiLG5ldyBEYXRlKSx0KCJjb25maWciLGUpLHdpbmRvdy5ndGFnPXR9KSgnVUEtMTU4ODY2MTY4LTEnKTwvc2NyaXB0PjwvYm9keT4=")</script>
+        </div>
+
+        <div class="rent-other bg-white">
+          <h3>Вам может быть интересно</h3>
+          <div class="other-objects">
+            <ul class="nav nav-pills mb-3" id="objects-tab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="price-tab" data-bs-toggle="pill" data-bs-target="#price" type="button" role="tab" aria-controls="price" aria-selected="true">Похожие по цене</button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="location-tab" data-bs-toggle="pill" data-bs-target="#location" type="button" role="tab" aria-controls="location" aria-selected="false">Похожие по расположению</button>
+              </li>
+            </ul>
+
+            <div class="tab-content" id="pills-tabContent">
+              <div class="tab-pane fade show active" id="price" role="tabpanel" aria-labelledby="price-tab" tabindex="0">
+                <div class="by-price">
+                  <div class="scroll-objects row">
+                    <% @similar_realties[:by_price].each do |realty| %>
+                      <div class="object col-lg-4">
+                        <div class="card">
+                          <%= link_to realty_href(realty) do %>
+                            <div id="object<%= realty.id %>" class="carousel slide">
+                              <div class="carousel-inner">
+                                <% if realty.photos.attached? %>
+                                  <% realty.photos.each.with_index do |photo, index| %>
+                                    <% carousel_classes = index.zero? ? "carousel-item active" : "carousel-item" %>
+                                    <div class="<%= carousel_classes %>">
+                                      <%= image_tag photo, class: "d-block w-100", alt: realty.name %>
+                                    </div>
+                                  <% end %>
+                                <% else %>
+                                  <%= image_tag "realty-placeholder.png", class: "d-block w-100", alt: realty.name %>
+                                <% end %>
+                              </div>
+                              <% if realty.photos.attached? %>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#object<%= realty.id %>" data-bs-slide="prev">
+                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                  <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#object<%= realty.id %>" data-bs-slide="next">
+                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                  <span class="visually-hidden">Next</span>
+                                </button>
+                              <% end %>
+                            </div>
+                          <% end %>
+
+                          <div class="card-body">
+                            <span class="card-price"><%= realty_price(realty) %></span>
+                            <h5 class="card-title"><%= link_to_realty(realty) %></h5>
+                            <div class="card-text">
+                              <small class="card-location">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                <%= realty_location realty %>
+                              </small>
+                              <% if realty.payments.present? %>
+                                <small class="additional-payments">
+                                  <%= realty.payments %>
+                                </small>
+                              <% end %>
+                              <div class="card-description"><%= realty.description&.html_safe %></div>
+                            </div>
+                          </div>
+                          <%= realty_footer(realty) %>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tab-pane fade" id="location" role="tabpanel" aria-labelledby="location-tab" tabindex="0">
+                <div class="by-location">
+                  <div class="scroll-objects row">
+                    <% @similar_realties[:by_location].each do |realty| %>
+                      <div class="object col-lg-4">
+                        <div class="card">
+                          <%= link_to realty_href(realty) do %>
+                            <div id="object<%= realty.id %>" class="carousel slide">
+                              <div class="carousel-inner">
+                                <% if realty.photos.attached? %>
+                                  <% realty.photos.each.with_index do |photo, index| %>
+                                    <% carousel_classes = index.zero? ? "carousel-item active" : "carousel-item" %>
+                                    <div class="<%= carousel_classes %>">
+                                      <%= image_tag photo, class: "d-block w-100", alt: realty.name %>
+                                    </div>
+                                  <% end %>
+                                <% else %>
+                                  <%= image_tag "realty-placeholder.png", class: "d-block w-100", alt: realty.name %>
+                                <% end %>
+                              </div>
+                              <% if realty.photos.attached? %>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#object<%= realty.id %>" data-bs-slide="prev">
+                                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                  <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#object<%= realty.id %>" data-bs-slide="next">
+                                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                  <span class="visually-hidden">Next</span>
+                                </button>
+                              <% end %>
+                            </div>
+                          <% end %>
+                          <div class="card-body">
+                            <span class="card-price"><%= realty_price(realty) %></span>
+                            <h5 class="card-title"><%= link_to_realty(realty) %></h5>
+                            <div class="card-text">
+                              <small class="card-location">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                <%= realty_location realty %>
+                              </small>
+                              <% if realty.payments.present? %>
+                                <small class="additional-payments">
+                                  <%= realty.payments %>
+                                </small>
+                              <% end %>
+                              <div class="card-description"><%= realty.description&.html_safe %></div>
+                            </div>
+                          </div>
+                          <%= realty_footer(realty) %>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3">
+        <div class="agent-details bg-white">
+          <div class="card text-center">
+            <div class="agent-photo">
+              <%= link_to team_member_path(@team_member.slug) do %>
+                <% if @team_member.photo.attached? %>
+                  <%= image_tag @team_member.photo.variant(:thumb), alt: @team_member.whole_name %>
+                <% else %>
+                  <div class="no-photo">
+                    <%= @team_member.whole_name.split.map(&:first).join %>
+                  </div>
+                <% end %>
+                <% if @team_member.rating&.nonzero? %>
+                  <div class="rating text-center">
+                    <i class="bi bi-star-fill"></i>
+                    <%= @team_member.rating %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title agent-name">
+                <%= link_to @team_member.whole_name, team_member_path(@team_member.slug) %>
+              </h5>
+              <div class="contact-list">
+                <div class="info-item">
+                  <i class="bi bi-telephone-fill"></i>
+                  <%= link_phone(@team_member.phone) %>
+                </div>
+                <div class="info-item">
+                  <i class="bi bi-envelope"></i>
+                  <%= link_email(@team_member.email) %>
+                </div>
+              </div>
+
+              <% if flash.key?("request") %>
+                <%= render "application/shared/flash_messages", exclude: "request" %>
+              <% else %>
+                <p class="card-text">или оставьте ваш номер, и мы вам перезвоним</p>
+
+                <%= form_with model: @message, url: messages_path, html: { class: "needs-validation callme-form", novalidate: true } do |form| %>
+                  <%= form.hidden_field :status, value: :new %>
+                  <%= form.hidden_field :category, value: :request %>
+                  <%= form.hidden_field :name, value: form_title("request", "#{controller_name}_call") %>
+
+                  <div class="mb-2">
+                    <%= text_field_tag "fields[0][username]", nil, class: "form-control", placeholder: "Ваше имя", required: true %>
+                    <div class="invalid-feedback">Пожалуйста введите имя</div>
+                    <div class="valid-feedback">Заполнено!</div>
+                  </div>
+
+                  <div class="mb-2">
+                    <%= text_field_tag "fields[1][phone]", nil, class: "form-control phone-mask", placeholder: "Ваш телефон", required: true %>
+                    <div class="invalid-feedback">Пожалуйста введите телефон</div>
+                    <div class="valid-feedback">Заполнено!</div>
+                  </div>
+
+                  <div class="d-grid gap-2">
+                    <%= form.button t("app.button.call_me"), type: :submit, class: "btn btn-success w-100" %>
+                  </div>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
