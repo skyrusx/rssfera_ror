@@ -334,6 +334,12 @@ form {
       margin-bottom: 5px;
     }
 
+    .additional-payments {
+      color: $color_7;
+      margin-bottom: 5px;
+      display: block;
+    }
+
     .card-description {
       margin: 0;
       -webkit-line-clamp: 4;
@@ -1430,12 +1436,24 @@ form {
     a {
       position: relative;
       display: inline-block;
+      text-decoration: none;
     }
 
     img {
       height: 100px;
       width: auto;
       border-radius: 50%;
+    }
+
+    .no-photo {
+      width: 100px;
+      height: 100px;
+      text-align: center;
+      line-height: 100px;
+      background-color: rgb(119, 176, 139);
+      border-radius: 50%;
+      color: white;
+      text-decoration: none;
     }
 
     .rating {
@@ -2587,6 +2605,12 @@ ul.list-none {
 
 .rating__input--none:hover + .rating__label .rating__icon--none {
   color: red;
+}
+
+.object {
+  .card {
+    height: 100%;
+  }
 }
 
 /* Stars Rating End */
