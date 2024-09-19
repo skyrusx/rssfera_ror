@@ -82,13 +82,24 @@
         <h2>Поиск объявлений и подбор недвижимости</h2>
         <h4>Лучшие предложения</h4>
         <%= link_to "Для тех, кто покупает", "#", class: "btn btn-success" %>
-        <%= link_to "Для тех, кто продает", "#", class: "btn btn-success" %>
+        <%= link_to "Для тех, кто продает", sells_search_buyers_path, class: "btn btn-success" %>
       </div>
     </div>
   <% else %>
-    <div class="title text-center" style="background-image: url(<%= asset_url("#{controller_name}.png") %>);">
+    <%
+      page = if params[:action] == "search_buyers"
+               { image: "#{params[:action]}.png", title: "Подбор покупателей" }
+             elsif controller_name == "realties"
+               slug = Realty.find_by(slug: params[:slug]).realty_category.slug
+               image = slug == "rent" ? "rents" : slug
+               { image: "#{image}.png", title: meta_data.page_name }
+             else
+               { image: "#{controller_name}.png", title: meta_data.page_name }
+             end
+    %>
+    <div class="title text-center" style="background-image: url(<%= asset_url(page[:image]) %>);">
       <div class="title-bg"></div>
-      <h1><%= meta_data.page_name %></h1>
+      <h1><%= page[:title] %></h1>
     </div>
   <% end %>
 </header>
