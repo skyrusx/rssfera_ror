@@ -14,6 +14,21 @@ $(document).on('turbo:load', function() {
     $("input.slug").val(translit(slug).toLowerCase());
   });
 
+  $("#realty-slug").click(function() {
+    let category = $("#realty_realty_category_id")[0].value
+    let employee = $("#realty_team_member_id")[0].value
+    let city = $("#realty_city_id")[0].value
+    let district = $("#realty_district_id")[0].value
+    let street = $("#realty_street_id")[0].value
+    let realty_id = $("#realty_id")[0].value
+    let partSlug = ""
+    let slug = ""
+
+    partSlug = [category, employee, city, district, street].join("")
+    slug = [partSlug, realty_id].join("-")
+    $("#realty_slug").val(slug)
+  });
+
   function translit(word) {
     var answer = '';
     var converter = {
