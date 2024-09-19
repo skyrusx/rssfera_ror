@@ -88,7 +88,7 @@ module Admin::HtmlHelper
   end
 
   def format_price(price, symbol = "")
-    "#{price.reverse.gsub(/...(?=.)/,'\& ').reverse} #{symbol}"
+    "#{price.to_s.reverse.gsub(/...(?=.)/,'\& ').reverse} #{symbol}"
   end
 
   def schedule_html(data)

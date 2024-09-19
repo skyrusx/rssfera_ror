@@ -78,23 +78,30 @@ module Application::HtmlHelper
     "#{text} (#{count})"
   end
 
-  def realty_price(price: nil, symbol: "₽", type: "Продажа")
-    converted_price = "#{price.reverse.gsub(/...(?=.)/, '\& ').reverse} #{symbol}"
-    type == "Продажа" ? converted_price : "#{converted_price} / в месяц"
+  def realty_location(object)
+    city = [object.city.localized_name_short, object.city.name].join(" ")
+    street = [object.street.localized_name_short, object.street.name].join(" ")
+    house = object.house
+    [city, street, house].join(", ")
   end
 
-  def realty_footer(specifications)
-    result = { rooms: "", square: "", floor: "" }
-    col_data = specifications.values.select { |data| ["Комнатность", "Общая площадь", "Этаж / Этажность"].include?(data["field"]) }
-    col_data.each do |data|
-      case data["field"]
-      when "Комнатность" then result[:rooms] = data["value"].gsub(/[^0-9]/, '')
-      when "Общая площадь" then result[:square] = data["value"]
-      when "Этаж / Этажность" then result[:floor] = data["value"].split(" из ").join("/")
-      else nil
-      end
+  def realty_footer(object)
+    content_tag(:div, class: "card-footer text-body-secondary") do
+      floors = [object.floor, object.floors].join("/")
+      square = "#{object.total_area.to_s.sub(/\.0+$/, '')} м²"
+
+      [object.number_rooms, square, floors].map.with_index(1) do |data, index|
+        html_data = case index
+                    when 1 then { class: "num-rooms", title: "Комнаты" }
+                    when 2 then { class: "square", title: "Площадь" }
+                    else { class: "floor-info", title: "Этаж" }
+                    end
+
+        content_tag(:div, class: html_data[:class]) do
+          content_tag(:span, "#{html_data[:title]}:") + " #{data}"
+        end
+      end.reduce(&:+)
     end
-    result
   end
 
   def vacancy_info(vacancy)
@@ -141,5 +148,30 @@ module Application::HtmlHelper
     content_tag(:span, class: "position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger") do
       counter.to_s.html_safe + content_tag(:span, "Непрочитанные сообщения", class: "visually-hidden")
     end
+  end
+
+  def realty_price(object)
+    price = number_to_currency(object.price, unit: "₽", strip_insignificant_zeros: true)
+    return price unless object.realty_category.slug == "rent"
+
+    [price, "в месяц"].join(" / ")
+  end
+
+  def link_to_realty(object)
+    # href = object.realty_category.name == "Аренда" ? rents_realty_path(object.slug) : sells_realty_path(object.slug)
+    href = object.realty_category.slug == "rent" ? rents_realty_path(object.slug) : "#"
+    link_to(object.name, href)
+  end
+
+  def realty_href(object)
+    object.realty_category.slug == "rent" ? rents_realty_path(object.slug) : "#"
+  end
+
+  def realty_square(value)
+    [value.to_s.sub(/\.0+$/, ''), "м²"].join(" ")
+  end
+
+  def available_value(value)
+    value ? "Есть" : "Нет"
   end
 end
