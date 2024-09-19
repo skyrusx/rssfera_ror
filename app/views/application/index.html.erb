@@ -10,7 +10,7 @@
         <% @realties.each do |realty| %>
           <div class="object col-lg-4">
             <div class="card">
-              <%= link_to "#" do %>
+              <%= link_to realty_href(realty) do %>
                 <div id="object<%= realty.id %>" class="carousel slide">
                   <div class="carousel-inner">
                     <% if realty.photos.attached? %>
@@ -20,35 +20,39 @@
                           <%= image_tag photo, class: "d-block w-100", alt: realty.name %>
                         </div>
                       <% end %>
+                    <% else %>
+                      <%= image_tag "realty-placeholder.png", class: "d-block w-100", alt: realty.name %>
                     <% end %>
                   </div>
-                  <button class="carousel-control-prev" type="button" data-bs-target="#object<%= realty.id %>" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                  </button>
-                  <button class="carousel-control-next" type="button" data-bs-target="#object<%= realty.id %>" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                  </button>
+                  <% if realty.photos.attached? %>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#object<%= realty.id %>" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#object<%= realty.id %>" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  <% end %>
                 </div>
               <% end %>
               <div class="card-body">
-                <span class="card-price"><%= realty_price(price: realty.price, type: realty.realty_category.name) %></span>
-                <h5 class="card-title"><%= link_to realty.name, "#" %></h5>
+                <span class="card-price"><%= realty_price(realty) %></span>
+                <h5 class="card-title"><%= link_to_realty(realty) %></h5>
                 <div class="card-text">
                   <small class="card-location">
                     <i class="bi bi-geo-alt-fill"></i>
-                    <%= realty.location %>
+                    <%= realty_location realty %>
                   </small>
-                  <div class="card-description"><%= realty.description.html_safe %></div>
+                  <% if realty.payments.present? %>
+                    <small class="additional-payments">
+                      <%= realty.payments %>
+                    </small>
+                  <% end %>
+                  <div class="card-description"><%= realty.description&.html_safe %></div>
                 </div>
               </div>
-              <div class="card-footer text-body-secondary">
-                <% realty_footer = realty_footer(realty.specifications) %>
-                <div class="num-rooms"><span>Комнаты:</span> <%= realty_footer[:rooms] %></div>
-                <div class="square"><span>Площадь:</span> <%= realty_footer[:square] %></div>
-                <div class="floor-info"><span>Этаж:</span> <%= realty_footer[:floor] %></div>
-              </div>
+              <%= realty_footer(realty) %>
             </div>
           </div>
         <% end %>
