@@ -1,0 +1,335 @@
+<section class="search-page bg-light">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <%= render "application/shared/breadcrumbs" %>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 text-center">
+        <h4>Заявки на покупку недвижимости</h4>
+        <p class="subtitle">Воспользуйтесь нашим особым предложением на рынке недвижимости по поиску своего
+          покупателя. Только у нас Вы сможете подобрать подходящего покупателя на свою недвижимость. Для этого
+          установите ниже параметры и нажмите кнопку поиска, и наш алгоритм подберет лучшее соответствие Вашему
+          запросу.</p>
+
+        <p>Недвижимость: <%= @realties.size %></p>
+        <p><%= params[:search] %></p>
+        <p><%= Realty.last.price.class %></p>
+
+        <%= form_with url: sells_search_buyers_path, method: :get, html: { class: "rent-form" } do |form| %>
+          <div class="row g-3 mb-3">
+            <div class="col-lg-4">
+              <%= form.label "search[type_object]", "Тип недвижимости", class: "form-label" %>
+              <%= form.select "search[type_object]", Realty::TYPES.values, { include_blank: false, selected: "", prompt: "Выбрать" }, { class: "form-select" } %>
+            </div>
+
+            <div class="col-lg-2">
+              <%= form.label "search[room_size]", "Комнатность", class: "form-label" %>
+              <div id="room-size" class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                <input type="checkbox" class="btn-check" id="one-room" autocomplete="off">
+                <label class="btn btn-outline-primary" for="one-room">1</label>
+
+                <input type="checkbox" class="btn-check" id="two-room" autocomplete="off">
+                <label class="btn btn-outline-primary" for="two-room">2</label>
+
+                <input type="checkbox" class="btn-check" id="three-room" autocomplete="off">
+                <label class="btn btn-outline-primary" for="three-room">3</label>
+
+                <input type="checkbox" class="btn-check" id="four-room" autocomplete="off">
+                <label class="btn btn-outline-primary" for="four-room">4</label>
+
+                <input type="checkbox" class="btn-check" id="five-room" autocomplete="off">
+                <label class="btn btn-outline-primary" for="five-room">5+</label>
+              </div>
+            </div>
+
+            <div class="col-lg-2">
+              <%= form.label "search[price]", "Стоимость, ₽", class: "form-label" %>
+              <div class="input-group">
+                <%= form.text_field "search[price][start]", class: "form-control", placeholder: "От" %>
+                <%= form.text_field "search[price][end]", class: "form-control", placeholder: "До" %>
+              </div>
+            </div>
+
+            <div class="col-lg-2">
+              <%= form.label "search[square]", "Площадь, м<sup>2</sup>".html_safe, class: "form-label" %>
+              <div class="input-group">
+                <%= form.text_field "search[square][start]", class: "form-control", placeholder: "От" %>
+                <%= form.text_field "search[square][end]", class: "form-control", placeholder: "До" %>
+              </div>
+            </div>
+
+            <div class="col-lg-2">
+              <%= form.label "search[floor]", "Этаж", class: "form-label" %>
+              <div class="input-group">
+                <%= form.text_field "search[floor][start]", class: "form-control", placeholder: "От" %>
+                <%= form.text_field "search[floor][end]", class: "form-control", placeholder: "До" %>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-3">
+            <div class="col-lg-3">
+              <label for="city" class="form-label">Город</label>
+              <select class="form-select" id="city" aria-label="Default select example">
+                <option selected>Выбрать</option>
+                <option value="1">Мурманск</option>
+                <option value="2">Умба</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3">
+              <label for="district" class="form-label">Район</label>
+              <select class="form-select" id="district" aria-label="Default select example">
+                <option selected>Выбрать</option>
+                <option value="1">Ленинский</option>
+                <option value="2">Октябрьский</option>
+                <option value="3">Первомайский</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3">
+              <label for="street" class="form-label">Улица</label>
+              <select class="form-select" id="street" aria-label="Default select example">
+                <option selected>Выбрать</option>
+                <option value="1">Аскольдовцев</option>
+                <option value="2">Беломорская</option>
+                <option value="3">Георгия Седова</option>
+                <option value="4">Героев Рыбачьего</option>
+                <option value="5">Достоевского</option>
+                <option value="6">Зои Космодемьянской</option>
+                <option value="7">Карла Либкнехта</option>
+                <option value="8">Крупской</option>
+                <option value="9">Ломоносова</option>
+                <option value="10">Полярные Зори</option>
+                <option value="11">Полярный Круг</option>
+                <option value="12">Радищева</option>
+                <option value="13">Саши Ковалева</option>
+                <option value="14">Северный</option>
+                <option value="15">Скальная</option>
+                <option value="16">Старостина</option>
+              </select>
+            </div>
+
+            <div class="col-lg-3 d-flex align-items-end">
+              <%= form.button t("app.button.search"), type: :submit, class: "btn btn-success w-100 align-bottom" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="col-lg-12 search-results">
+        <h4 class="text-center">Результаты поиска</h4>
+
+        <div class="table-wrapper">
+          <table class="table table-success table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Дата добавления</th>
+                <th scope="col">Тип недвижимости</th>
+                <th scope="col">Комнатность</th>
+                <th scope="col">Адрес</th>
+                <th scope="col">Этаж/Этажность</th>
+                <th scope="col">Бюджет</th>
+                <th scope="col">Агент</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>03.06.2024, 11:28</td>
+                <td>Коммерческая недвижимость</td>
+                <td>0-комн</td>
+                <td>Мурманск</td>
+                <td></td>
+                <td>6 000 000 ₽</td>
+                <td><a href="team-05.html">Новожилов Илья Витальевич</a></td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>01.06.2024, 13:29</td>
+                <td>Квартира</td>
+                <td>2-комн</td>
+                <td>Мурманск <div class="district">Лениниский</div></td>
+                <td>Кроме первых этажей / 5</td>
+                <td>4 000 000 ₽</td>
+                <td><a href="team-05.html">Новожилов Илья Витальевич</a></td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>05.03.2024, 17:45</td>
+                <td>Квартира</td>
+                <td>2-комн</td>
+                <td>Мурманск <div class="district">Первомайский</div></td>
+                <td>Кроме последних этажей / 9</td>
+                <td>5 000 000 ₽</td>
+                <td><a href="#">Стрелец Михаил Сергеевич</a></td>
+              </tr>
+              <tr>
+                <th scope="row">4</th>
+                <td>16.02.2024, 11:48</td>
+                <td>Квартира</td>
+                <td>2-комн</td>
+                <td>Мурманск <div class="district">Октябрьский</div></td>
+                <td>Кроме первых этажей</td>
+                <td>4 500 000 ₽</td>
+                <td><a href="team-02.html">Кулишова Ирина Александровна</a></td>
+              </tr>
+              <tr>
+                <th scope="row">5</th>
+                <td>08.01.2024, 11:11</td>
+                <td>Квартира</td>
+                <td>2-комн</td>
+                <td>Мурманск <div class="district">Октябрьский</div></td>
+                <td>Кроме первых этажей</td>
+                <td>2 150 000 ₽</td>
+                <td><a href="team-05.html">Новожилов Илья Витальевич</a></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="text-center">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item">
+                  <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">«</span>
+                  </a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">»</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section rea-area bg-overlay ptb_100">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10">
+        <div class="section-heading text-center m-0">
+          <h2 class="text-white">Не нашли подходящий вариат?</h2>
+          <p class="text-white mt-4">Оставьте заявку и мы подберем объекты из закрытой базы</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-lg-4 offset-lg-4">
+        <% if flash.key?("request") %>
+          <%= render "application/shared/flash_messages", exclude: "request" %>
+        <% else %>
+          <%= form_with model: @message, url: messages_path, html: { class: "needs-validation rental-request-form", novalidate: true } do |form| %>
+            <%= form.hidden_field :status, value: :new %>
+            <%= form.hidden_field :category, value: :request %>
+            <%= form.hidden_field :name, value: form_title("request", "#{controller_name}_request") %>
+
+            <div class="mb-3">
+              <%= text_field_tag "fields[0][username]", nil, class: "form-control", placeholder: "Ваше имя", required: true %>
+              <div class="invalid-feedback">Пожалуйста введите имя</div>
+              <div class="valid-feedback">Заполнено!</div>
+            </div>
+
+            <div class="mb-3">
+              <%= text_field_tag "fields[1][phone]", nil, class: "form-control phone-mask", placeholder: "Ваш телефон", required: true %>
+              <div class="invalid-feedback">Пожалуйста введите телефон</div>
+              <div class="valid-feedback">Заполнено!</div>
+            </div>
+
+            <div class="d-grid gap-2">
+              <%= form.button t("app.button.send"), type: :submit, class: "btn btn-success" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="rent-services bg-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h4>Агентство недвижимости «РиелтСтройСфера» <br /> предлагает комплекс услуг по подбору покупателей недвижимости</h4>
+      </div>
+    </div>
+
+    <div class="card-list">
+      <div class="row text-center">
+        <div class="col-lg-3 card-wrapper">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-icon"><i class="bi bi-person-check"></i></div>
+              <h5 class="card-title">Персональный специалист</h5>
+              <p class="card-text">по подбору жилья</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 card-wrapper">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-icon"><i class="bi bi-clipboard-data"></i></div>
+              <h5 class="card-title">Анализ базы покупателей</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 card-wrapper">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-icon"><i class="bi bi-house-check"></i></div>
+              <h5 class="card-title">Показ жилья</h5>
+              <p class="card-text">в удобное для Вас время</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 card-wrapper">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-icon"><i class="bi bi-folder-check"></i></div>
+              <h5 class="card-title">Проверка документов</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 card-wrapper">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-icon"><i class="bi bi-file-earmark-check"></i></div>
+              <h5 class="card-title">Проверка</h5>
+              <p class="card-text">на юридическую чистоту и подписание договора, акта приема-передачи</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 card-wrapper">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-icon"><i class="bi bi-calendar3"></i></div>
+              <h5 class="card-title">Продажа жилья</h5>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 card-wrapper">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-icon"><i class="bi bi-people"></i></div>
+              <h5 class="card-title">Для юридических лиц</h5>
+              <p class="card-text">индивидуальный подход, с учетом всех пожеланий</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
