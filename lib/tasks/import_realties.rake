@@ -1,4 +1,6 @@
 require "csv"
+require "open-uri"
+require "json"
 
 namespace :import do
   desc "Импорт объектов недвижимости"
@@ -71,11 +73,23 @@ namespace :import do
         house: house || realty_data[17].to_s,
         flat: realty_data[18].to_s,
         realty_category_id: RealtyCategory.find_by(name: realty_data[20]&.capitalize)&.id,
-        team_member_id: TeamMember.find_by(phone: realty_data[4])&.id
+        team_member_id: TeamMember.find_by(phone: realty_data[4])&.id,
+        description: realty_data[21]
       }
 
-      # p realty_params
       realty = Realty.create(realty_params)
+      if realty_data[22].present?
+        images = realty_data[22].split(" ")
+        images.each do |photo|
+          realty.photos.attach(
+            io: File.open(URI.parse(photo).open),
+            filename: "realty-#{photo.split("/").last}"
+          )
+        end
+      end
+
+
+      realty.save
       puts "Недвижимость '#{realty.name}' добавлена"
     end
 
