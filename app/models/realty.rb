@@ -6,6 +6,7 @@ class Realty < ApplicationRecord
   belongs_to :street
 
   has_many_attached :photos do |attachable|
+    attachable.variant :thumb, resize_to_fill: [390.9, 219.88]
     attachable.variant :medium, resize_to_limit: [800, 450]
   end
 
