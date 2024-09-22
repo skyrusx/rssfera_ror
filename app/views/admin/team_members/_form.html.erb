@@ -12,16 +12,12 @@
 
       <div class="input-group mb-4 mb-3">
         <span class="input-group-text justify-content-end"><%= t "crud.table.position" %></span>
-        <%= form.number_field :position, step: 1, min: 0, class: "form-control", placeholder: @team_members.size + 1, required: true %>
-        <div class="invalid-feedback"><%= t "validation.invalid.position" %></div>
-        <div class="valid-feedback"><%= t "validation.valid" %></div>
+        <%= form.number_field :position, step: 1, min: 0, class: "form-control", placeholder: @team_members.size + 1 %>
       </div>
 
       <div class="row">
         <div class="mb-4 mb-3 col-md-4">
-          <%= form.text_field :last_name, class: "form-control slug-item", placeholder: true, required: true %>
-          <div class="invalid-feedback"><%= t "validation.invalid.last_name" %></div>
-          <div class="valid-feedback"><%= t "validation.valid" %></div>
+          <%= form.text_field :last_name, class: "form-control slug-item", placeholder: true %>
         </div>
         <div class="mb-4 mb-3 col-md-4">
           <%= form.text_field :first_name, class: "form-control slug-item", placeholder: true, required: true %>
@@ -29,9 +25,7 @@
           <div class="valid-feedback"><%= t "validation.valid" %></div>
         </div>
         <div class="mb-4 mb-3 col-md-4">
-          <%= form.text_field :patronymic_name, class: "form-control slug-item", placeholder: true, required: true %>
-          <div class="invalid-feedback"><%= t "validation.invalid.patronymic_name" %></div>
-          <div class="valid-feedback"><%= t "validation.valid" %></div>
+          <%= form.text_field :patronymic_name, class: "form-control slug-item", placeholder: true %>
         </div>
       </div>
 
@@ -74,6 +68,11 @@
         <div class="invalid-feedback"><%= t "validation.invalid.phone" %></div>
         <div class="valid-feedback"><%= t "validation.valid" %></div>
       </div>
+
+      <div class="input-group mb-4 mb-3">
+        <span class="input-group-text justify-content-end"><%= t "crud.table.rating" %></span>
+        <%= form.number_field :rating, step: 0.5, min: 0.0, max: 5.0, class: "form-control", placeholder: 5.0 %>
+      </div>
     </div>
 
     <div class="col-lg-3">
@@ -89,6 +88,7 @@
           <% end %>
         </div>
       </div>
+
       <div class="d-flex justify-content-center align-items-end photo-wrapper">
         <div class="btn btn-light mb-4 mb-3">
           <%= form.label :photo, t("crud.table.select_photo"), class: "form-label" %>
