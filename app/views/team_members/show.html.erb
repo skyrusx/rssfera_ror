@@ -19,7 +19,7 @@
         <div class="col-lg-9 col-12">
           <div class="user-info__wrapper">
             <div class="detail-user-info">
-              <% if @team_member.rating.nonzero? %>
+              <% if @team_member.rating.present? && @team_member.rating.nonzero? %>
                 <div class="rating">
                 <span class="rating-count">
                   <% rating_stars(@team_member.rating).each do |key, value| %>
