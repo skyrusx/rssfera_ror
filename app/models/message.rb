@@ -29,6 +29,7 @@ class Message < ApplicationRecord
     sells: "на консультацию",
     sells_realty: "на продажу недвижимости",
     sells_request: "на подбор недвижимости для клиента",
-    realties_call: "на звонок"
+    realties_call: "на звонок",
+    buys_request: "на подбор недвижимости для клиента",
   }
 end

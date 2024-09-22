@@ -158,13 +158,12 @@ module Application::HtmlHelper
   end
 
   def link_to_realty(object)
-    # href = object.realty_category.name == "Аренда" ? rents_realty_path(object.slug) : sells_realty_path(object.slug)
-    href = object.realty_category.slug == "rent" ? rents_realty_path(object.slug) : "#"
+    href = object.realty_category.slug == "rent" ? rents_realty_path(object.slug) : buys_realty_path(object.slug)
     link_to(object.name, href)
   end
 
   def realty_href(object)
-    object.realty_category.slug == "rent" ? rents_realty_path(object.slug) : "#"
+    object.realty_category.slug == "rent" ? rents_realty_path(object.slug) : buys_realty_path(object.slug)
   end
 
   def realty_square(value)

@@ -8,7 +8,16 @@ module ApplicationHelper
   def meta_data
     if controller_name == "realties"
       realty = Realty.find_by(slug: params[:slug])
-      page_name = realty.realty_category.slug == "rent" ? "Аренда недвижимости" : "Продажа недвижимости"
+
+      page_name = case realty.realty_category.slug
+                  when "rent" then "Аренда недвижимости"
+                  when "sell" then "Продажа недвижимости"
+                  else "Покупка недвижимости"
+                  end
+
+      settings = Setting.find_by(page_name: page_name, meta_title: realty.name)
+      return settings if settings
+
       settings_params = {
         page: "realties",
         page_name: page_name,

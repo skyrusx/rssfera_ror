@@ -10,18 +10,30 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Купить
-            </a>
+            <%= link_to "Купить", buys_path, class: "nav-link dropdown-toggle", role: :button, data: { "bs-toggle": :dropdown }, aria: { expanded: false } %>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="buy-room.html">Комнату</a></li>
-              <li><a class="dropdown-item" href="buy-flat.html">Квартиру</a></li>
-              <li><a class="dropdown-item" href="buy-house.html">Загородный дом</a></li>
-              <li><a class="dropdown-item" href="buy-land.html">Земельный участок</a></li>
-              <li><a class="dropdown-item" href="buy-commercial.html">Коммерческая недвижимость</a></li>
-              <li><a class="dropdown-item" href="buy-garage.html">Гараж</a></li>
+              <li>
+                <%= link_to "Комнату", buys_path(realty_id: 1), class: dropdown_active_class(buys_path(realty_id: 1)) %>
+              </li>
+              <li>
+                <%= link_to "Квартиру", buys_path(realty_id: 2), class: dropdown_active_class(buys_path(realty_id: 2)) %>
+              </li>
+              <li>
+                <%= link_to "Дом", buys_path(realty_id: 3), class: dropdown_active_class(buys_path(realty_id: 3)) %>
+              </li>
+              <li>
+                <%= link_to "Земельный участок", buys_path(realty_id: 4), class: dropdown_active_class(buys_path(realty_id: 4)) %>
+              </li>
+              <li>
+                <%= link_to "Коммерческая недвижимость", buys_path(realty_id: 5), class: dropdown_active_class(buys_path(realty_id: 5)) %>
+              </li>
+              <li>
+                <%= link_to "Гараж", buys_path(realty_id: 6), class: dropdown_active_class(buys_path(realty_id: 6)) %>
+              </li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="base-property.html">База недвижимости</a></li>
+              <li>
+                <%= link_to "База недвижимости", buys_base_path, class: dropdown_active_class(buys_base_path) %>
+              </li>
             </ul>
           </li>
           <li class="<%= dropdown_active("sells") %>">
@@ -81,7 +93,7 @@
       <div class="all-objects text-center">
         <h2>Поиск объявлений и подбор недвижимости</h2>
         <h4>Лучшие предложения</h4>
-        <%= link_to "Для тех, кто покупает", "#", class: "btn btn-success" %>
+        <%= link_to "Для тех, кто покупает", buys_base_path, class: "btn btn-success" %>
         <%= link_to "Для тех, кто продает", sells_search_buyers_path, class: "btn btn-success" %>
       </div>
     </div>
@@ -91,7 +103,11 @@
                { image: "#{params[:action]}.png", title: "Подбор покупателей" }
              elsif controller_name == "realties"
                slug = Realty.find_by(slug: params[:slug]).realty_category.slug
-               image = slug == "rent" ? "rents" : slug
+               image = case slug
+                       when "rent" then "rents"
+                       when "buy" then "buys"
+                       else slug
+                       end
                { image: "#{image}.png", title: meta_data.page_name }
              else
                { image: "#{controller_name}.png", title: meta_data.page_name }

@@ -73,6 +73,12 @@ Rails.application.routes.draw do
     get "search-buyers"
   end
 
+  scope :buy, as: :buys, controller: :buys do
+    get "/", to: "buys#index"
+    get "base"
+    resources :realties, path: "", param: :slug,  only: :show
+  end
+
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   get "up" => "rails/health#show", as: :rails_health_check

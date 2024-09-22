@@ -10,10 +10,10 @@
       <div class="col-lg-9 rent-details">
         <% if @realty.photos.attached? %>
           <div class="rent-gallery bg-white">
-            <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true">
+            <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true" data-ratio="800/450" data-maxwidth="800" data-maxheight="450">
               <% @realty.photos.each do |image| %>
                 <%= link_to image do %>
-                  <%= image_tag image.variant(:medium), alt: @realty.name %>
+                  <%= image_tag image, alt: @realty.name %>
                 <% end %>
               <% end %>
             </div>
