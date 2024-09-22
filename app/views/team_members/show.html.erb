@@ -19,7 +19,8 @@
         <div class="col-lg-9 col-12">
           <div class="user-info__wrapper">
             <div class="detail-user-info">
-              <div class="rating">
+              <% if @team_member.rating.nonzero? %>
+                <div class="rating">
                 <span class="rating-count">
                   <% rating_stars(@team_member.rating).each do |key, value| %>
                     <% star_class = [:fill, :half].include?(key) ? "bi bi-star-#{key}" : "bi bi-star" %>
@@ -28,8 +29,9 @@
                     <% end %>
                   <% end %>
                 </span>
-                <%= rating_reviews @team_member %>
-              </div>
+                  <%= rating_reviews @team_member %>
+                </div>
+              <% end %>
 
               <h3><%= @team_member.whole_name %> <i class="bi bi-check-circle-fill"></i></h3>
 
@@ -117,7 +119,7 @@
                                 <div class="card">
                                   <%= link_to realty_href(realty) do %>
                                     <% if realty.photos.attached? %>
-                                      <%= image_tag realty.photos.first, class: "d-block w-100", alt: realty.name %>
+                                      <%= image_tag realty.photos.first.variant(:thumb), class: "d-block w-100", alt: realty.name %>
                                     <% else %>
                                       <%= image_tag "realty-placeholder.png", class: "d-block w-100", alt: realty.name %>
                                     <% end %>
