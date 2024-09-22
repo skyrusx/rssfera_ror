@@ -17,7 +17,7 @@ class BuysController < ApplicationController
     @message = Message.new
 
     @category = RealtyCategory.find_by(slug: "buy")
-    @realties = Realty.active.where(realty_category_id: @category.id).order(:created_at)
+    @realties = Realty.active.where(realty_category_id: @category.id, type_object: params[:realty_id]).order(:created_at)
   end
 
   def base
