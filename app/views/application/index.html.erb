@@ -17,7 +17,7 @@
                       <% realty.photos.each.with_index do |photo, index| %>
                         <% carousel_classes = index.zero? ? "carousel-item active" : "carousel-item" %>
                         <div class="<%= carousel_classes %>">
-                          <%= image_tag photo, class: "d-block w-100", alt: realty.name %>
+                          <%= image_tag photo.variant(:thumb), class: "d-block w-100", alt: realty.name %>
                         </div>
                       <% end %>
                     <% else %>

@@ -238,7 +238,7 @@
             <div class="tab-content" id="pills-tabContent">
               <div class="tab-pane fade show active" id="price" role="tabpanel" aria-labelledby="price-tab" tabindex="0">
                 <div class="by-price">
-                  <div class="scroll-objects row">
+                  <div class="scroll-objects">
                     <% @similar_realties[:by_price].each do |realty| %>
                       <div class="object col-lg-4">
                         <div class="card">
@@ -249,7 +249,7 @@
                                   <% realty.photos.each.with_index do |photo, index| %>
                                     <% carousel_classes = index.zero? ? "carousel-item active" : "carousel-item" %>
                                     <div class="<%= carousel_classes %>">
-                                      <%= image_tag photo, class: "d-block w-100", alt: realty.name %>
+                                      <%= image_tag photo.variant(:thumb), class: "d-block w-100", alt: realty.name %>
                                     </div>
                                   <% end %>
                                 <% else %>
@@ -295,7 +295,7 @@
 
               <div class="tab-pane fade" id="location" role="tabpanel" aria-labelledby="location-tab" tabindex="0">
                 <div class="by-location">
-                  <div class="scroll-objects row">
+                  <div class="scroll-objects">
                     <% @similar_realties[:by_location].each do |realty| %>
                       <div class="object col-lg-4">
                         <div class="card">
@@ -306,7 +306,7 @@
                                   <% realty.photos.each.with_index do |photo, index| %>
                                     <% carousel_classes = index.zero? ? "carousel-item active" : "carousel-item" %>
                                     <div class="<%= carousel_classes %>">
-                                      <%= image_tag photo, class: "d-block w-100", alt: realty.name %>
+                                      <%= image_tag photo.variant(:thumb), class: "d-block w-100", alt: realty.name %>
                                     </div>
                                   <% end %>
                                 <% else %>
