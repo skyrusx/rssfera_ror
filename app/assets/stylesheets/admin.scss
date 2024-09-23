@@ -744,6 +744,14 @@ ul.list-none, ul.list-none li {
   }
 }
 
+.admin-crud #photos .carousel-item img {
+  max-height: 450px;
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media screen and (min-width: 768px) {
   #admin-page .middle {
     display: flex;

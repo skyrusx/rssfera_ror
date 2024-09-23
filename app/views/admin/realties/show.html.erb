@@ -35,7 +35,7 @@
               <div class="carousel-inner">
                 <% @realty.photos.each.with_index do |photo, index| %>
                   <div class="carousel-item <%= "active" if index.zero? %>">
-                    <%= image_tag photo, class: "d-block w-100" %>
+                    <%= image_tag photo, class: "d-block" %>
                   </div>
                 <% end %>
               </div>
