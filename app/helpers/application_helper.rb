@@ -90,7 +90,7 @@ module ApplicationHelper
   def working_hours(work_schedule)
     result = {}
 
-    work_schedule.values.group_by { |v| v["start"] }.each.with_index do |(_, values), index|
+    work_schedule.values.group_by { |v| v["end"] }.each.with_index do |(_, values), index|
       start_time = values.first["start"]
       end_time = values.last["end"]
 
