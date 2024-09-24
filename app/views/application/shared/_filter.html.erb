@@ -1,0 +1,76 @@
+<%= form_with url: url_form, method: :get, html: { class: "rent-form" } do |form| %>
+  <div class="row g-3 mb-3">
+    <div class="col-lg-4">
+      <%= form.label "search[type_object]", "Тип недвижимости", class: "form-label" %>
+      <%= form.select "search[type_object]", Realty::TYPES.map { |k, v| [v, k] }, { include_blank: false, selected: @search[:type_object], prompt: "Выбрать" }, { class: "form-select" } %>
+    </div>
+
+    <div class="col-lg-2">
+      <%= form.label "search[room_size]", "Комнатность", class: "form-label" %>
+      <div id="room-size" class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+        <input type="checkbox" class="btn-check" id="one-room" autocomplete="off">
+        <label class="btn btn-outline-primary" for="one-room">1</label>
+
+        <input type="checkbox" class="btn-check" id="two-room" autocomplete="off">
+        <label class="btn btn-outline-primary" for="two-room">2</label>
+
+        <input type="checkbox" class="btn-check" id="three-room" autocomplete="off">
+        <label class="btn btn-outline-primary" for="three-room">3</label>
+
+        <input type="checkbox" class="btn-check" id="four-room" autocomplete="off">
+        <label class="btn btn-outline-primary" for="four-room">4</label>
+
+        <input type="checkbox" class="btn-check" id="five-room" autocomplete="off">
+        <label class="btn btn-outline-primary" for="five-room">5+</label>
+      </div>
+    </div>
+
+    <div class="col-lg-2">
+      <%= form.label "search[price]", "Стоимость, ₽", class: "form-label" %>
+      <div class="input-group">
+        <% price = @search[:price] || {} %>
+        <%= form.text_field "search[price][start]", value: price[:start], class: "form-control", placeholder: "От" %>
+        <%= form.text_field "search[price][end]", value: price[:end], class: "form-control", placeholder: "До" %>
+      </div>
+    </div>
+
+    <div class="col-lg-2">
+      <%= form.label "search[total_area]", "Площадь, м<sup>2</sup>".html_safe, class: "form-label" %>
+      <div class="input-group">
+        <% total_area = @search[:total_area] || {} %>
+        <%= form.text_field "search[total_area][start]", value: total_area[:start], class: "form-control", placeholder: "От" %>
+        <%= form.text_field "search[total_area][end]", value: total_area[:end], class: "form-control", placeholder: "До" %>
+      </div>
+    </div>
+
+    <div class="col-lg-2">
+      <%= form.label "search[floor]", "Этаж", class: "form-label" %>
+      <div class="input-group">
+        <% floor = @search[:floor] || {} %>
+        <%= form.text_field "search[floor][start]", value: floor[:start], class: "form-control", placeholder: "От" %>
+        <%= form.text_field "search[floor][end]", value: floor[:end], class: "form-control", placeholder: "До" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-lg-3">
+      <label for="city" class="form-label">Город</label>
+      <%= form.select "search[city]", City.active.pluck(:name, :id), { include_blank: false, selected: @search[:city], prompt: "Выбрать" }, { class: "form-select", id: "search_city_id" } %>
+    </div>
+
+    <div class="col-lg-3">
+      <label for="district" class="form-label">Район</label>
+      <%= form.select "search[district]", @districts, { include_blank: false, selected: @search[:district], prompt: "Выбрать" }, { class: "form-select", id: "search_district_id" } %>
+    </div>
+
+    <div class="col-lg-3">
+      <label for="street" class="form-label">Улица</label>
+      <%= form.select "search[street]", @streets, { include_blank: false, selected: @search[:street], prompt: "Выбрать" }, { class: "form-select", id: "search_street_id" } %>
+    </div>
+
+    <div class="col-lg-3 d-flex align-items-end">
+      <%= form.button t("app.button.search"), type: :submit, class: "btn btn-success w-100 align-bottom" %>
+    </div>
+  </div>
+<% end %>

@@ -13,6 +13,46 @@ class Realty < ApplicationRecord
   after_create :fill_slug
 
   scope :active, -> { where(status: true) }
+  scope :filter_by_type_object, -> (type) { where(type_object: type) }
+  scope :filter_by_price, -> (price) do
+    if price[:start].present? && price[:end].present?
+      price_range = price[:start].to_f..price[:end].to_f
+      where(price: price_range)
+    elsif price[:start].present? && !price[:end].present?
+      where("price >= ?", price[:start].to_f)
+    elsif !price[:start].present? && price[:end].present?
+      where("price <= ?", price[:end].to_f)
+    else
+      where(nil)
+    end
+  end
+  scope :filter_by_total_area, -> (total_area) do
+    if total_area[:start].present? && total_area[:end].present?
+      total_area_range = total_area[:start].to_f..total_area[:end].to_f
+      where(total_area: total_area_range)
+    elsif total_area[:start].present? && !total_area[:end].present?
+      where("total_area >= ?", total_area[:start].to_f)
+    elsif !total_area[:start].present? && total_area[:end].present?
+      where("total_area <= ?", total_area[:end].to_f)
+    else
+      where(nil)
+    end
+  end
+  scope :filter_by_floor, -> (floor) do
+    if floor[:start].present? && floor[:end].present?
+      floor_range = floor[:start].to_i..floor[:end].to_i
+      where(floor: floor_range)
+    elsif floor[:start].present? && !floor[:end].present?
+      where("floor >= ?", floor[:start].to_i)
+    elsif !floor[:start].present? && floor[:end].present?
+      where("floor <= ?", floor[:end].to_i)
+    else
+      where(nil)
+    end
+  end
+  scope :filter_by_city, -> (city) { where(city_id: city) }
+  scope :filter_by_district, -> (district) { where(district_id: district) }
+  scope :filter_by_street, -> (street) { where(street_id: street) }
 
   TYPES = {
     1 => "Комната",
