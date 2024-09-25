@@ -175,6 +175,7 @@ GEM
     nokogiri (1.16.7-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    petrovich (1.1.5)
     pg (1.5.7)
     popper_js (2.11.8)
     positionable (1.1.2)
@@ -306,6 +307,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jquery-rails
+  petrovich
   pg (~> 1.1)
   positionable
   puma (>= 5.0)
