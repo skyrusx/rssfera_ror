@@ -14,7 +14,7 @@ $(document).on('turbo:load', function() {
             success: function(response) {
                 var streets = response["streets"];
                 $("#search_street_id").empty();
-                $("#search_street_id").append('<option>Выбрать</option>');
+                $("#search_street_id").append('<option value="">Выбрать</option>');
                 for (var i = 0; i < streets.length; i++) {
                     $("#search_street_id").append('<option value="' + streets[i]["id"] + '">' + streets[i]["name"] + '</option>');
                 }
