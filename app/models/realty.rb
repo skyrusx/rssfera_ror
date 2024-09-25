@@ -53,6 +53,7 @@ class Realty < ApplicationRecord
   scope :filter_by_city, -> (city) { where(city_id: city) }
   scope :filter_by_district, -> (district) { where(district_id: district) }
   scope :filter_by_street, -> (street) { where(street_id: street) }
+  scope :filter_by_number_rooms, -> (number_rooms) { where(number_rooms: number_rooms) }
 
   TYPES = {
     1 => "Комната",

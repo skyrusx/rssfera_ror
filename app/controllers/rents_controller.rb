@@ -15,6 +15,7 @@ class RentsController < ApplicationController
       @streets = @search[:city].present? ? District.find(@search[:district]).streets.pluck(:name, :id) : []
 
       filtering_params(@search).each do |key, value|
+        value = value.split(",") if key == "number_rooms"
         @realties = @realties.public_send("filter_by_#{key}", value) if value.present?
       end
     else
@@ -56,6 +57,6 @@ class RentsController < ApplicationController
   private
 
   def filtering_params(params)
-    params.slice(:type_object, :price, :total_area, :floor, :city, :district, :street)
+    params.slice(:type_object, :price, :total_area, :floor, :city, :district, :street, :number_rooms)
   end
 end

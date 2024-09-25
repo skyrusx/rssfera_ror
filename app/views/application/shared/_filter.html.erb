@@ -1,4 +1,7 @@
 <%= form_with url: url_form, method: :get, html: { class: "rent-form" } do |form| %>
+  <% room_size = @search[:number_rooms] || {} %>
+  <%= form.hidden_field "search[number_rooms]", value: room_size, id: "number-rooms" %>
+
   <div class="row g-3 mb-3">
     <div class="col-lg-4">
       <%= form.label "search[type_object]", "Тип недвижимости", class: "form-label" %>
@@ -7,20 +10,20 @@
 
     <div class="col-lg-2">
       <%= form.label "search[room_size]", "Комнатность", class: "form-label" %>
-      <div id="room-size" class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-        <input type="checkbox" class="btn-check" id="one-room" autocomplete="off">
+      <div id="room-size" class="btn-group" role="group" aria-label="Basic checkbox toggle button group" data-toggle="buttons-checkbox">
+        <input type="checkbox" value="1" class="btn-check" id="one-room" autocomplete="off" <%= "checked" if room_size.include?("1") %>>
         <label class="btn btn-outline-primary" for="one-room">1</label>
 
-        <input type="checkbox" class="btn-check" id="two-room" autocomplete="off">
+        <input type="checkbox" value="2" class="btn-check" id="two-room" autocomplete="off" <%= "checked" if room_size.include?("2") %>>
         <label class="btn btn-outline-primary" for="two-room">2</label>
 
-        <input type="checkbox" class="btn-check" id="three-room" autocomplete="off">
+        <input type="checkbox" class="btn-check" id="three-room" autocomplete="off" <%= "checked" if room_size.include?("3") %>>
         <label class="btn btn-outline-primary" for="three-room">3</label>
 
-        <input type="checkbox" class="btn-check" id="four-room" autocomplete="off">
+        <input type="checkbox" class="btn-check" id="four-room" autocomplete="off" <%= "checked" if room_size.include?("4") %>>
         <label class="btn btn-outline-primary" for="four-room">4</label>
 
-        <input type="checkbox" class="btn-check" id="five-room" autocomplete="off">
+        <input type="checkbox" class="btn-check" id="five-room" autocomplete="off" <%= "checked" if room_size.include?("5") %>>
         <label class="btn btn-outline-primary" for="five-room">5+</label>
       </div>
     </div>
