@@ -105,4 +105,14 @@ module ApplicationHelper
 
     result
   end
+
+  def filter_title(section, type, city)
+    name = section == "rents" ? "Аренда" : "Продажа"
+    realty = type.present? ? Realty::TITLES[type.to_i] : Realty::TITLES[0]
+    city_name = Petrovich(firstname: City.find_by(id: city).name).prepositional.to_s if city.present?
+
+    title = "#{name}: #{realty}"
+    title = [title, "в", city_name].join(" ") if city.present?
+    title
+  end
 end
