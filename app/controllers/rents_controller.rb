@@ -11,8 +11,8 @@ class RentsController < ApplicationController
     @realties = Realty.active.joins(:realty_category).where(realty_category: { slug: "rent" })
     if @search.present?
       @search = @search.reject { |_, v| v.empty? }
-      @districts = @search[:city].present? ? City.find(@search[:city]).districts.pluck(:name, :id) : []
-      @streets = @search[:city].present? ? District.find(@search[:district]).streets.pluck(:name, :id) : []
+      @districts = @search[:city].present? ? City.find_by(id: @search[:city]).districts.pluck(:name, :id) : []
+      @streets = @search[:district].present? ? District.find_by(id: @search[:district]).streets.pluck(:name, :id) : []
 
       filtering_params(@search).each do |key, value|
         value = value.split(",") if key == "number_rooms"
