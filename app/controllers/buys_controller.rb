@@ -7,7 +7,7 @@ class BuysController < ApplicationController
                   else
                     "недвижимость"
                   end
-    breadcrumb = [I18n.t("app.breadcrumbs.sells"), realty_type.downcase].join(" ")
+    breadcrumb = [I18n.t("app.breadcrumbs.buys"), realty_type.downcase].join(" ")
 
     add_breadcrumb breadcrumb, :sells_path
 
