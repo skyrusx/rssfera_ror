@@ -253,7 +253,7 @@
           <%= form_with model: @message, url: messages_path, html: { class: "needs-validation rental-request-form", novalidate: true } do |form| %>
             <%= form.hidden_field :status, value: :new %>
             <%= form.hidden_field :category, value: :request %>
-            <%= form.hidden_field :name, value: form_title("request", "#{controller_name}_request") %>
+            <%= form.hidden_field :name, value: form_title("request", controller_name) %>
 
             <div class="mb-3">
               <%= text_field_tag "fields[0][username]", nil, class: "form-control", placeholder: "Ваше имя", required: true %>
