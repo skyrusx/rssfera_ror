@@ -107,7 +107,7 @@ module ApplicationHelper
   end
 
   def filter_title(section, type, city)
-    name = section == "rents" ? "Аренда" : "Продажа"
+    name = section == "rents" ? "Аренда" : "Покупка"
     realty = type.present? ? Realty::TITLES[type.to_i] : Realty::TITLES[0]
     if city.present?
       city_object = City.find_by(id: city)
