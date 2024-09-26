@@ -50,7 +50,7 @@ module ApplicationHelper
     controller_name == page_name ? "nav-item dropdown active" : "nav-item dropdown"
   end
 
-  def pagination(collection, anchor)
+  def pagination(collection, anchor = nil)
     params = { anchor: anchor }
     will_paginate(
       collection,
