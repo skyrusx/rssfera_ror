@@ -101,6 +101,8 @@
     <%
       page = if params[:action] == "search_buyers"
                { image: "#{params[:action]}.png", title: "Подбор покупателей" }
+             elsif params[:action] == "base"
+               { image: "application.png", title: "База недвижимости" }
              elsif controller_name == "realties"
                slug = Realty.find_by(slug: params[:slug]).realty_category.slug
                image = case slug
