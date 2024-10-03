@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_17_180624) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_03_051339) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -135,7 +135,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_17_180624) do
     t.string "name"
     t.boolean "status", default: true
     t.string "slug"
-    t.string "location"
     t.string "payments"
     t.text "description"
     t.jsonb "specifications", default: "{}"
@@ -158,6 +157,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_17_180624) do
     t.string "flat"
     t.float "price"
     t.boolean "balcony", default: true
+    t.integer "crm_id"
     t.index ["realty_category_id"], name: "index_realties_on_realty_category_id"
     t.index ["team_member_id"], name: "index_realties_on_team_member_id"
   end
