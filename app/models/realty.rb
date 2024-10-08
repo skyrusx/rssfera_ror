@@ -2,8 +2,9 @@ class Realty < ApplicationRecord
   belongs_to :team_member
   belongs_to :realty_category
   belongs_to :city
-  belongs_to :district
-  belongs_to :street
+  has_many :realty_district_joins
+  has_many :districts, through: :realty_district_joins
+  belongs_to :street, optional: true
 
   has_many_attached :photos do |attachable|
     attachable.variant :thumb, resize_to_fill: [390.9, 219.88]
@@ -135,7 +136,7 @@ class Realty < ApplicationRecord
   private
 
   def fill_slug
-    slug = [self.realty_category_id, self.team_member_id, self.city_id, self.district_id, self.street_id].compact.join("")
+    slug = [self.realty_category_id, self.team_member_id, self.city_id, self.district_ids, self.street_id].compact.join("")
     self.slug = [slug, self.id].join("-")
     self.save
   end

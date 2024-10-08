@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_03_051339) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_08_094802) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -144,7 +144,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_03_051339) do
     t.datetime "updated_at", null: false
     t.string "type_object"
     t.integer "city_id"
-    t.integer "district_id"
     t.integer "street_id"
     t.float "total_area"
     t.float "living_area"
@@ -168,6 +167,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_03_051339) do
     t.datetime "updated_at", null: false
     t.boolean "status", default: true
     t.string "slug"
+  end
+
+  create_table "realty_district_joins", force: :cascade do |t|
+    t.integer "realty_id"
+    t.integer "district_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "regions", force: :cascade do |t|
