@@ -561,6 +561,7 @@ ru:
   crud:
     table:
       id: "#"
+      crm_id: "CRM ID"
       name: "Наименование"
       last_name: "Фамилия"
       first_name: "Имя"

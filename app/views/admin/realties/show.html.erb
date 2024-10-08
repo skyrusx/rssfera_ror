@@ -53,6 +53,11 @@
       <% end %>
 
       <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.crm_id" %></div>
+        <div class="field-value"><%= @realty.crm_id %></div>
+      </div>
+
+      <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.name" %></div>
         <div class="field-value"><%= @realty.name %></div>
       </div>
@@ -75,8 +80,10 @@
       <div class="input-group mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.city_district_street" %></div>
         <div class="field-value"><%= [@realty.city.localized_name_short, @realty.city.name].join(" ") %></div>
-        <div class="field-value"><%= [@realty.district.localized_name_short, @realty.district.name].join(" ") %></div>
-        <div class="field-value"><%= [@realty.street.localized_name_short, @realty.street.name].join(" ") %></div>
+        <div class="field-value"><%= [@realty.districts.first.localized_name_short, @realty.districts.pluck(:name).join(", ")].join(" ") %></div>
+        <% if @realty.street.present? %>
+          <div class="field-value"><%= [@realty.street.localized_name_short, @realty.street.name].join(" ") %></div>
+        <% end %>
       </div>
 
       <div class="mb-4 mb-3 d-flex field">
