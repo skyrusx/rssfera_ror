@@ -80,9 +80,9 @@ module Application::HtmlHelper
 
   def realty_location(object)
     city = [object.city.localized_name_short, object.city.name].join(" ")
-    street = [object.street.localized_name_short, object.street.name].join(" ")
-    house = object.house
-    [city, street, house].join(", ")
+    street = [object.street.localized_name_short, object.street.name].join(" ") if object.street.present?
+    house = object.house if object.house.present?
+    [city, street, house].compact.join(", ")
   end
 
   def realty_footer(object)
