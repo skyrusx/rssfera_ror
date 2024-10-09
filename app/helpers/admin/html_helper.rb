@@ -65,7 +65,7 @@ module Admin::HtmlHelper
   end
 
   def date_format(date, public = false)
-    public ? l(@vacancy.published_at, format: "%e %b %Y, %H:%M") : date&.strftime("%d.%m.%Y %H:%M:%S")
+    public ? l(date, format: "%e %b %Y, %H:%M") : date&.strftime("%d.%m.%Y %H:%M:%S")
   end
 
   def rating_with_reviews(team_member)
