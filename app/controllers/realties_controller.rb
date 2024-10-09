@@ -18,7 +18,7 @@ class RealtiesController < ApplicationController
       by_price: Realty.where.not(id: @realty.id)
                       .where(realty_category_id: @realty.realty_category_id, price: price_range),
       by_location: Realty.where.not(id: @realty.id)
-                         .where(realty_category_id: @realty.realty_category_id, district_id: @realty.district_id)
+                         .where(realty_category_id: @realty.realty_category_id).joins(:districts).where(districts: { id: @realty.district_ids })
     }
   end
 end
