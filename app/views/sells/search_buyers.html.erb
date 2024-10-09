@@ -14,203 +14,67 @@
           установите ниже параметры и нажмите кнопку поиска, и наш алгоритм подберет лучшее соответствие Вашему
           запросу.</p>
 
-        <p>Недвижимость: <%= @realties.size %></p>
-        <p><%= params[:search] %></p>
-        <p><%= Realty.last.price.class %></p>
-
-        <%= form_with url: sells_search_buyers_path, method: :get, html: { class: "rent-form" } do |form| %>
-          <div class="row g-3 mb-3">
-            <div class="col-lg-4">
-              <%= form.label "search[type_object]", "Тип недвижимости", class: "form-label" %>
-              <%= form.select "search[type_object]", Realty::TYPES.values, { include_blank: false, selected: "", prompt: "Выбрать" }, { class: "form-select" } %>
-            </div>
-
-            <div class="col-lg-2">
-              <%= form.label "search[room_size]", "Комнатность", class: "form-label" %>
-              <div id="room-size" class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
-                <input type="checkbox" class="btn-check" id="one-room" autocomplete="off">
-                <label class="btn btn-outline-primary" for="one-room">1</label>
-
-                <input type="checkbox" class="btn-check" id="two-room" autocomplete="off">
-                <label class="btn btn-outline-primary" for="two-room">2</label>
-
-                <input type="checkbox" class="btn-check" id="three-room" autocomplete="off">
-                <label class="btn btn-outline-primary" for="three-room">3</label>
-
-                <input type="checkbox" class="btn-check" id="four-room" autocomplete="off">
-                <label class="btn btn-outline-primary" for="four-room">4</label>
-
-                <input type="checkbox" class="btn-check" id="five-room" autocomplete="off">
-                <label class="btn btn-outline-primary" for="five-room">5+</label>
-              </div>
-            </div>
-
-            <div class="col-lg-2">
-              <%= form.label "search[price]", "Стоимость, ₽", class: "form-label" %>
-              <div class="input-group">
-                <%= form.text_field "search[price][start]", class: "form-control", placeholder: "От" %>
-                <%= form.text_field "search[price][end]", class: "form-control", placeholder: "До" %>
-              </div>
-            </div>
-
-            <div class="col-lg-2">
-              <%= form.label "search[square]", "Площадь, м<sup>2</sup>".html_safe, class: "form-label" %>
-              <div class="input-group">
-                <%= form.text_field "search[square][start]", class: "form-control", placeholder: "От" %>
-                <%= form.text_field "search[square][end]", class: "form-control", placeholder: "До" %>
-              </div>
-            </div>
-
-            <div class="col-lg-2">
-              <%= form.label "search[floor]", "Этаж", class: "form-label" %>
-              <div class="input-group">
-                <%= form.text_field "search[floor][start]", class: "form-control", placeholder: "От" %>
-                <%= form.text_field "search[floor][end]", class: "form-control", placeholder: "До" %>
-              </div>
-            </div>
-          </div>
-
-          <div class="row g-3">
-            <div class="col-lg-3">
-              <label for="city" class="form-label">Город</label>
-              <select class="form-select" id="city" aria-label="Default select example">
-                <option selected>Выбрать</option>
-                <option value="1">Мурманск</option>
-                <option value="2">Умба</option>
-              </select>
-            </div>
-
-            <div class="col-lg-3">
-              <label for="district" class="form-label">Район</label>
-              <select class="form-select" id="district" aria-label="Default select example">
-                <option selected>Выбрать</option>
-                <option value="1">Ленинский</option>
-                <option value="2">Октябрьский</option>
-                <option value="3">Первомайский</option>
-              </select>
-            </div>
-
-            <div class="col-lg-3">
-              <label for="street" class="form-label">Улица</label>
-              <select class="form-select" id="street" aria-label="Default select example">
-                <option selected>Выбрать</option>
-                <option value="1">Аскольдовцев</option>
-                <option value="2">Беломорская</option>
-                <option value="3">Георгия Седова</option>
-                <option value="4">Героев Рыбачьего</option>
-                <option value="5">Достоевского</option>
-                <option value="6">Зои Космодемьянской</option>
-                <option value="7">Карла Либкнехта</option>
-                <option value="8">Крупской</option>
-                <option value="9">Ломоносова</option>
-                <option value="10">Полярные Зори</option>
-                <option value="11">Полярный Круг</option>
-                <option value="12">Радищева</option>
-                <option value="13">Саши Ковалева</option>
-                <option value="14">Северный</option>
-                <option value="15">Скальная</option>
-                <option value="16">Старостина</option>
-              </select>
-            </div>
-
-            <div class="col-lg-3 d-flex align-items-end">
-              <%= form.button t("app.button.search"), type: :submit, class: "btn btn-success w-100 align-bottom" %>
-            </div>
-          </div>
-        <% end %>
+        <%= render "application/shared/filter", url_form: sells_search_buyers_path %>
       </div>
 
       <div class="col-lg-12 search-results">
         <h4 class="text-center">Результаты поиска</h4>
 
-        <div class="table-wrapper">
-          <table class="table table-success table-striped">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Дата добавления</th>
-                <th scope="col">Тип недвижимости</th>
-                <th scope="col">Комнатность</th>
-                <th scope="col">Адрес</th>
-                <th scope="col">Этаж/Этажность</th>
-                <th scope="col">Бюджет</th>
-                <th scope="col">Агент</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>03.06.2024, 11:28</td>
-                <td>Коммерческая недвижимость</td>
-                <td>0-комн</td>
-                <td>Мурманск</td>
-                <td></td>
-                <td>6 000 000 ₽</td>
-                <td><a href="team-05.html">Новожилов Илья Витальевич</a></td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>01.06.2024, 13:29</td>
-                <td>Квартира</td>
-                <td>2-комн</td>
-                <td>Мурманск <div class="district">Лениниский</div></td>
-                <td>Кроме первых этажей / 5</td>
-                <td>4 000 000 ₽</td>
-                <td><a href="team-05.html">Новожилов Илья Витальевич</a></td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>05.03.2024, 17:45</td>
-                <td>Квартира</td>
-                <td>2-комн</td>
-                <td>Мурманск <div class="district">Первомайский</div></td>
-                <td>Кроме последних этажей / 9</td>
-                <td>5 000 000 ₽</td>
-                <td><a href="#">Стрелец Михаил Сергеевич</a></td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>16.02.2024, 11:48</td>
-                <td>Квартира</td>
-                <td>2-комн</td>
-                <td>Мурманск <div class="district">Октябрьский</div></td>
-                <td>Кроме первых этажей</td>
-                <td>4 500 000 ₽</td>
-                <td><a href="team-02.html">Кулишова Ирина Александровна</a></td>
-              </tr>
-              <tr>
-                <th scope="row">5</th>
-                <td>08.01.2024, 11:11</td>
-                <td>Квартира</td>
-                <td>2-комн</td>
-                <td>Мурманск <div class="district">Октябрьский</div></td>
-                <td>Кроме первых этажей</td>
-                <td>2 150 000 ₽</td>
-                <td><a href="team-05.html">Новожилов Илья Витальевич</a></td>
-              </tr>
-            </tbody>
-          </table>
+        <% if @realties.present? %>
+          <div class="table-wrapper">
+            <table class="table table-success table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Дата добавления</th>
+                  <th scope="col">Тип недвижимости</th>
+                  <th scope="col">Комнатность</th>
+                  <th scope="col">Адрес</th>
+                  <th scope="col">Этаж/Этажность</th>
+                  <th scope="col">Бюджет</th>
+                  <th scope="col">Агент</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @realties.each.with_index(1) do |realty, index| %>
+                  <tr>
+                    <th scope="row"><%= index %></th>
+                    <td><%= realty.created_at.strftime("%d.%m.%Y %H:%M") %></td>
+                    <td><%= Realty::TYPES[realty.type_object.to_i] %></td>
+                    <td><%= realty.number_rooms %>-комн.</td>
+                    <td>
+                      <%= realty.city.name %>
+                      <div class="district"><%= realty.districts.pluck(:name).join(", ") %></div>
+                    </td>
+                    <td><%= [realty.floor, realty.floors].join("/") %></td>
+                    <td><%= number_to_currency realty.price, unit: "₽", strip_insignificant_zeros: true %></td>
+                    <td><%= link_to realty.team_member.whole_name, team_member_path(realty.team_member.slug) %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
 
-          <div class="text-center">
-            <nav aria-label="Page navigation example">
-              <ul class="pagination">
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Previous">
-                    <span aria-hidden="true">«</span>
-                  </a>
-                </li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                  <a class="page-link" href="#" aria-label="Next">
-                    <span aria-hidden="true">»</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+<!--            <div class="text-center">-->
+<!--              <nav aria-label="Page navigation example">-->
+<!--                <ul class="pagination">-->
+<!--                  <li class="page-item">-->
+<!--                    <a class="page-link" href="#" aria-label="Previous">-->
+<!--                      <span aria-hidden="true">«</span>-->
+<!--                    </a>-->
+<!--                  </li>-->
+<!--                  <li class="page-item active"><a class="page-link" href="#">1</a></li>-->
+<!--                  <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                  <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--                  <li class="page-item">-->
+<!--                    <a class="page-link" href="#" aria-label="Next">-->
+<!--                      <span aria-hidden="true">»</span>-->
+<!--                    </a>-->
+<!--                  </li>-->
+<!--                </ul>-->
+<!--              </nav>-->
+<!--            </div>-->
           </div>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>
