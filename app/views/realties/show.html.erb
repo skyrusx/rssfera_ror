@@ -10,12 +10,33 @@
       <div class="col-lg-9 rent-details">
         <% if @realty.photos.attached? %>
           <div class="rent-gallery bg-white">
-            <div class="fotorama" data-nav="thumbs" data-allowfullscreen="true" data-ratio="800/450" data-maxwidth="800" data-maxheight="450">
-              <% @realty.photos.each do |image| %>
-                <%= link_to image do %>
-                  <%= image_tag image, alt: @realty.name %>
+            <div id="realty-photos" class="carousel slide">
+              <div class="carousel-indicators">
+                <% (0..@realty.photos.size-1).each do |index| %>
+                  <%
+                    classes = "active" if index.zero?
+                    aria_current = true if index.zero?
+                  %>
+                  <%= button_tag type: "button", "data-bs-target": "#realty-photos", "data-bs-slide-to": index, class: classes, "aria-current": aria_current, "aria-label": "Photo #{index}" do %>
+                    <%= image_tag @realty.photos[index].variant(:thumb), class: "d-block" %>
+                  <% end %>
                 <% end %>
-              <% end %>
+              </div>
+              <div class="carousel-inner">
+                <% @realty.photos.each.with_index do |photo, index| %>
+                  <div class="carousel-item <%= "active" if index.zero? %>">
+                    <%= image_tag photo.variant(:medium), class: "d-block" %>
+                  </div>
+                <% end %>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#realty-photos" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#realty-photos" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
             </div>
           </div>
         <% end %>

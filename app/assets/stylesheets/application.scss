@@ -2278,7 +2278,7 @@ ul.list-none {
 
 .rent-details {
   .rent-gallery {
-    padding: 24px;
+    padding: 24px 24px 72px 24px;
     margin-bottom: 24px;
     transition-timing-function: cubic-bezier(.4, 0, .2, 1) !important;
     box-shadow: 0 0 #0000, 0 0 #0000, 0 0 3px #3c485826 !important;
@@ -2615,6 +2615,18 @@ ul.list-none {
 }
 
 /* Stars Rating End */
+
+#realty-photos .carousel-item img {
+  //max-height: 450px;
+  width: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#realty-photos .carousel-indicators [data-bs-target] {
+  width: 66px;
+}
 
 @media screen and (min-width: 768px) {
   .navbar-brand {
