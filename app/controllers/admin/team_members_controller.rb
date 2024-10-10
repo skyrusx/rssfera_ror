@@ -66,7 +66,7 @@ class Admin::TeamMembersController < AdminController
   def team_member_params
     params.require(:team_member).permit(
       :first_name, :last_name, :patronymic_name, :slug, :phone, :email, :info, :whatsapp, :status, :photo, :position,
-      :rating, :best_agent, :job_title_ids => [], :review_ids => [], :vacancy_ids => []
+      :rating, :best_agent, :crm_id, :job_title_ids => [], :review_ids => [], :vacancy_ids => []
     )
   end
 

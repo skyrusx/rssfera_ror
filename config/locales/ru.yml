@@ -719,6 +719,7 @@ ru:
       rating: "4,5"
     team_members:
       slug: "ivanov-ivan-ivanovich"
+      crm_id: "CRM ID"
     skills:
       name: "Коммерческая недвижимость"
     vacancies:
