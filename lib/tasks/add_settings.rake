@@ -1,5 +1,5 @@
 namespace :add do
-  desc "Заполнение позиции у сотрудников"
+  desc "Добавление настроек"
   task settings: :environment do
     puts "Начало"
 
