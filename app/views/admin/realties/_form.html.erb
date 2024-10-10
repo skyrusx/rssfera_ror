@@ -90,7 +90,7 @@
 
       <div class="input-group mb-4 mb-3">
         <span class="input-group-text justify-content-end align-items-start"><%= t "crud.table.district" %></span>
-        <%= form.collection_select :district_id, @districts, :id, :full_name, { include_blank: true, selected: @realty.district_id }, { class: "form-select select2", required: true } %>
+        <%= form.collection_select :district_ids, @districts, :id, :full_name, { include_blank: true, selected: @realty.district_ids }, { class: "form-select select2", required: true, multiple: true } %>
         <div class="invalid-feedback"><%= t "validation.invalid.district" %></div>
         <div class="valid-feedback"><%= t "validation.valid" %></div>
       </div>

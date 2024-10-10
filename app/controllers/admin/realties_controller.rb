@@ -89,7 +89,7 @@ class Admin::RealtiesController < AdminController
   end
 
   def streets
-    @streets = @realty.present? ? Street.where(district_id: @realty.district_id).sort : Street.all
+    @streets = @realty.present? ? Street.where(district_id: @realty.district_ids).sort : Street.all
   end
 
   def categories
