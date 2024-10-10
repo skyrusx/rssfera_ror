@@ -79,6 +79,55 @@
   </div>
 </section>
 
+<% if @best_agent.present? %>
+  <section class="team best-agent bg-light">
+    <div class="container">
+      <div class="row text-center section-header">
+        <h1>Лучший агент месяца</h1>
+        <p class="subtitle">
+          <%= image_tag "stars.png", style: "width: 100px" %>
+        </p>
+      </div>
+
+      <div class="team-members row">
+        <div class="member offset-lg-3 col-lg-3">
+          <div class="card">
+            <div class="card-image">
+              <%= link_to team_member_path(@best_agent.slug) do %>
+                <%= image_tag @best_agent.photo.variant(:full), class: "w-100", alt: @best_agent.whole_name %>
+              <% end %>
+
+              <div class="team-info">
+                <div class="name"><%= @best_agent.whole_name %></div>
+                <%= list_positions @best_agent.job_titles %>
+              </div>
+            </div>
+
+            <div class="award"><%= image_tag "award.png" %></div>
+          </div>
+        </div>
+
+        <div class="col-lg-3 d-flex flex-wrap align-items-center">
+          <div class="contact-list">
+            <div class="info-item">
+              <i class="bi bi-telephone-fill"></i>
+              <%= link_phone @best_agent.phone %>
+            </div>
+            <div class="info-item">
+              <i class="bi bi-envelope"></i>
+              <%= link_email @best_agent.email %>
+            </div>
+            <div class="info-item">
+              <i class="bi bi-house-fill"></i>
+              <%= link_to "Недвижимость", team_member_path(@best_agent.slug) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<% end %>
+
 <% if @team_members.present? %>
   <section class="team bg-white">
     <div class="container">
@@ -101,6 +150,11 @@
                     <%= image_tag "team-placeholder.png", class: "card-img-top", alt: team_member.whole_name %>
                   <% end %>
                 <% end %>
+
+                <% if team_member.best_agent %>
+                  <div class="award"><%= image_tag "award.png" %></div>
+                <% end %>
+
                 <div class="team-info">
                   <div class="name"><%= team_member.whole_name %></div>
                   <%= list_positions team_member.job_titles %>

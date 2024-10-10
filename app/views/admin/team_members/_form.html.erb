@@ -11,6 +11,13 @@
       </div>
 
       <div class="input-group mb-4 mb-3">
+        <div class="input-group-text checkbox status">
+          <%= form.check_box :best_agent, class: "form-check-input mt-0", required: false %>
+          <%= form.label :best_agent, class: "form-check-label" %>
+        </div>
+      </div>
+
+      <div class="input-group mb-4 mb-3">
         <span class="input-group-text justify-content-end"><%= t "crud.table.position" %></span>
         <%= form.number_field :position, step: 1, min: 0, class: "form-control", placeholder: @team_members.size + 1 %>
       </div>

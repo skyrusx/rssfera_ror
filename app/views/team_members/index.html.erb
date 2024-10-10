@@ -33,6 +33,11 @@
                   <%= list_positions team_member.job_titles %>
                 </div>
               </div>
+
+              <% if team_member.best_agent %>
+                <div class="award"><%= image_tag "award.png" %></div>
+              <% end %>
+
               <div class="card-body">
                 <h5 class="card-title">Контакты</h5>
               </div>

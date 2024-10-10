@@ -22,6 +22,10 @@
         <div class="field-value"><%= @team_member.position %></div>
       </div>
       <div class="mb-4 mb-3 d-flex field">
+        <div class="field-name justify-content-end"><%= t "crud.table.best_agent" %></div>
+        <div class="field-value"><%= best_agent @team_member.best_agent %></div>
+      </div>
+      <div class="mb-4 mb-3 d-flex field">
         <div class="field-name justify-content-end"><%= t "crud.table.full_name" %></div>
         <div class="field-value"><%= @team_member.whole_name %></div>
       </div>

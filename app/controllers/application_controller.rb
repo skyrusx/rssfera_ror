@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   def index
     @partners = Partner.active.sort_by { |partner| partner.position }
     @team_members = TeamMember.active.sort_by { |team_member| team_member.position }
+    @best_agent = TeamMember.active.find_by(best_agent: true)
 
     realties = Realty.active.joins(:realty_category).where(realty_category: { slug: %w[buy rent] })
     total_entries = realties.size > 18 ? 18 : realties.size

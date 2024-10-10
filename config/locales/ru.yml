@@ -35,6 +35,7 @@ ru:
         info: О сотруднике
         whatsapp: Наличие WhatsApp
         status: Активен
+        best_agent: Лучший агент месяца
       job_title:
         name: Наименование
         status: Активен
@@ -664,6 +665,7 @@ ru:
       balcony: "Балкон"
       house: "Номер дома"
       flat: "Номер квартиры"
+      best_agent: "Лучший агент месяца"
       messages:
         category: "Тип"
       meta:

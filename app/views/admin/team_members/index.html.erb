@@ -17,6 +17,7 @@
       <tr>
         <th scope="col" class="text-center"><%= t "crud.table.id" %></th>
         <th scope="col"><%= t "crud.table.full_name" %></th>
+        <th scope="col" class="text-center"><%= t "crud.table.best_agent" %></th>
         <th scope="col" class="text-center"><%= t "crud.table.rating" %></th>
         <th scope="col" class="text-center"><%= t "crud.table.realties" %></th>
         <th scope="col" class="text-center"><%= t "crud.table.status" %></th>
@@ -31,6 +32,7 @@
             <%= team_member.whole_name %>
             <%= list_objects(team_member.job_titles.order(:position).pluck(:name), "index") %>
           </td>
+          <td class="text-center"><%= best_agent team_member.best_agent %></td>
           <td class="text-center"><%= rating_with_reviews team_member %></td>
           <td class="text-center"><%= team_member.realties.size %></td>
           <td class="status text-center"><%= activity_status team_member.status %></td>

@@ -140,4 +140,8 @@ module Admin::HtmlHelper
       end
     end.reduce(&:+)
   end
+
+  def best_agent(value)
+    value ? "Да" : "Нет"
+  end
 end
