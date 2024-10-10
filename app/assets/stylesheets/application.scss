@@ -127,7 +127,7 @@ form {
       }
 
       h4 {
-        color: $color_5;
+        color: lightgreen;
       }
 
       .btn {
@@ -475,6 +475,13 @@ form {
           }
         }
       }
+    }
+
+    .award {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      width: 50px;
     }
 
     .card-title {
@@ -2626,6 +2633,75 @@ ul.list-none {
 
 #realty-photos .carousel-indicators [data-bs-target] {
   width: 66px;
+}
+
+.best-agent .team-members .member .card-image .team-info {
+  text-align: center;
+}
+
+.best-agent .team-members .member .card-image .team-info .name {
+  width: 100%;
+}
+
+.best-agent .team-members .member .winner {
+  position: absolute;
+  transform: scale(1.6);
+  bottom: -15px;
+  z-index: 10;
+}
+
+.best-agent .award {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  width: 50px;
+}
+
+.best-agent .contact-list {
+  .info-item {
+    background: rgba(25, 135, 84, .2);
+    border-radius: 5px;
+    padding: 4px 8px 4px 36px;
+    position: relative;
+    display: inline-block;
+    color: $color_1;
+    margin-bottom: 10px;
+    font-size: 16px;
+    min-width: 210px;
+
+    i {
+      background: rgba(25, 135, 84, .2);
+      text-align: center;
+      width: 30px;
+      height: 100%;
+      top: 0;
+      bottom: 0;
+      border-radius: 5px 0 0 5px;
+      line-height: 30px;
+      margin-right: 10px;
+      display: inline-block;
+      left: 0;
+      position: absolute;
+    }
+
+    a {
+      color: $color_1;
+      text-decoration: none;
+
+      &:focus {
+        color: $color_1;
+        text-decoration: none;
+      }
+
+      &:hover {
+        color: $color_3;
+      }
+    }
+  }
+}
+
+section.best-agent {
+  padding: 50px 0;
 }
 
 @media screen and (min-width: 768px) {
