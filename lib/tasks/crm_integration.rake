@@ -59,6 +59,8 @@ namespace :crm do
     if realties[:selection].present?
       puts "Покупка"
       realties[:selection].each do |realty|
+        next unless realty["city"].present?
+
         @selection = Realty.new(realty_params(realty, "selection"))
         if @selection.save
           puts "Добавлена недвижимость: #{@selection.name}"
@@ -124,7 +126,10 @@ namespace :crm do
     end
   end
 
-  def team_member(name)
+  def team_member(id, name)
+    team_member_id = TeamMember.find_by(crm_id: id)&.id
+    return team_member_id if team_member_id.present?
+
     user_name = name.split(" ")
     case user_name.size
     when 1 then TeamMember.find_by(first_name: user_name.first)
@@ -236,7 +241,7 @@ namespace :crm do
       status: true,
       payments: payments,
       description: realty["comment"].gsub("&lt;", "<").gsub("&gt;", ">").html_safe,
-      team_member_id: team_member(realty["agent_name"])&.id,
+      team_member_id: team_member(realty["agent_id"], realty["agent_name"])&.id,
       realty_category_id: realty_category(realty["deal"]),
       created_at: realty["date"].in_time_zone('Moscow'),
       updated_at: DateTime.current.in_time_zone('Moscow'),
