@@ -127,7 +127,7 @@ namespace :crm do
   end
 
   def team_member(id, name)
-    team_member_id = TeamMember.find_by(crm_id: id)&.id
+    team_member_id = TeamMember.find_by(crm_id: id)
     return team_member_id if team_member_id.present?
 
     user_name = name.split(" ")
