@@ -130,7 +130,7 @@ namespace :crm do
     team_member_id = TeamMember.find_by(crm_id: id)
     return team_member_id if team_member_id.present?
 
-    user_name = name.split(" ")
+    user_name = name.gsub(" (аренда)", "").split(" ")
     case user_name.size
     when 1 then TeamMember.find_by(first_name: user_name.first)
     when 2 then TeamMember.find_by(first_name: user_name.first) || TeamMember.find_by(last_name: user_name.first)
