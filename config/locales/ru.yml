@@ -666,6 +666,9 @@ ru:
       house: "Номер дома"
       flat: "Номер квартиры"
       best_agent: "Лучший агент месяца"
+      coordinates: "Координаты для карты"
+      latitude: "Широта"
+      longitude: "Долгота"
       messages:
         category: "Тип"
       meta:
