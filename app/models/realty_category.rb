@@ -8,6 +8,8 @@ class RealtyCategory < ApplicationRecord
   private
 
   def fill_slug
+    return if self.slug.present?
+
     self.slug = self.name.parameterize
     self.save
   end
