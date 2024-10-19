@@ -6,6 +6,7 @@
 
 .DS_Store
 .idea/
+.byebug_history
 
 # Ignore bundler config.
 /.bundle
