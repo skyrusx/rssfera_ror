@@ -138,9 +138,18 @@ namespace :crm do
     end
   end
 
-  def realty_category(name)
-    return RealtyCategory.find_by(name: "Покупка").id if name.nil?
-    RealtyCategory.find_by(name: name&.capitalize)&.id
+  def realty_category(name, type)
+    case type
+    when "apartments"
+      name.nil? ? RealtyCategory.find_by(name: "Аренда (поиск)").id : RealtyCategory.find_by(name: name&.capitalize)&.id
+    when "apartments_rent"
+      name.nil? ? RealtyCategory.find_by(name: "Аренда").id : RealtyCategory.find_by(name: name&.capitalize)&.id
+    when "selection"
+      name.nil? ? RealtyCategory.find_by(name: "Аренда").id : RealtyCategory.find_by(name: name&.capitalize)&.id
+    when "selection_rent"
+      name.nil? ? RealtyCategory.find_by(name: "Аренда (поиск)").id : RealtyCategory.find_by(name: name&.capitalize)&.id
+    else nil
+    end
   end
 
   def realty_type(id)
@@ -242,7 +251,7 @@ namespace :crm do
       payments: payments,
       description: realty["comment"].gsub("&lt;", "<").gsub("&gt;", ">").html_safe,
       team_member_id: team_member(realty["agent_id"], realty["agent_name"])&.id,
-      realty_category_id: realty_category(realty["deal"]),
+      realty_category_id: realty_category(realty["deal"], type),
       created_at: realty["date"].in_time_zone('Moscow'),
       updated_at: DateTime.current.in_time_zone('Moscow'),
       type_object: realty_type(realty["object"]),
