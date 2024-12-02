@@ -1,6 +1,6 @@
 class Admin::RealtiesController < AdminController
   before_action :find_realty, only: [:show, :edit, :update, :destroy, :delete_photo]
-  before_action :cities, :districts, :streets, :categories, :team_members, :specifications, only: [:new, :create, :edit, :update]
+  before_action :cities, :districts, :streets, :categories, :team_members, only: [:new, :create, :edit, :update]
 
   add_breadcrumb I18n.t("admin_breadcrumbs.realties"), :admin_realties_path
 
@@ -22,7 +22,6 @@ class Admin::RealtiesController < AdminController
 
   def create
     @realty = Realty.new(realty_params)
-    @realty.specifications = params[:specs]
 
     if @realty.save
       flash[:success] = I18n.t("realties.create.success")
@@ -39,7 +38,6 @@ class Admin::RealtiesController < AdminController
 
   def update
     if @realty.update(realty_params)
-      @realty.specifications = params[:specs]
       @realty.save
       flash[:success] = I18n.t("realties.update.success")
       redirect_to admin_realties_path
@@ -72,7 +70,7 @@ class Admin::RealtiesController < AdminController
   def realty_params
     params.require(:realty).permit(
       :name, :status, :slug, :location, :price, :payments, :description, :type_object, :team_member_id,
-      :realty_category_id, :city_id, :ditrict_id, :street_id, :photos => [], :specifications => '{}'
+      :realty_category_id, :city_id, :ditrict_id, :street_id, :photos => []
     )
   end
 
@@ -98,9 +96,5 @@ class Admin::RealtiesController < AdminController
 
   def team_members
     @team_members = TeamMember.active
-  end
-
-  def specifications
-    @specifications = @realty.present? ? @realty.specifications : Realty::SPECIFICATIONS
   end
 end
