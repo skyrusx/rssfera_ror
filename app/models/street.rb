@@ -1,4 +1,5 @@
 class Street < ApplicationRecord
+  belongs_to :city
   belongs_to :district
   has_many :realties
 
