@@ -185,27 +185,21 @@
         </div>
       </div>
 
-<!--      <div class="mb-4 mb-3 schedule">-->
-<!--        <div class="input-group">-->
-<!--          <span class="input-group-text w-100"><%#= t "crud.table.specifications" %></span>-->
-<!--        </div>-->
+      <div class="mb-4 mb-3">
+        <div class="input-group">
+          <span class="input-group-text w-100"><%= t "crud.table.coordinates" %></span>
+        </div>
 
-        <%# prev_section = "" %>
-        <%# @specifications.each do |key, data| %>
-          <%# unless prev_section == data["section"] %>
-<!--            <div class="input-group">-->
-              <%#= text_field_tag "specs[#{key}][section]", @specifications[key]["section"], class: "form-control input-group-text w-100" %>
-<!--            </div>-->
-          <%# end %>
+        <div class="input-group">
+          <span class="input-group-text justify-content-end"><%= t "crud.table.latitude" %></span>
+          <%= form.text_field :latitude, class: "form-control" %>
+        </div>
 
-<!--          <div class="input-group">-->
-            <%#= text_field_tag "specs[#{key}][field]", @specifications[key]["field"], class: "form-control" %>
-            <%#= text_field_tag "specs[#{key}][value]", @specifications[key]["value"], class: "form-control" %>
-<!--          </div>-->
-
-          <%# prev_section = data["section"] %>
-        <%# end %>
-<!--      </div>-->
+        <div class="input-group">
+          <span class="input-group-text justify-content-end"><%= t "crud.table.longitude" %></span>
+          <%= form.text_field :longitude, class: "form-control" %>
+        </div>
+      </div>
     </div>
 
     <div class="col-lg-3"></div>
