@@ -90,7 +90,7 @@
       </div>
 
       <div class="team-members row">
-        <div class="member offset-lg-3 col-lg-3">
+        <div class="member col-lg-3">
           <div class="card">
             <div class="card-image">
               <%= link_to team_member_path(@best_agent.slug) do %>
@@ -107,19 +107,107 @@
           </div>
         </div>
 
-        <div class="col-lg-3 d-flex flex-wrap align-items-center">
-          <div class="contact-list">
-            <div class="info-item">
-              <i class="bi bi-telephone-fill"></i>
-              <%= link_phone @best_agent.phone %>
+        <div class="col-lg-3">
+          <%= form_with model: @message, url: messages_path, html: { class: "needs-validation message-form", novalidate: true } do |form| %>
+            <%= form.hidden_field :status, value: :new %>
+            <%= form.hidden_field :category, value: :message %>
+            <%= form.hidden_field :name, value: form_title("message", controller_name, @best_agent.whole_name) %>
+
+            <div class="sidebar-card-title text-center">
+              <h5>Написать сообщение</h5>
             </div>
-            <div class="info-item">
-              <i class="bi bi-envelope"></i>
-              <%= link_email @best_agent.email %>
+
+            <%= hidden_field_tag "fields[0][team_member]", @best_agent.whole_name %>
+
+            <div class="mb-2">
+              <%= text_field_tag "fields[1][username]", nil, class: "form-control", placeholder: "Ваше имя", required: true %>
+              <div class="invalid-feedback">Пожалуйста введите имя</div>
+              <div class="valid-feedback">Заполнено!</div>
             </div>
-            <div class="info-item">
-              <i class="bi bi-house-fill"></i>
-              <%= link_to "Недвижимость", team_member_path(@best_agent.slug) %>
+
+            <div class="mb-2">
+              <%= text_field_tag "fields[2][email]", nil, class: "form-control email-mask", placeholder: "Ваш email", required: true %>
+              <div class="invalid-feedback">Пожалуйста введите email</div>
+              <div class="valid-feedback">Заполнено!</div>
+            </div>
+
+            <div class="mb-2">
+              <%= text_field_tag "fields[3][phone]", nil, class: "form-control phone-mask", placeholder: "Ваш телефон", required: true %>
+              <div class="invalid-feedback">Пожалуйста введите телефон</div>
+              <div class="valid-feedback">Заполнено!</div>
+            </div>
+
+            <div class="mb-2">
+              <%= select_tag "fields[4][type_realty]", options_for_select(Realty::TYPES.values), include_blank: false, prompt: "Тип недвижимости", class: "form-select" %>
+            </div>
+
+            <div class="mb-3">
+              <%= text_area_tag "fields[5][message]", nil, class: "form-control", placeholder: "Сообщение", rows: 5 %>
+              <div class="invalid-feedback">Пожалуйста введите текст сообщения</div>
+              <div class="valid-feedback">Заполнено!</div>
+            </div>
+
+            <div class="d-grid gap-2">
+              <%= form.button t("app.button.send"), type: :submit, class: "btn btn-success" %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="col-lg-6">
+          <% slides = @best_agent_realties.each_slice(2) %>
+
+          <div id="carousel-objects" class="carousel slide">
+            <div class="carousel-indicators">
+              <% slides.with_index do |_, index| %>
+                <% class_active = "active" if index.zero? %>
+                <%= button_tag '', class: class_active, type: :button, data: { "bs-target": "#carousel-objects", "bs-slide-to": index }, aria: { current: (true if index.zero?), label: "Slide #{index}" } %>
+              <% end %>
+            </div>
+            <div class="carousel-inner">
+              <% slides.with_index do |objects, index| %>
+                <% carousel_classes = index.zero? ? "carousel-item active" : "carousel-item" %>
+
+                <div class="<%= carousel_classes %>">
+                  <div class="row">
+                    <% objects.each do |realty| %>
+                      <div class="object col-lg-6">
+                        <div class="card">
+                          <%= link_to realty_href(realty) do %>
+                            <% if realty.photos.attached? %>
+                              <%= image_tag realty.photos.first.variant(:thumb), class: "d-block w-100", alt: realty.name %>
+                            <% else %>
+                              <%= image_tag "realty-placeholder.png", class: "d-block w-100", alt: realty.name %>
+                            <% end %>
+                          <% end %>
+                          <div class="card-body">
+                                    <span class="card-price">
+                                      <%= realty_price(realty) %>
+                                    </span>
+                            <h5 class="card-title">
+                              <%= link_to_realty(realty) %>
+                            </h5>
+                            <div class="card-text">
+                              <small class="card-location">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                <%= realty_location realty %>
+                              </small>
+                              <% if realty.payments.present? %>
+                                <small class="additional-payments">
+                                  <%= realty.payments %>
+                                </small>
+                              <% end %>
+                              <div class="card-description">
+                                <%= realty.description&.html_safe %>
+                              </div>
+                            </div>
+                          </div>
+                          <%= realty_footer(realty) %>
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
