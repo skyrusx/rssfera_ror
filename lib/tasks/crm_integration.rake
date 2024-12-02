@@ -87,9 +87,9 @@ namespace :crm do
     end
 
     if realties[:apartments_rent].present?
-      puts "Аренда"
+      puts "Покупка"
 
-      apartments_rent_crm_ids = RealtyCategory.find_by_name("Аренда").realties.pluck(:crm_id)
+      apartments_rent_crm_ids = RealtyCategory.find_by_name("Покупка").realties.pluck(:crm_id)
       realties[:apartments_rent].each do |realty|
         next if apartments_rent_crm_ids.include?(realty["id"].to_i)
 
@@ -119,9 +119,9 @@ namespace :crm do
     end
 
     if realties[:selection].present?
-      puts "Покупка"
+      puts "Аренда"
 
-      selection_crm_ids = RealtyCategory.find_by_name("Покупка").realties.pluck(:crm_id)
+      selection_crm_ids = RealtyCategory.find_by_name("Аренда").realties.pluck(:crm_id)
       realties[:selection].each do |realty|
         next if selection_crm_ids.include?(realty["id"].to_i)
 
