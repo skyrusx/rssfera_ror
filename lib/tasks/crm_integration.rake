@@ -87,9 +87,9 @@ namespace :crm do
     end
 
     if realties[:apartments_rent].present?
-      puts "Покупка"
+      puts "Аренда"
 
-      apartments_rent_crm_ids = RealtyCategory.find_by_name("Покупка").realties.pluck(:crm_id)
+      apartments_rent_crm_ids = RealtyCategory.find_by_name("Аренда").realties.pluck(:crm_id)
       realties[:apartments_rent].each do |realty|
         next if apartments_rent_crm_ids.include?(realty["id"].to_i)
 
