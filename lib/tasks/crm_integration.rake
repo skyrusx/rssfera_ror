@@ -433,8 +433,8 @@ namespace :crm do
   def realty_category(type)
     case type
     when "apartments" then RealtyCategory.find_by(name: "Продажа").id
-    when "apartments_rent" then RealtyCategory.find_by(name: "Покупка").id
-    when "selection" then RealtyCategory.find_by(name: "Аренда").id
+    when "apartments_rent" then RealtyCategory.find_by(name: "Аренда").id
+    when "selection" then RealtyCategory.find_by(name: "Покупка").id
     when "selection_rent" then RealtyCategory.find_by(name: "Аренда (поиск)").id
     else nil
     end
