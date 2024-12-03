@@ -183,7 +183,7 @@ namespace :crm do
       payments: payments,
       description: realty["comment"].gsub("&lt;", "<").gsub("&gt;", ">").html_safe,
       team_member_id: team_member(realty["agent_id"], realty["agent_name"])&.id,
-      realty_category_id: realty_category(realty["deal"], type),
+      realty_category_id: realty_category(type),
       created_at: realty["date"].in_time_zone('Moscow'),
       updated_at: DateTime.current.in_time_zone('Moscow'),
       type_object: realty_type(realty["object"]),
@@ -430,16 +430,12 @@ namespace :crm do
     end
   end
 
-  def realty_category(name, type)
+  def realty_category(type)
     case type
-    when "apartments"
-      name.nil? ? RealtyCategory.find_by(name: "Аренда (поиск)").id : RealtyCategory.find_by(name: name&.capitalize)&.id
-    when "apartments_rent"
-      name.nil? ? RealtyCategory.find_by(name: "Аренда").id : RealtyCategory.find_by(name: name&.capitalize)&.id
-    when "selection"
-      name.nil? ? RealtyCategory.find_by(name: "Аренда").id : RealtyCategory.find_by(name: name&.capitalize)&.id
-    when "selection_rent"
-      name.nil? ? RealtyCategory.find_by(name: "Аренда (поиск)").id : RealtyCategory.find_by(name: name&.capitalize)&.id
+    when "apartments" then RealtyCategory.find_by(name: "Продажа").id
+    when "apartments_rent" then RealtyCategory.find_by(name: "Покупка").id
+    when "selection" then RealtyCategory.find_by(name: "Аренда").id
+    when "selection_rent" then RealtyCategory.find_by(name: "Аренда (поиск)").id
     else nil
     end
   end
